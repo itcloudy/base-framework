@@ -1,0 +1,9 @@
+# ignore
+logs/
+
+.idea/
+base-framework
+*.exe
+
+
+.DS_Store
