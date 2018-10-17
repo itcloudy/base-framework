@@ -1,0 +1,14 @@
+# config information
+
+# server config information
+server:
+  mode: debug # debug,release
+  host: 0.0.0.0
+  port: 8000
+  token_expire_second: 360000
+  enable_https: false  # 后台开启https
+  cert_file: conf/https/cert.pem  # https对应的私钥
+  key_file: conf/https/key.pem # https对应的公钥
+  jwt_public_key_path: conf/jwt/tm.rsa.pub
+  jwt_private_key_path: conf/jwt/tm.rsa
+  system_static_file_path: system_statics
