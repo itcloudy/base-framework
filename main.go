@@ -5,6 +5,9 @@ package main
 
 import (
 	"flag"
+	"fmt"
+	"github.com/itcloudy/base-framework/common"
+	"github.com/itcloudy/base-framework/router"
 	"github.com/itcloudy/base-framework/system"
 	"os"
 	"path"
@@ -19,5 +22,26 @@ func main() {
 	err = system.LoadConfigInformation(*configPath)
 	if err != nil {
 		return
+	}
+
+	//router init
+	router := router.InitRouter()
+	server := common.ServerInfo
+	serverInfo := common.StringsJoin(server.Host, ":", server.Port)
+	// restart
+	if server.EnableHttps {
+		fmt.Println("server start https")
+		err := router.RunTLS(serverInfo, server.CertFile, server.KeyFile)
+
+		if err != nil {
+			fmt.Println("server start failed ", err.Error())
+		}
+	} else {
+		fmt.Printf("server start info: %s\n", serverInfo)
+
+		err := router.Run(serverInfo)
+		if err != nil {
+			fmt.Println("server start failed ", err.Error())
+		}
 	}
 }
