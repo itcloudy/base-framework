@@ -4,7 +4,6 @@
 package router
 
 import (
-	"github.com/gin-contrib/pprof"
 	"github.com/gin-gonic/gin"
 )
 
@@ -12,7 +11,6 @@ import (
 func InitRouter() *gin.Engine {
 
 	router := gin.Default()
-	pprof.Register(router, "dev/pprof")
 
 	router.Use(gin.Recovery())
 	// add routers

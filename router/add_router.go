@@ -4,11 +4,14 @@
 package router
 
 import (
+	"github.com/gin-contrib/pprof"
 	"github.com/gin-gonic/gin"
 	"github.com/itcloudy/base-framework/controllers"
 )
 
 func addRouter(router *gin.Engine)  {
+	// TODO: only admin user can access pprof router
+	pprof.Register(router, "dev/pprof")
 	{
 		router.GET("/", controllers.IndexGet)
 	}

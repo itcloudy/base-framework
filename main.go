@@ -9,7 +9,6 @@ import (
 	"github.com/itcloudy/base-framework/common"
 	"github.com/itcloudy/base-framework/router"
 	"github.com/itcloudy/base-framework/system"
-	_ "net/http/pprof"
 	"os"
 	"path"
 )
