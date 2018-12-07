@@ -10,20 +10,20 @@ import (
 )
 
 var AllInitMigrations = map[string][]models.MigrationHistory{
-	"postgres":{
+	"postgres": {
 		models.MigrationHistory{
 			Version: "0.0.1",
 			Data:    postgres.Init,
 		},
 	},
-	"mysql":{
+	"mysql": {
 		models.MigrationHistory{
 			Version: "0.0.1",
 			Data:    mysql.Init,
 		},
 	},
 }
-var AllUpdateMigrations =map[string][]models.MigrationHistory{
-	"postgres":{},
-	"mysql":{},
+var AllUpdateMigrations = map[string][]models.MigrationHistory{
+	"postgres": {},
+	"mysql":    {},
 }

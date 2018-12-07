@@ -6,7 +6,6 @@ package routers
 import (
 	"errors"
 	"github.com/itcloudy/base-framework/pkg/conf"
-	"github.com/itcloudy/base-framework/pkg/models"
 	"github.com/itcloudy/base-framework/pkg/repositories/common"
 	"github.com/itcloudy/base-framework/pkg/services"
 	"github.com/itcloudy/base-framework/pkg/transport/restful/controllers"
@@ -41,7 +40,7 @@ func (k *kernel) UserContainer() controllers.UserController {
 	switch dbType {
 	case "mysql":
 	case "postgres":
-		userService.IUserRepository = &common.UserRepository{DB: models.DBConn}
+		userService.IUserRepository = &common.UserRepository{DB: conf.DBConn}
 		break
 
 	default:
@@ -57,7 +56,7 @@ func (k *kernel) MenuContainer() controllers.MenuController {
 	switch dbType {
 	case "mysql":
 	case "postgres":
-		menuService.IMenuRepository = &common.MenuRepository{DB: models.DBConn}
+		menuService.IMenuRepository = &common.MenuRepository{DB: conf.DBConn}
 		break
 	default:
 		panic(errors.New("un support sql type:" + dbType))

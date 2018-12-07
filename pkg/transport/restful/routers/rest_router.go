@@ -11,7 +11,6 @@ import (
 	"github.com/itcloudy/base-framework/pkg/conf"
 	"github.com/itcloudy/base-framework/pkg/consts"
 	"github.com/itcloudy/base-framework/pkg/logs"
-	"github.com/itcloudy/base-framework/pkg/models"
 	"github.com/swaggo/gin-swagger"
 	"github.com/swaggo/gin-swagger/swaggerFiles"
 	"go.uber.org/zap"
@@ -34,7 +33,7 @@ func addRouter(router *gin.Engine) {
 	// casbin load role permission
 	var adapter *gormadapter.Adapter
 	dbConf := conf.Config.DB
-	connectInfo := models.GetDBConnectionString(dbConf.DbType, dbConf.Host, dbConf.Port, dbConf.User, dbConf.Password, dbConf.Name, dbConf.Charset)
+	connectInfo := conf.GetDBConnectionString(dbConf.DbType, dbConf.Host, dbConf.Port, dbConf.User, dbConf.Password, dbConf.Name, dbConf.Charset)
 	fmt.Println(connectInfo)
 	adapter = gormadapter.NewAdapter(dbConf.DbType, connectInfo, true)
 	cwd, _ := os.Getwd()

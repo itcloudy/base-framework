@@ -5,7 +5,6 @@ package daylight
 
 import (
 	"github.com/itcloudy/base-framework/pkg/logs"
-	"github.com/itcloudy/base-framework/pkg/models"
 	"github.com/itcloudy/base-framework/pkg/transport"
 	"go.uber.org/zap"
 
@@ -59,7 +58,7 @@ func Start() {
 	}
 	defer delPidFile()
 	cfg := conf.Config.DB
-	models.GetDBConnection(cfg.DbType, cfg.Host, cfg.Port, cfg.User, cfg.Password, cfg.Name, cfg.Charset, "")
+	conf.GetDBConnection(cfg.DbType, cfg.Host, cfg.Port, cfg.User, cfg.Password, cfg.Name, cfg.Charset, "")
 	transport.ServerStart()
 
 	select {}

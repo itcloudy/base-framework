@@ -1,9 +1,3 @@
-// Copyright 2018 cloudy 272685110@qq.com.  All rights reserved.
-// Use of this source code is governed by a MIT style
-// license that can be found in the LICENSE file.
-package postgres
-
-var Init = `
 -- ----------------------------
 -- 数据库升级日志表
 -- ----------------------------
@@ -42,4 +36,3 @@ comment on column users.updated_at is '更新时间';
 CREATE SEQUENCE users_id_seq START WITH 1 INCREMENT BY 1 NO MINVALUE NO MAXVALUE CACHE 1;
 
 alter table users alter column id set default nextval('users_id_seq');
-`

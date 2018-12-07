@@ -21,3 +21,6 @@
 2018-12-07T14:34:14.567+0800	INFO	update database success	{"db name": "go", "time": "2018-12-07T14:34:14.567+0800"}
 2018-12-07T16:54:07.225+0800	INFO	init database success	{"db name": "go", "time": "2018-12-07T16:54:07.225+0800"}
 2018-12-07T17:06:04.689+0800	INFO	init database success	{"db name": "go", "time": "2018-12-07T17:06:04.689+0800"}
+2018-12-07T17:22:36.440+0800	INFO	init database success	{"db name": "go", "time": "2018-12-07T17:22:36.440+0800"}
+2018-12-07T17:35:29.507+0800	INFO	init database success	{"db name": "go", "time": "2018-12-07T17:35:29.507+0800"}
+2018-12-07T17:53:10.152+0800	INFO	init database success	{"db name": "go", "time": "2018-12-07T17:53:10.152+0800"}
