@@ -36,7 +36,7 @@ func (service *MigrationService) FirstMigration() (err error) {
 	needUpdateMap := make(map[string]string)
 
 	// 判断需要升级几个版本
-	for _, migrate := range migration.AllInitMigrations {
+	for _, migrate := range migration.AllInitMigrations[conf.Config.DB.DbType] {
 		var migVersion *version.Version
 		// 如果转换失败则返回
 		if migVersion, err = version.NewVersion(migrate.Version); err != nil {
@@ -81,7 +81,7 @@ func (service *MigrationService) UpdateToOneVersion() (err error) {
 		return errors.New("need update version:  " + conf.Config.DBUpdateToVersion + " last installed version: : " + last.String())
 	}
 	// 判断需要升级几个版本
-	for _, migrate := range migration.AllUpdateMigrations {
+	for _, migrate := range migration.AllUpdateMigrations[conf.Config.DB.DbType] {
 		var migVersion *version.Version
 		// 如果转换失败则返回
 		if migVersion, err = version.NewVersion(migrate.Version); err != nil {
@@ -105,8 +105,8 @@ func (service *MigrationService) UpdateToOneVersion() (err error) {
 */
 func (service *MigrationService) GetAllListMigration() (migrates []models.MigrationHistory, err error) {
 	var installedMigrates []models.MigrationHistory
-	migrates = migration.AllInitMigrations
-	migrates = append(migrates, migration.AllUpdateMigrations...)
+	migrates = migration.AllInitMigrations[conf.Config.DB.DbType]
+	migrates = append(migrates, migration.AllUpdateMigrations[conf.Config.DB.DbType]...)
 	var verSlice []string
 	// 获得已经安装的版本
 	installedMigrates, _ = service.ListMigration()

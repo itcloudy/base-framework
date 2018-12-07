@@ -4,14 +4,26 @@
 package migration
 
 import (
+	"github.com/itcloudy/base-framework/pkg/migration/mysql"
 	"github.com/itcloudy/base-framework/pkg/migration/postgres"
 	"github.com/itcloudy/base-framework/pkg/models"
 )
 
-var AllInitMigrations = []models.MigrationHistory{
-	models.MigrationHistory{
-		Version: "0.0.1",
-		Data:    postgres.Init,
+var AllInitMigrations = map[string][]models.MigrationHistory{
+	"postgres":{
+		models.MigrationHistory{
+			Version: "0.0.1",
+			Data:    postgres.Init,
+		},
+	},
+	"mysql":{
+		models.MigrationHistory{
+			Version: "0.0.1",
+			Data:    mysql.Init,
+		},
 	},
 }
-var AllUpdateMigrations []models.MigrationHistory
+var AllUpdateMigrations =map[string][]models.MigrationHistory{
+	"postgres":{},
+	"mysql":{},
+}
