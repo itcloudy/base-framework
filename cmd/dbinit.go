@@ -4,9 +4,12 @@
 package cmd
 
 import (
+	"errors"
 	"github.com/itcloudy/base-framework/pkg/conf"
 	"github.com/itcloudy/base-framework/pkg/logs"
 	"github.com/itcloudy/base-framework/pkg/models"
+	"github.com/itcloudy/base-framework/pkg/repositories/common"
+	"github.com/itcloudy/base-framework/pkg/services"
 	"github.com/spf13/cobra"
 	"go.uber.org/zap"
 	"time"
@@ -17,7 +20,19 @@ var dbinitCmd = &cobra.Command{
 	Short:  "init database,create tables",
 	PreRun: loadConfig,
 	Run: func(cmd *cobra.Command, args []string) {
-		if err := models.InitDatabase(conf.Config.DB, logs.Logger); err != nil {
+		cfg := conf.Config.DB
+		models.GetDBConnection(cfg.DbType, cfg.Host, cfg.Port, cfg.User, cfg.Password, cfg.Name, cfg.Charset, "init")
+		migrateService := services.MigrationService{}
+		switch cfg.DbType {
+		case "mysql":
+		case "postgres":
+			migrateService.IMigrationHistoryRepository = &common.MigrationHistoryRepository{DB: models.SqlxDB}
+			break
+		default:
+			panic(errors.New("un support sql type:" + cfg.DbType))
+
+		}
+		if err := migrateService.FirstMigration(); err != nil {
 			logs.Logger.Fatal("init database failed", zap.String("type", conf.Config.DB.Name), zap.Error(err))
 
 		} else {

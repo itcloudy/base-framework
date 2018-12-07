@@ -97,9 +97,10 @@ type CorsConfig struct {
 }
 
 type GlobalConfig struct {
+	DBUpdateToVersion string                  // 数据库升级到某个版本
 	Mode              string                  // 运行模式
 	TokenExpire       time.Duration           // token有效时间
-	ConfigPath        string                  `toml:"-"` // 配置文件地址
+	ConfigPath        string                  // 配置文件地址
 	JwtPrivatePath    string                  // jwt private path
 	JwtPublicPath     string                  // jwt public path
 	TempDir           string                  // 临时文件

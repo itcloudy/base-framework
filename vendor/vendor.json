@@ -211,6 +211,12 @@
 			"revisionTime": "2018-11-28T19:23:52Z"
 		},
 		{
+			"checksumSHA1": "r0pj5dMHCghpaQZ3f1BRGoKiSWw=",
+			"path": "github.com/hashicorp/go-version",
+			"revision": "b5a281d3160aa11950a6182bd9a9dc2cb1e02d50",
+			"revisionTime": "2018-08-24T00:43:55Z"
+		},
+		{
 			"checksumSHA1": "40vJyUB4ezQSn/NSadsKEOrudMc=",
 			"path": "github.com/inconshreveable/mousetrap",
 			"revision": "76626ae9c91c4f2a10f34cad8ce83ea42c93bb75",

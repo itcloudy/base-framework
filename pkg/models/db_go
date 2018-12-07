@@ -6,12 +6,16 @@ package models
 import (
 	"errors"
 	"fmt"
+	"github.com/itcloudy/base-framework/pkg/logs"
+	"github.com/itcloudy/base-framework/pkg/migration"
+	"go.uber.org/zap"
+
+	"github.com/jmoiron/sqlx"
+
+	_ "github.com/go-sql-driver/mysql"
 	"github.com/itcloudy/base-framework/pkg/conf"
 	"github.com/itcloudy/base-framework/pkg/consts"
-	"github.com/itcloudy/base-framework/pkg/logs"
 	"github.com/jinzhu/gorm"
-	"github.com/jmoiron/sqlx"
-	"go.uber.org/zap"
 )
 
 var (
@@ -146,4 +150,64 @@ END;
 	} else {
 		return errors.New("db type not support")
 	}
+}
+
+// InitSchema is executing schema
+func InitSchema() error {
+	return migration.InitMigrate()
+
+
+}
+
+// UpdateSchema is executing schema
+func UpdateSchema() error {
+	//return migration.UpdateMigrate(&MigrationHistory{})
+	return nil
+}
+
+// InitDB drop all tables and exec db schema
+func InitDatabase(cfg conf.DBConfig, logger *zap.Logger) error {
+	err := GetDBConnection(cfg.DbType, cfg.Host, cfg.Port, cfg.User, cfg.Password, cfg.Name, cfg.Charset, "init")
+	if err != nil || SqlxDB == nil {
+		logger.Error("connecting DB", zap.String("type", consts.DBError), zap.String("db name", cfg.Name), zap.Error(err))
+		return err
+	} else {
+		logger.Info("connecting DB", zap.String("db name", cfg.Name))
+
+	}
+	if err = DropTables(); err != nil {
+		logger.Error("dropping all tables", zap.String("type", consts.DBError), zap.String("db name", cfg.Name), zap.Error(err))
+
+		return err
+	} else {
+		logger.Info("dropping all tables success", zap.String("db name", cfg.Name))
+
+	}
+	if err = InitSchema(); err != nil {
+		logger.Error("executing init db schema", zap.String("type", consts.DBError), zap.String("db name", cfg.Name), zap.Error(err))
+		return err
+	} else {
+		logger.Info("executing init db schema success", zap.String("db name", cfg.Name))
+
+	}
+
+	return nil
+}
+
+func UpdateDatabase(cfg conf.DBConfig) error {
+	err := GetDBConnection(cfg.DbType, cfg.Host, cfg.Port, cfg.User, cfg.Password, cfg.Name, cfg.Charset, "update")
+	if err != nil || SqlxDB == nil {
+		logs.Logger.Error("connecting DB", zap.String("type", consts.DBError), zap.Error(err))
+		return err
+	}
+	if err = UpdateSchema(); err != nil {
+		logs.Logger.Error("executing update db schema", zap.String("type", consts.DBError), zap.Error(err))
+
+		return err
+	} else {
+		logs.Logger.Info("update db schema success", zap.String("db name", cfg.Name))
+
+	}
+	return nil
+
 }

@@ -8,5 +8,6 @@ import (
 )
 
 type IMenuRepository interface {
+	//获得某些角色的菜单信息
 	FindMenuByRoles(roleSlice []string) (menus []models.Menu, err error)
 }

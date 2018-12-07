@@ -3,48 +3,18 @@
 // license that can be found in the LICENSE file.
 package models
 
-const noVersion = "0.0.0"
+import "time"
 
-// MigrationHistory is model
+// MigrationHistoryRepository is model
 type MigrationHistory struct {
-	ID          int64
-	Version     string
-	DateApplied int64
+	ID        int       `json:"id" db:"id" comment:"主键ID"`
+	CreatedAt time.Time `json:"created_at,omitempty"  db:"created_at" comment:"记录创建时间"`
+	Version   string    `json:"version" db:"version" comment:"版本"`
+	Data      string    `json:"data" db:"data" comment:"升级数据"`
+	Installed bool      `json:"installed" db:"-" comment:"升级"`
 }
 
 // TableName returns name of table
 func (mh *MigrationHistory) TableName() string {
 	return "migration_history"
 }
-
-/*
-// CurrentVersion returns current version of database migrations
-func (mh *MigrationHistory) CurrentVersion() (string, error) {
-
-
-	err := DBConn.Last(mh).Error
-
-	if mh.Version == "" {
-		return noVersion, nil
-	}
-
-	return mh.Version, err
-}
-
-// ApplyMigration executes database schema and writes migration history
-func (mh *MigrationHistory) ApplyMigration(version string, query string) (err error) {
-	tx := DBConn.Begin()
-	defer func() {
-		if err != nil {
-			tx.Rollback()
-		} else {
-			tx.Commit()
-		}
-		DBConn.Close()
-	}()
-
-	err = tx.Exec(query).Error
-
-	return DBConn.Create(&MigrationHistory{Version: version, DateApplied: time.Now().Unix()}).Error
-}
-*/

@@ -8,6 +8,8 @@ import (
 )
 
 type IUserRepository interface {
+	//根据用户名查找用户
 	FindUserByUserName(username string) (models.User, error)
+	//根据用户ID查找用户
 	FindUserByID(id string) (models.User, error)
 }

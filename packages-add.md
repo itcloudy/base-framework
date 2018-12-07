@@ -13,6 +13,8 @@ govendor fetch github.com/centrifugal/gocent
 
 govendor fetch github.com/theckman/go-flock
 
+govendor fetch github.com/hashicorp/go-version
+
 govendor fetch github.com/satori/go.uuid
 
 govendor fetch github.com/blackjack/syslog

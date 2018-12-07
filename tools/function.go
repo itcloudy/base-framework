@@ -46,17 +46,7 @@ func Capitalize(str string) string {
 	return upperStr
 }
 
-func CheckExsitInList(check string, checkList []string) bool {
-	var exsit bool
-	for _, name := range checkList {
-		if check == name {
-			exsit = true
-		}
-	}
-	return exsit
-}
-
-func GetAllFile(pathname string, suffix string) (fileList []string) {
+func GetAllFile(pathname string, suffix string) (fileSlice []string) {
 	rd, err := ioutil.ReadDir(pathname)
 	if err != nil {
 		return
@@ -69,10 +59,10 @@ func GetAllFile(pathname string, suffix string) (fileList []string) {
 		} else {
 			if suffix != "" {
 				if strings.HasSuffix(fi.Name(), suffix) {
-					fileList = append(fileList, fi.Name())
+					fileSlice = append(fileSlice, fi.Name())
 				}
 			} else {
-				fileList = append(fileList, fi.Name())
+				fileSlice = append(fileSlice, fi.Name())
 
 			}
 		}
