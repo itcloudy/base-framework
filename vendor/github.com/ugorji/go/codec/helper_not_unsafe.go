@@ -47,9 +47,9 @@ func rt2id(rt reflect.Type) uintptr {
 	return reflect.ValueOf(rt).Pointer()
 }
 
-func rv2rtid(rv reflect.Value) uintptr {
-	return reflect.ValueOf(rv.Type()).Pointer()
-}
+// func rv2rtid(rv reflect.Value) uintptr {
+// 	return reflect.ValueOf(rv.Type()).Pointer()
+// }
 
 func i2rtid(i interface{}) uintptr {
 	return reflect.ValueOf(reflect.TypeOf(i)).Pointer()
@@ -94,19 +94,50 @@ func isEmptyValue(v reflect.Value, tinfos *TypeInfos, deref, checkStruct bool) b
 // }
 
 // --------------------------
+type atomicClsErr struct {
+	v atomic.Value
+}
+
+func (x *atomicClsErr) load() (e clsErr) {
+	if i := x.v.Load(); i != nil {
+		e = i.(clsErr)
+	}
+	return
+}
+
+func (x *atomicClsErr) store(p clsErr) {
+	x.v.Store(p)
+}
+
+// --------------------------
 type atomicTypeInfoSlice struct { // expected to be 2 words
 	v atomic.Value
 }
 
-func (x *atomicTypeInfoSlice) load() []rtid2ti {
-	i := x.v.Load()
-	if i == nil {
-		return nil
+func (x *atomicTypeInfoSlice) load() (e []rtid2ti) {
+	if i := x.v.Load(); i != nil {
+		e = i.([]rtid2ti)
 	}
-	return i.([]rtid2ti)
+	return
 }
 
 func (x *atomicTypeInfoSlice) store(p []rtid2ti) {
+	x.v.Store(p)
+}
+
+// --------------------------
+type atomicRtidFnSlice struct { // expected to be 2 words
+	v atomic.Value
+}
+
+func (x *atomicRtidFnSlice) load() (e []codecRtidFn) {
+	if i := x.v.Load(); i != nil {
+		e = i.([]codecRtidFn)
+	}
+	return
+}
+
+func (x *atomicRtidFnSlice) store(p []codecRtidFn) {
 	x.v.Store(p)
 }
 
@@ -194,7 +225,7 @@ func (e *Encoder) kTime(f *codecFnInfo, rv reflect.Value) {
 }
 
 func (e *Encoder) kString(f *codecFnInfo, rv reflect.Value) {
-	e.e.EncodeString(cUTF8, rv.String())
+	e.e.EncodeStringEnc(cUTF8, rv.String())
 }
 
 func (e *Encoder) kFloat64(f *codecFnInfo, rv reflect.Value) {

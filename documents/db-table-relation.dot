@@ -1,0 +1,48 @@
+digraph GoERD {
+	graph [bb="0,0,364.35,951"];
+	node [label="\N"];
+	subgraph all_fileds {
+		graph [label=all_fileds];
+		"node-User"		 [height=4.2917,
+			label="{User|<f0>ID\ int|<f1>CreatedAt\ time.Time|<f2>UpdatedAt\ time.Time|<f3>Username\ string|<f4>Alias\ string|<f5>HeadImage\ string|<\
+f6>Email\ string|<f7>Mobile\ string|<f8>Password\ string|<f9>ConfirmPassword\ string|<f10>Pwd\ string|<f11>IsAdmin\ bool|<f12>IsActive\ \
+bool}",
+			pos="75.867,712.5",
+			rects="0,844.5,151.73,866.5 0,822.5,151.73,844.5 0,800.5,151.73,822.5 0,778.5,151.73,800.5 0,756.5,151.73,778.5 0,734.5,151.73,756.5 0,\
+712.5,151.73,734.5 0,690.5,151.73,712.5 0,668.5,151.73,690.5 0,646.5,151.73,668.5 0,624.5,151.73,646.5 0,602.5,151.73,624.5 0,580.5,\
+151.73,602.5 0,558.5,151.73,580.5",
+			shape=record,
+			width=2.1074];
+		"node-Role"		 [height=2.7639,
+			label="{Role|<f0>ID\ int|<f1>CreatedAt\ time.Time|<f2>UpdatedAt\ time.Time|<f3>Name\ string|<f4>Code\ string|<f5>InheritIds\ \[\]int|<f6>\
+Inherits\ \[\]\*Role|<f7>RoleMenus\ \[\]\*RoleMenu}",
+			pos="249.87,712.5",
+			rects="170.13,789.5,329.61,811.5 170.13,767.5,329.61,789.5 170.13,745.5,329.61,767.5 170.13,723.5,329.61,745.5 170.13,701.5,329.61,723.5 \
+170.13,679.5,329.61,701.5 170.13,657.5,329.61,679.5 170.13,635.5,329.61,657.5 170.13,613.5,329.61,635.5",
+			shape=record,
+			width=2.215];
+		"node-Role":f6 -> "node-Role"		 [pos="e,243.81,811.74 250.98,657.52 258.85,744.92 258.48,951 249.87,951 244.22,951 242.11,888.31 243.56,821.97"];
+		"node-RoleMenu"		 [height=2.4583,
+			label="{RoleMenu|<f0>ID\ int|<f1>CreatedAt\ time.Time|<f2>UpdatedAt\ time.Time|<f3>Role\ Role|<f4>RoleID\ int|<f5>Menu\ Menu|<f6>MenuID\ \
+int}",
+			pos="249.87,433.5",
+			rects="180.68,499.5,319.05,521.5 180.68,477.5,319.05,499.5 180.68,455.5,319.05,477.5 180.68,433.5,319.05,455.5 180.68,411.5,319.05,433.5 \
+180.68,389.5,319.05,411.5 180.68,367.5,319.05,389.5 180.68,345.5,319.05,367.5",
+			shape=record,
+			width=1.9218];
+		"node-Role":f7 -> "node-RoleMenu"		 [pos="e,249.87,521.85 249.87,613.5 249.87,587.04 249.87,558.39 249.87,531.89"];
+		"node-Menu"		 [height=4.2917,
+			label="{Menu|<f0>ID\ int|<f1>CreatedAt\ time.Time|<f2>UpdatedAt\ time.Time|<f3>Parent\ \*Menu|<f4>ParentID\ int|<f5>Name\ string|<f6>Route\ \
+string|<f7>Component\ string|<f8>Icon\ string|<f9>Sequence\ int|<f10>Tree\ string|<f11>Children\ \[\]\*Menu|<f12>UniqueTag\ string}",
+			pos="249.87,154.5",
+			rects="180.68,286.5,319.05,308.5 180.68,264.5,319.05,286.5 180.68,242.5,319.05,264.5 180.68,220.5,319.05,242.5 180.68,198.5,319.05,220.5 \
+180.68,176.5,319.05,198.5 180.68,154.5,319.05,176.5 180.68,132.5,319.05,154.5 180.68,110.5,319.05,132.5 180.68,88.5,319.05,110.5 \
+180.68,66.5,319.05,88.5 180.68,44.5,319.05,66.5 180.68,22.5,319.05,44.5 180.68,0.5,319.05,22.5",
+			shape=record,
+			width=1.9218];
+		"node-Menu":f3 -> "node-Menu"		 [pos="e,243.28,308.52 250.83,220.56 258.85,317.58 258.53,448 249.87,448 244.91,448 242.68,388.59 243.19,318.87"];
+		"node-Menu":f11 -> "node-Menu"		 [pos="e,243.28,308.52 250.78,44.606 258.86,153.21 258.55,448 249.87,448 244.91,448 242.68,388.59 243.19,318.87"];
+		"node-RoleMenu":f3 -> "node-Role"		 [pos="e,310.85,613.1 318.87,422.5 396.39,422.5 359.57,521.79 315.67,604.17"];
+		"node-RoleMenu":f5 -> "node-Menu"		 [pos="e,319.09,258.63 318.87,378.5 370.63,378.5 353.92,323.2 324,267.56"];
+	}
+}
