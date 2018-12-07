@@ -6,6 +6,7 @@ package daylight
 import (
 	"github.com/itcloudy/base-framework/pkg/logs"
 	"github.com/itcloudy/base-framework/pkg/transport"
+	"github.com/itcloudy/base-framework/pkg/transport/restful/middles"
 	"go.uber.org/zap"
 
 	"encoding/json"
@@ -58,6 +59,7 @@ func Start() {
 	}
 	defer delPidFile()
 	cfg := conf.Config.DB
+	middles.InitKeys()
 	conf.GetDBConnection(cfg.DbType, cfg.Host, cfg.Port, cfg.User, cfg.Password, cfg.Name, cfg.Charset, "")
 	transport.ServerStart()
 

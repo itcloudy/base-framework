@@ -24,10 +24,11 @@ var (
 
 type JwtClaims struct {
 	*jwt.StandardClaims
-	Name    string
-	Role    []string
-	UserId  int
-	IsAdmin bool
+	Name      string
+	RoleIds   []string
+	RoleCodes []string
+	UserId    int
+	IsAdmin   bool
 }
 
 // Read the key files before starting http handlers
@@ -59,14 +60,15 @@ func InitKeys() {
 }
 
 // GenerateJWT generates a new JWT token
-func GenerateJWT(name string, role []string, userId int, isAdmin bool) string {
+func GenerateJWT(name string, roleIds, roleCodes []string, userId int, isAdmin bool) string {
 
 	claims := JwtClaims{
 		&jwt.StandardClaims{
 			ExpiresAt: time.Now().Add(time.Second * conf.Config.TokenExpire).Unix(),
 		},
 		name,
-		role,
+		roleIds,
+		roleCodes,
 		userId,
 		isAdmin,
 	}
@@ -97,13 +99,15 @@ func JwtAuthorize() gin.HandlerFunc {
 				jwtClaims := token.Claims.(*JwtClaims)
 				c.Set(consts.LoginUserID, jwtClaims.UserId)
 				c.Set(consts.LoginUserName, jwtClaims.Name)
-				c.Set(consts.LoginUserRoles, jwtClaims.Role)
+				c.Set(consts.LoginUserRoleIds, jwtClaims.RoleIds)
+				c.Set(consts.LoginUserRoleCodes, jwtClaims.RoleCodes)
 				c.Set(consts.LoginIsAdmin, jwtClaims.IsAdmin)
 				c.Set(consts.TokenValid, true)
 			} else {
 				c.Set(consts.LoginUserID, 0)
 				c.Set(consts.LoginUserName, "")
-				c.Set(consts.LoginUserRoles, []string{})
+				c.Set(consts.LoginUserRoleIds, []string{})
+				c.Set(consts.LoginUserRoleCodes, []string{})
 				c.Set(consts.LoginIsAdmin, false)
 				c.Set(consts.TokenValid, false)
 			}

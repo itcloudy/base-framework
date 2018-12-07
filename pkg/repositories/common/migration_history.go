@@ -34,7 +34,7 @@ func (repo *MigrationHistoryRepository) ApplyMigrations(collection version.Colle
 		tx.MustExec(migrates[v.String()])
 	}
 	for _, v := range collection {
-		tx.MustExec("intersect into migration_history (version, data ) values ($1,$2)", v.String(), migrates[v.String()])
+		tx.MustExec("insert into migration_history (version, data ) values ($1,$2)", v.String(), migrates[v.String()])
 	}
 
 	tx.Commit()

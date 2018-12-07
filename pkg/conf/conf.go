@@ -86,6 +86,10 @@ type RedisConfig struct {
 	Password string
 	DB       int
 }
+type SuperUser struct {
+	UserName string
+	Password string
+}
 type CorsConfig struct {
 	AllowOrigins     []string
 	AllowMethods     []string
@@ -117,6 +121,7 @@ type GlobalConfig struct {
 	Log               LogConfig               // 日志
 	EmailNotification EmailNotificationConfig // 邮件配置
 	Cors              CorsConfig              // 跨域配置
+	Admin             SuperUser               //超级用户
 
 }
 
@@ -224,6 +229,20 @@ func FillRuntimePaths() error {
 	if Config.Log.FileName == "" {
 		Config.Log.FileName = filepath.Join(Config.SystemDataDir, consts.DefaultLogFileName)
 
+	}
+	//jwt
+	if Config.JwtPrivatePath == "" {
+		Config.JwtPrivatePath = filepath.Join(cwd, "config", "jwt", "tm.rsa")
+	}
+	if Config.JwtPublicPath == "" {
+		Config.JwtPublicPath = filepath.Join(cwd, "config", "jwt", "tm.rsa.pub")
+	}
+	//https
+	if Config.TLS.CertFile == "" {
+		Config.TLS.CertFile = filepath.Join(cwd, "config", "https", "cert.pem")
+	}
+	if Config.TLS.KeyFile == "" {
+		Config.TLS.KeyFile = filepath.Join(cwd, "config", "https", "key.pem")
 	}
 	return nil
 }

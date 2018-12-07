@@ -23,7 +23,7 @@ type MenuController struct {
 // @Router /user/{id} [get]
 func (ctl *MenuController) CtlGetSelfMenu(c *gin.Context) {
 
-	menus, err := ctl.MenuService.GetSelfMenu(c.GetStringSlice(consts.LoginUserRoles))
+	menus, err := ctl.MenuService.GetSelfMenu(c.GetStringSlice(consts.LoginUserRoleIds))
 	if err != nil {
 
 	}

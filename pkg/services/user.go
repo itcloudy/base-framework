@@ -8,16 +8,25 @@ import (
 	"github.com/itcloudy/base-framework/pkg/repositories"
 )
 
+const salt = "cloudy"
+
 type UserService struct {
 	repositories.IUserRepository
 }
 
-func (service *UserService) GetSelf(id string) (user models.User, err error) {
+func (service *UserService) GetSelf(id string) (user models.UserDetail, err error) {
 	return service.FindUserByID(id)
 }
-func (service *UserService) GetUserByID(id string) (user models.User, err error) {
+func (service *UserService) GetUserByID(id string) (user models.UserDetail, err error) {
 	return service.FindUserByID(id)
 }
-func (service *UserService) GetUserByUserName(username string) (user models.User, err error) {
+func (service *UserService) GetUserByUserName(username string) (user models.UserDetail, err error) {
 	return service.FindUserByUserName(username)
+}
+func (service *UserService) UserCreate(userCreate models.UserCreate) (user models.UserDetail, err error) {
+
+}
+func (service *UserService) CheckUser(usename, pwd string) (user models.User, err error) {
+
+	return
 }

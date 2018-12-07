@@ -24,3 +24,11 @@
 2018-12-07T17:22:36.440+0800	INFO	init database success	{"db name": "go", "time": "2018-12-07T17:22:36.440+0800"}
 2018-12-07T17:35:29.507+0800	INFO	init database success	{"db name": "go", "time": "2018-12-07T17:35:29.507+0800"}
 2018-12-07T17:53:10.152+0800	INFO	init database success	{"db name": "go", "time": "2018-12-07T17:53:10.152+0800"}
+2018-12-07T18:15:48.710+0800	INFO	init database success	{"db name": "go", "time": "2018-12-07T18:15:48.710+0800"}
+2018-12-07T18:19:00.602+0800	INFO	init database success	{"db name": "go", "time": "2018-12-07T18:19:00.602+0800"}
+2018-12-07T21:37:07.836+0800	DEBUG	old pid path	{"path": "/Users/cloudy/Documents/go/src/github.com/itcloudy/base-framework/system-data/base-framework.pid"}
+2018-12-07T21:37:07.836+0800	ERROR	killing process failed	{"error": "no such process", "pid": "11689"}
+2018-12-07T21:37:22.881+0800	FATAL	jwt private key file read failed	{"db name": "", "error": "open : no such file or directory"}
+2018-12-07T21:47:50.424+0800	DEBUG	old pid path	{"path": "/Users/cloudy/Documents/go/src/github.com/itcloudy/base-framework/system-data/base-framework.pid"}
+2018-12-07T21:47:50.425+0800	ERROR	killing process failed	{"error": "no such process", "pid": "1559"}
+2018-12-07T21:48:05.501+0800	INFO	server start process invoke end

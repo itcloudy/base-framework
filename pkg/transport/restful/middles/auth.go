@@ -29,7 +29,7 @@ func CasbinJwtAuthorize(e *casbin.Enforcer) gin.HandlerFunc {
 // Returns true (permission granted) or false (permission forbidden)
 func (a *BasicAuthorizer) CheckPermission(c *gin.Context) bool {
 	userId := c.GetInt(consts.LoginUserID)
-	roles := c.GetStringSlice(consts.LoginUserRoles)
+	roles := c.GetStringSlice(consts.LoginUserRoleIds)
 	isAdmin := c.GetBool(consts.LoginIsAdmin)
 	if isAdmin {
 		return true

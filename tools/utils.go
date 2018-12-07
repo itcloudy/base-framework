@@ -4,6 +4,8 @@
 package tools
 
 import (
+	"crypto/sha256"
+	"fmt"
 	"github.com/itcloudy/base-framework/pkg/logs"
 	"github.com/satori/go.uuid"
 	"go.uber.org/zap"
@@ -56,4 +58,10 @@ func StringInSlice(slice []string, v string) bool {
 		}
 	}
 	return false
+}
+func SHA256(str string) (result string) {
+	h := sha256.New()
+	h.Write([]byte(str))
+	result = fmt.Sprintf("%x", h.Sum(nil))
+	return
 }

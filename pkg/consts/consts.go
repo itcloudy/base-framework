@@ -43,7 +43,9 @@ const (
 	// login user id
 	LoginUserID = "LOGIN_USER_ID"
 	// login user roles []string
-	LoginUserRoles = "LOGIN_USER_ROLES"
+	LoginUserRoleIds   = "LOGIN_USER_ROLE_IDS"
+	LoginUserRoleCodes = "LOGIN_USER_ROLE_CODES"
+
 	//login user is admin
 	LoginIsAdmin = "LOGIN_IS_ADMIN"
 	// token is valid

@@ -9,7 +9,13 @@ import (
 
 type IUserRepository interface {
 	//根据用户名查找用户
-	FindUserByUserName(username string) (models.User, error)
+	FindUserByUserName(username string) (models.UserDetail, error)
 	//根据用户ID查找用户
-	FindUserByID(id string) (models.User, error)
+	FindUserByID(id string) (models.UserDetail, error)
+	// 创建用户
+	InsertUser(create models.UserCreate) (models.UserDetail, error)
+	//管理员更改
+	UpdateUserAdmin(id string, isAdmin bool) error
+	// 用户有效更改
+	UpdateUserActive(id string, isActive bool) error
 }

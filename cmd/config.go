@@ -119,7 +119,7 @@ func init() {
 	configCmd.Flags().IntVar(&conf.Config.Log.MaxBackups, "logFileBackups", 3, "number of log backup")
 	configCmd.Flags().IntVar(&conf.Config.Log.MaxAge, "logFileAge", 7, "log file save max days")
 	configCmd.Flags().BoolVar(&conf.Config.Log.Compress, "logFileCompress", true, "compress log file")
-	configCmd.Flags().BoolVar(&conf.Config.Log.EnableKafka, "logEnableKafka", true, "log send to kafka")
+	configCmd.Flags().BoolVar(&conf.Config.Log.EnableKafka, "logEnableKafka", false, "log send to kafka")
 	viper.BindPFlag("Log.EnableKafka", configCmd.Flags().Lookup("logEnableKafka"))
 	viper.BindPFlag("Log.KafkaAddress", configCmd.Flags().Lookup("kafkaAddress"))
 	viper.BindPFlag("Log.FileName", configCmd.Flags().Lookup("logFile"))
