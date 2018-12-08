@@ -1,8 +1,0 @@
-2018-12-06T21:01:00.710+0800	DEBUG	old pid path	{"path": "/Users/cloudy/Documents/go/src/github.com/itcloudy/base-framework/system-data/base-framework.pid"}
-2018-12-06T21:01:01.586+0800	ERROR	killing process failed	{"error": "no such process", "pid": "7533"}
-2018-12-06T21:01:16.662+0800	INFO	server start success
-2018-12-06T21:01:16.776+0800	FATAL	rest router init recovered panic
-2018-12-07T09:13:24.018+0800	DEBUG	old pid path	{"path": "/Users/cloudy/Documents/go/src/github.com/itcloudy/base-framework/system-data/base-framework.pid"}
-2018-12-07T09:13:24.019+0800	ERROR	killing process failed	{"error": "no such process", "pid": "2708"}
-2018-12-07T09:13:39.087+0800	INFO	server start success
-2018-12-07T09:13:39.137+0800	FATAL	rest router init recovered panic

@@ -227,7 +227,7 @@ func FillRuntimePaths() error {
 		Config.LockFilePath = filepath.Join(Config.SystemDataDir, consts.DefaultLockFilename)
 	}
 	if Config.Log.FileName == "" {
-		Config.Log.FileName = filepath.Join(Config.SystemDataDir, consts.DefaultLogFileName)
+		Config.Log.FileName = filepath.Join(cwd, "logs", consts.DefaultLogFileName)
 
 	}
 	//jwt

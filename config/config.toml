@@ -10,6 +10,10 @@ TempDir = "/Users/cloudy/Documents/go/src/github.com/itcloudy/base-framework/fra
 TokenExpire = "2h0m0s"
 UserDataDir = "/Users/cloudy/Documents/go/src/github.com/itcloudy/base-framework/user-data"
 
+[Admin]
+  Password = ""
+  UserName = ""
+
 [Centrifugo]
   Enable = false
   Secret = "127.0.0.1"
@@ -52,7 +56,7 @@ UserDataDir = "/Users/cloudy/Documents/go/src/github.com/itcloudy/base-framework
 [Log]
   Compress = true
   EnableKafka = false
-  FileName = "/Users/cloudy/Documents/go/src/github.com/itcloudy/base-framework/system-data/base-framework.log"
+  FileName = "/Users/cloudy/Documents/go/src/github.com/itcloudy/base-framework/logs/base-framework.log"
   KafkaAddress = ["localhost:9092"]
   MaxAge = 7
   MaxBackups = 3

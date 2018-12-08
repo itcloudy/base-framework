@@ -24,7 +24,7 @@ func (service *UserService) GetUserByUserName(username string) (user models.User
 	return service.FindUserByUserName(username)
 }
 func (service *UserService) UserCreate(userCreate models.UserCreate) (user models.UserDetail, err error) {
-
+	return
 }
 func (service *UserService) CheckUser(usename, pwd string) (user models.User, err error) {
 
