@@ -41,6 +41,8 @@ var dbupdateCmd = &cobra.Command{
 			logs.Logger.Sync()
 
 		}
+		conf.SqlxDB.Close()
+
 	},
 }
 

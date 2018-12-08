@@ -11,8 +11,10 @@ TokenExpire = "2h0m0s"
 UserDataDir = "/Users/cloudy/Documents/go/src/github.com/itcloudy/base-framework/user-data"
 
 [Admin]
-  Password = ""
-  UserName = ""
+  Email = "itcloudy@qq.com"
+  Mobile = "13888888888"
+  Password = "itcloudy"
+  UserName = "admin"
 
 [Centrifugo]
   Enable = false

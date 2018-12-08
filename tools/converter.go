@@ -29,7 +29,7 @@ func StrToUint64(s string) uint64 {
 }
 
 // Float64ToStr converts float64 to string
-func Float64ToStr(f float64) string {
+func Float64ToStr(f float64, prec ...string) string {
 	return strconv.FormatFloat(f, 'f', 13, 64)
 }
 

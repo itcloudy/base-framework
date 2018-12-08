@@ -63,6 +63,16 @@ func init() {
 	// Command flags
 	configCmd.Flags().String("path", "", "Generate config to (default config/config.toml)")
 
+	// super user
+	configCmd.Flags().StringVar(&conf.Config.Admin.UserName, "admin-name", "admin", "super user name")
+	configCmd.Flags().StringVar(&conf.Config.Admin.Password, "admin-pwd", "itcloudy", "super user password")
+	configCmd.Flags().StringVar(&conf.Config.Admin.Email, "admin-email", "itcloudy@qq.com", "super user email")
+	configCmd.Flags().StringVar(&conf.Config.Admin.Mobile, "admin-mobile", "13888888888", "super user mobile")
+	viper.BindPFlag("Admin.UserName", configCmd.Flags().Lookup("admin-name"))
+	viper.BindPFlag("Admin.Password", configCmd.Flags().Lookup("admin-pwd"))
+	viper.BindPFlag("Admin.Email", configCmd.Flags().Lookup("admin-email"))
+	viper.BindPFlag("Admin.Mobile", configCmd.Flags().Lookup("admin-mobile"))
+
 	// jwt
 	configCmd.Flags().StringVar(&conf.Config.JwtPrivatePath, "jwt-pri", "", "jwt private path")
 	configCmd.Flags().StringVar(&conf.Config.JwtPublicPath, "jwt-pub", "", "jwt pblic path")

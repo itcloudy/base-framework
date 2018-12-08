@@ -22,7 +22,7 @@ func (repo *UserRepository) FindUserByID(id string) (user models.UserDetail, err
 	return
 }
 func (repo *UserRepository) InsertUser(create models.UserCreate) (user models.UserDetail, err error) {
-	err = repo.Create(create).Error
+	err = repo.Create(&create).Error
 	if err == nil {
 		return repo.FindUserByID(strconv.Itoa(create.ID))
 	}

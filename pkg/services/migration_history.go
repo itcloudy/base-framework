@@ -11,6 +11,7 @@ import (
 	"github.com/itcloudy/base-framework/pkg/migration"
 	"github.com/itcloudy/base-framework/pkg/models"
 	"github.com/itcloudy/base-framework/pkg/repositories"
+	"github.com/itcloudy/base-framework/pkg/repositories/common"
 	"github.com/itcloudy/base-framework/tools"
 )
 
@@ -55,7 +56,34 @@ func (service *MigrationService) FirstMigration() (err error) {
 	if len(collection) < 1 {
 		return errors.New("no need update version, code logic has problem")
 	}
-	return service.ApplyMigrations(collection, needUpdateMap)
+	err = service.ApplyMigrations(collection, needUpdateMap)
+	if err == nil {
+		// 插入超级管理员
+		var superUser models.UserCreate
+		cfg := conf.Config.DB
+		conf.GetDBConnection(cfg.DbType, cfg.Host, cfg.Port, cfg.User, cfg.Password, cfg.Name, cfg.Charset, "")
+		userService := UserService{}
+		switch cfg.DbType {
+		case "mysql":
+		case "postgres":
+			userService.IUserRepository = &common.UserRepository{DB: conf.DBConn}
+			break
+		default:
+			panic(errors.New("un support sql type:" + cfg.DbType))
+
+		}
+		admin := conf.Config.Admin
+		superUser.Username = admin.UserName
+		superUser.Password = admin.Password
+		superUser.ConfirmPassword = admin.Password
+		superUser.Email = admin.Email
+		superUser.Mobile = admin.Mobile
+		superUser.IsActive = true
+		superUser.IsAdmin = true
+		_, err = userService.UserCreate(superUser)
+	}
+	conf.DBConn.Close()
+	return
 }
 
 /*

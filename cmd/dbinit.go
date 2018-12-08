@@ -38,6 +38,7 @@ var dbinitCmd = &cobra.Command{
 			logs.Logger.Info("init database success", zap.String("db name", conf.Config.DB.Name), zap.Time("time", time.Now()))
 
 		}
+		conf.SqlxDB.Close()
 
 	},
 }

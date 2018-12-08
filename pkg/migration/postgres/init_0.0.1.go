@@ -49,13 +49,25 @@ create  table users (
   created_at timestamp NOT NULL  default CURRENT_TIMESTAMP,
   updated_at timestamp NOT NULL  default CURRENT_TIMESTAMP ,
   username CHAR(50) NOT NULL,
+  alias  CHAR(50),
+  head_image CHAR(200),
+  email CHAR(50),
+  pwd CHAR(200),
+  mobile CHAR(50),
+  is_active boolean DEFAULT true,
+  is_admin boolean DEFAULT false,
   UNIQUE(username)
-);[
+);
 
 COMMENT ON TABLE users IS '系统用户';
 comment on column users.created_at is '创建时间';
 comment on column users.updated_at is '更新时间';
 comment on column users.username is '用户名';
+comment on column users.email is '邮箱';
+comment on column users.pwd is '密码';
+comment on column users.username is '有效';
+comment on column users.username is '管理员';
+
 CREATE SEQUENCE users_id_seq START WITH 1 INCREMENT BY 1 NO MINVALUE NO MAXVALUE CACHE 1;
 
 alter table users alter column id set default nextval('users_id_seq');

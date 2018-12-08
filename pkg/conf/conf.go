@@ -89,6 +89,8 @@ type RedisConfig struct {
 type SuperUser struct {
 	UserName string
 	Password string
+	Email    string
+	Mobile   string
 }
 type CorsConfig struct {
 	AllowOrigins     []string

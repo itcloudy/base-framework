@@ -6,6 +6,7 @@ package services
 import (
 	"github.com/itcloudy/base-framework/pkg/models"
 	"github.com/itcloudy/base-framework/pkg/repositories"
+	"github.com/itcloudy/base-framework/tools"
 )
 
 const salt = "cloudy"
@@ -24,7 +25,10 @@ func (service *UserService) GetUserByUserName(username string) (user models.User
 	return service.FindUserByUserName(username)
 }
 func (service *UserService) UserCreate(userCreate models.UserCreate) (user models.UserDetail, err error) {
-	return
+	userCreate.ID = 0
+	userCreate.Pwd = tools.SHA256(userCreate.Password)
+	 return service.InsertUser(userCreate)
+
 }
 func (service *UserService) CheckUser(usename, pwd string) (user models.User, err error) {
 
