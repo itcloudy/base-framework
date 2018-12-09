@@ -45,6 +45,6 @@ func (m *MockUserRepository) GetUserByID(id int) (models.User, error) {
 	}
 	return r0, r1
 }
-func (m *MockUserRepository)	FindUserByUserNameAndPwd(username,pwd string) (user models.UserDetail,err  error){
+func (m *MockUserRepository) FindUserByUserNameAndPwd(username, pwd string) (user models.UserDetail, err error) {
 	return
 }

@@ -73,7 +73,7 @@ func (ctl UserController) CtlLogin(c *gin.Context) {
 		common.GenResponse(c, consts.BindingJsonErr, nil, "bing json failed")
 		return
 	}
-	if userDetail, err = ctl.CheckUser(user.Username, user.Password); err != nil  || userDetail.ID==0{
+	if userDetail, err = ctl.CheckUser(user.Username, user.Password); err != nil || userDetail.ID == 0 {
 		common.GenResponse(c, consts.UserNameOrPasswordErr, nil, "username or password error")
 		return
 	}

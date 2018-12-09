@@ -32,7 +32,7 @@ func (service *UserService) UserCreate(userCreate models.UserCreate) (user model
 }
 func (service *UserService) CheckUser(username, pwd string) (user models.UserDetail, err error) {
 	loginPwd := tools.SHA256(tools.StringsJoin(pwd, salt))
-	user, err = service.FindUserByUserNameAndPwd(username,loginPwd)
+	user, err = service.FindUserByUserNameAndPwd(username, loginPwd)
 	return
 
 }

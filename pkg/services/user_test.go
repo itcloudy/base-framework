@@ -4,13 +4,13 @@
 package services
 
 import (
+	"github.com/itcloudy/base-framework/pkg/mocks/repositories"
 	"github.com/itcloudy/base-framework/pkg/models"
-	"github.com/itcloudy/base-framework/pkg/repositories/mocks"
 	"testing"
 )
 
 func TestUserService_GetUserByID(t *testing.T) {
-	userRepository := new(mocks.IUserRepository)
+	userRepository := new(mocks.MockUserRepository)
 	id := 101
 	user1 := models.User{}
 	user1.ID = id
@@ -22,7 +22,7 @@ func TestUserService_GetUserByID(t *testing.T) {
 	//userService := UserService{userRepository}
 }
 func TestUserService_GetUserByUserName(t *testing.T) {
-	userRepository := new(mocks.IUserRepository)
+	userRepository := new(mocks.MockUserRepository)
 	name := "cloudy"
 	user1 := models.User{}
 	user1.Username = name

@@ -19,6 +19,6 @@ func (_m *MockMigrationHistoryRepository) CurrentVersion() (version string, err 
 func (_m *MockMigrationHistoryRepository) ApplyMigrations(collection version.Collection, migrates map[string]string) (err error) {
 	return
 }
-func (_m * MockMigrationHistoryRepository) ListMigration() (migrates []models.MigrationHistory, err error) {
+func (_m *MockMigrationHistoryRepository) ListMigration() (migrates []models.MigrationHistory, err error) {
 	return
 }

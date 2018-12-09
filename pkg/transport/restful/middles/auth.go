@@ -30,7 +30,7 @@ func CasbinJwtAuthorize(e *casbin.Enforcer) gin.HandlerFunc {
 // CheckPermission checks the user/method/path combination from the request.
 // Returns true (permission granted) or false (permission forbidden)
 func (a *BasicAuthorizer) CheckPermission(c *gin.Context) bool {
-	if !c.GetBool(consts.TokenValid){
+	if !c.GetBool(consts.TokenValid) {
 		return false
 	}
 	userId := c.GetInt(consts.LoginUserID)
@@ -51,7 +51,6 @@ func (a *BasicAuthorizer) CheckPermission(c *gin.Context) bool {
 	}
 	return authOk
 }
-
 
 // RequirePermission returns the 403 Forbidden to the client
 func (a *BasicAuthorizer) RequirePermission(c *gin.Context) {
