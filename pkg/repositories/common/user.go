@@ -38,6 +38,8 @@ func (repo *UserRepository) UpdateUserActive(id string, isActive bool) (err erro
 }
 
 func (repo *UserRepository)	FindUserByUserNameAndPwd(username,pwd string) (user models.UserDetail,err  error){
+	err = repo.Model(models.User{}).Where("username = ? and pwd = ? and is_active = ?",username,pwd,true).First(&user).Error
+
 	return
 }
 
