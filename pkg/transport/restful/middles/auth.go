@@ -59,7 +59,7 @@ func (a *BasicAuthorizer) RequirePermission(c *gin.Context) {
 	var res conf.ResponseJson
 	if tokenValid {
 		c.Writer.WriteHeader(http.StatusForbidden)
-		//common.GenResponse(c, consts.PermissionErr, nil, "you have no right for this action")
+		//common.GenResponse(c, consts.PermissionErr, nil, "you have no right for this action1")
 		res = conf.ResponseJson{
 			Code:    consts.PermissionErr,
 			Data:    nil,
@@ -67,7 +67,7 @@ func (a *BasicAuthorizer) RequirePermission(c *gin.Context) {
 		}
 	} else {
 		c.Writer.WriteHeader(http.StatusUnauthorized)
-		//common.GenResponse(c, consts.TokenValidErr, nil, "token error or expire or invalid")
+		//common.GenResponse(c, consts.TokenValidErr, nil, "token error or expire or invalid1")
 		res = conf.ResponseJson{
 			Code:    consts.TokenValidErr,
 			Data:    nil,

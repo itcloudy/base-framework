@@ -4,7 +4,6 @@
 package routers
 
 import (
-	"fmt"
 	"github.com/casbin/casbin"
 	"github.com/casbin/gorm-adapter"
 	"github.com/gin-gonic/gin"
@@ -35,7 +34,6 @@ func addRouter(router *gin.Engine) {
 	var adapter *gormadapter.Adapter
 	dbConf := conf.Config.DB
 	connectInfo := conf.GetDBConnectionString(dbConf.DbType, dbConf.Host, dbConf.Port, dbConf.User, dbConf.Password, dbConf.Name, dbConf.Charset)
-	fmt.Println(connectInfo)
 	adapter = gormadapter.NewAdapter(dbConf.DbType, connectInfo, true)
 	cwd, _ := os.Getwd()
 	conf.Enforcer = casbin.NewEnforcer(path.Join(cwd, consts.DefaultWorkdirName, "casbin_rbac_model.conf"), adapter)
