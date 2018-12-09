@@ -3,6 +3,12 @@
 	"ignore": "test",
 	"package": [
 		{
+			"checksumSHA1": "Pc2ORQp+VY3Un/dkh4QwLC7R6lE=",
+			"path": "github.com/BurntSushi/toml",
+			"revision": "3012a1dbe2e4bd1391d42b32f0577cb7bbc7f005",
+			"revisionTime": "2018-08-15T10:47:33Z"
+		},
+		{
 			"checksumSHA1": "oyXJxS8qqy5TCkqvndCD1c7Lkg4=",
 			"path": "github.com/Knetic/govaluate",
 			"revision": "9aa49832a739dcd78a5542ff189fb82c3e423116",
@@ -445,6 +451,24 @@
 			"revisionTime": "2018-12-06T21:06:23Z"
 		},
 		{
+			"checksumSHA1": "qoH2l9oi79NfVls2+rCZpGYB0a4=",
+			"path": "github.com/nicksnyder/go-i18n/v2/i18n",
+			"revision": "cc0ca3bb8ee4a7c17dc0e0e3dab8728eea371401",
+			"revisionTime": "2018-11-26T19:14:19Z"
+		},
+		{
+			"checksumSHA1": "u+EKUypQx2OWro260q7LMD9wL3o=",
+			"path": "github.com/nicksnyder/go-i18n/v2/internal",
+			"revision": "cc0ca3bb8ee4a7c17dc0e0e3dab8728eea371401",
+			"revisionTime": "2018-11-26T19:14:19Z"
+		},
+		{
+			"checksumSHA1": "h43HlGQxI/NDktCSw2BVrSS57sE=",
+			"path": "github.com/nicksnyder/go-i18n/v2/internal/plural",
+			"revision": "cc0ca3bb8ee4a7c17dc0e0e3dab8728eea371401",
+			"revisionTime": "2018-11-26T19:14:19Z"
+		},
+		{
 			"checksumSHA1": "DTy0iJ2w5C+FDsN9EnzfhNmvS+o=",
 			"path": "github.com/pkg/errors",
 			"revision": "059132a15dd08d6704c67711dae0cf35ab991756",
@@ -584,6 +608,10 @@
 		},
 		{
 			"path": "golang.org/x/sys/unix",
+			"revision": ""
+		},
+		{
+			"path": "golang.org/x/text/language",
 			"revision": ""
 		},
 		{

@@ -26,11 +26,13 @@ func (service *UserService) GetUserByUserName(username string) (user models.User
 }
 func (service *UserService) UserCreate(userCreate models.UserCreate) (user models.UserDetail, err error) {
 	userCreate.ID = 0
-	userCreate.Pwd = tools.SHA256(userCreate.Password)
-	 return service.InsertUser(userCreate)
+	userCreate.Pwd = tools.SHA256(tools.StringsJoin(userCreate.Password, salt))
+	return service.InsertUser(userCreate)
 
 }
-func (service *UserService) CheckUser(usename, pwd string) (user models.User, err error) {
-
+func (service *UserService) CheckUser(username, pwd string) (user models.UserDetail, err error) {
+	loginPwd := tools.SHA256(tools.StringsJoin(pwd, salt))
+	user, err = service.FindUserByUserNameAndPwd(username,loginPwd)
 	return
+
 }

@@ -48,6 +48,7 @@ func addRouter(router *gin.Engine) {
 	rest := restContainer()
 	// public router
 	{
+		router.POST("/login",rest.UserContainer().CtlLogin)
 	}
 
 	// auth router

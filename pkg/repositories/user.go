@@ -18,4 +18,6 @@ type IUserRepository interface {
 	UpdateUserAdmin(id string, isAdmin bool) error
 	// 用户有效更改
 	UpdateUserActive(id string, isActive bool) error
+	//根据密码和用户名查询用户
+	FindUserByUserNameAndPwd(username,pwd string) (models.UserDetail, error)
 }

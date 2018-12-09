@@ -58,8 +58,12 @@ func Start() {
 		Exit(1)
 	}
 	defer delPidFile()
-	cfg := conf.Config.DB
+	//加载jwt使用的公私钥
 	middles.InitKeys()
+	// 加载语言资源
+	conf.BundleI18nLanguages()
+	cfg := conf.Config.DB
+
 	conf.GetDBConnection(cfg.DbType, cfg.Host, cfg.Port, cfg.User, cfg.Password, cfg.Name, cfg.Charset, "")
 	transport.ServerStart()
 

@@ -57,5 +57,6 @@ govendor fetch github.com/casbin/gorm-adapter
 
 govendor fetch github.com/centrifugal/gocent
 
+govendor fetch github.com/nicksnyder/go-i18n/v2/i18n
 
 ```

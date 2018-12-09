@@ -36,3 +36,8 @@ func (repo *UserRepository) UpdateUserActive(id string, isActive bool) (err erro
 	err = repo.Model(models.User{}).Updates(map[string]interface{}{"IsActive": isActive}).Error
 	return
 }
+
+func (repo *UserRepository)	FindUserByUserNameAndPwd(username,pwd string) (user models.UserDetail,err  error){
+	return
+}
+

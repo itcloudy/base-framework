@@ -104,6 +104,7 @@ type CorsConfig struct {
 
 type GlobalConfig struct {
 	DBUpdateToVersion string                  // 数据库升级到某个版本
+	I18ns             []string                // 服务端支持的语言，用于页面和json的提示信息
 	Mode              string                  // 运行模式
 	TokenExpire       time.Duration           // token有效时间
 	ConfigPath        string                  // 配置文件地址

@@ -45,3 +45,6 @@ func (m *IUserRepository) GetUserByID(id int) (models.User, error) {
 	}
 	return r0, r1
 }
+func (m *IUserRepository)	FindUserByUserNameAndPwd(username,pwd string) (user models.UserDetail,err  error){
+	return
+}

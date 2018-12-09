@@ -4,25 +4,12 @@
 package conf
 
 import (
-	"errors"
 	"fmt"
 	"github.com/itcloudy/base-framework/pkg/consts"
 	"github.com/itcloudy/base-framework/pkg/logs"
 	"github.com/jinzhu/gorm"
 	"github.com/jmoiron/sqlx"
 	"go.uber.org/zap"
-)
-
-var (
-	// DBConn is orm connection
-	DBConn *gorm.DB
-	SqlxDB *sqlx.DB
-
-	// ErrRecordNotFound is Not Found Record wrapper
-	ErrRecordNotFound = errors.New("Record Not Found ")
-
-	// ErrDBConn database connection error
-	ErrDBConn = errors.New("Database connection error ")
 )
 
 func GetDBConnectionString(dbType string, host string, port int, user string, pass string, dbName string, charset string) (str string) {
