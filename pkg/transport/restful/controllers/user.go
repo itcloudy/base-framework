@@ -6,15 +6,15 @@ package controllers
 import (
 	"github.com/gin-gonic/gin"
 	"github.com/itcloudy/base-framework/pkg/consts"
+	"github.com/itcloudy/base-framework/pkg/interfaces/services"
 	"github.com/itcloudy/base-framework/pkg/models"
-	"github.com/itcloudy/base-framework/pkg/services"
 	"github.com/itcloudy/base-framework/pkg/transport/restful/common"
 	"github.com/itcloudy/base-framework/pkg/transport/restful/middles"
 	"net/http"
 )
 
 type UserController struct {
-	services.UserService
+	services.IUserService
 }
 
 // @tags  用户

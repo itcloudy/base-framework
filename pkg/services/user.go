@@ -4,8 +4,8 @@
 package services
 
 import (
+	"github.com/itcloudy/base-framework/pkg/interfaces/repositories"
 	"github.com/itcloudy/base-framework/pkg/models"
-	"github.com/itcloudy/base-framework/pkg/repositories"
 	"github.com/itcloudy/base-framework/tools"
 )
 

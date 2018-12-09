@@ -8,9 +8,9 @@ import (
 	"fmt"
 	"github.com/hashicorp/go-version"
 	"github.com/itcloudy/base-framework/pkg/conf"
+	"github.com/itcloudy/base-framework/pkg/interfaces/repositories"
 	"github.com/itcloudy/base-framework/pkg/migration"
 	"github.com/itcloudy/base-framework/pkg/models"
-	"github.com/itcloudy/base-framework/pkg/repositories"
 	"github.com/itcloudy/base-framework/pkg/repositories/common"
 	"github.com/itcloudy/base-framework/tools"
 )

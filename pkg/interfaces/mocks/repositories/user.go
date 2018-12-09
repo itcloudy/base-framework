@@ -8,11 +8,11 @@ import (
 	"github.com/stretchr/testify/mock"
 )
 
-type IUserRepository struct {
+type MockUserRepository struct {
 	mock.Mock
 }
 
-func (m *IUserRepository) GetUserByUserName(username string) (models.User, error) {
+func (m *MockUserRepository) GetUserByUserName(username string) (models.User, error) {
 	ret := m.Called(username)
 	var r0 models.User
 	if rf, ok := ret.Get(0).(func(string) models.User); ok {
@@ -29,7 +29,7 @@ func (m *IUserRepository) GetUserByUserName(username string) (models.User, error
 	return r0, r1
 
 }
-func (m *IUserRepository) GetUserByID(id int) (models.User, error) {
+func (m *MockUserRepository) GetUserByID(id int) (models.User, error) {
 	ret := m.Called(id)
 	var r0 models.User
 	if rf, ok := ret.Get(0).(func(int) models.User); ok {
@@ -45,6 +45,6 @@ func (m *IUserRepository) GetUserByID(id int) (models.User, error) {
 	}
 	return r0, r1
 }
-func (m *IUserRepository)	FindUserByUserNameAndPwd(username,pwd string) (user models.UserDetail,err  error){
+func (m *MockUserRepository)	FindUserByUserNameAndPwd(username,pwd string) (user models.UserDetail,err  error){
 	return
 }

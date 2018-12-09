@@ -47,7 +47,7 @@ func (k *kernel) UserContainer() controllers.UserController {
 		panic(errors.New("un support sql type:" + dbType))
 
 	}
-	userController := controllers.UserController{UserService: userService}
+	userController := controllers.UserController{IUserService: &userService}
 	return userController
 }
 func (k *kernel) MenuContainer() controllers.MenuController {

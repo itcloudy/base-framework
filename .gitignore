@@ -1,5 +1,6 @@
 # ignore
 
+*.pid
 .idea/
 base-framework
 *.exe
