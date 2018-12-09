@@ -14,7 +14,11 @@ import (
 	"os"
 	"path"
 )
-
+type ResponseJson struct {
+	Code    uint        `yaml:"code" json:"code"`       // response code
+	Data    interface{} `yaml:"data" json:"data"`       // response data
+	Message string      `yaml:"message" json:"message"` // response message
+}
 var (
 	// 数据库连接对象
 	DBConn *gorm.DB

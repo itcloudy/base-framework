@@ -11,6 +11,7 @@ import (
 	"github.com/itcloudy/base-framework/pkg/conf"
 	"github.com/itcloudy/base-framework/pkg/consts"
 	"github.com/itcloudy/base-framework/pkg/logs"
+	"github.com/itcloudy/base-framework/pkg/transport/restful/middles"
 	"github.com/swaggo/gin-swagger"
 	"github.com/swaggo/gin-swagger/swaggerFiles"
 	"go.uber.org/zap"
@@ -53,11 +54,11 @@ func addRouter(router *gin.Engine) {
 
 	// auth router
 	authRouter := router.Group("/auth")
-	//authRouter.Use(middles.CasbinJwtAuthorize(conf.Enforcer))
+	authRouter.Use(middles.CasbinJwtAuthorize(conf.Enforcer))
 	{
 		authRouter.GET("/user/:id", rest.UserContainer().CtlGetUserByID)
 		authRouter.GET("/username/:username", rest.UserContainer().CtlGetUserByUserName)
-		//authRouter.GET("/menu/self", rest.MenuContainer().CtlGetSelfMenu)
+		authRouter.GET("/menu/self", rest.MenuContainer().CtlGetSelfMenu)
 
 	}
 
