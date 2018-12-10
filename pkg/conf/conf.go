@@ -133,7 +133,7 @@ type GlobalConfig struct {
 	EmailNotification EmailNotificationConfig // 邮件配置
 	Cors              CorsConfig              // 跨域配置
 	Admin             SuperUser               // 超级用户
-	Init InitConfig // 初始化数据
+	Init              InitConfig              // 初始化数据
 
 }
 
@@ -258,11 +258,11 @@ func FillRuntimePaths() error {
 	}
 
 	// init data
-	if Config.Init.Menu ==""{
+	if Config.Init.Menu == "" {
 		Config.Init.Menu = filepath.Join(cwd, "init", "menu_data.yml")
 
 	}
-	if Config.Init.API ==""{
+	if Config.Init.API == "" {
 		Config.Init.API = filepath.Join(cwd, "init", "api_data.yml")
 
 	}

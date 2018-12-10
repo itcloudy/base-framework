@@ -5,10 +5,16 @@ package services
 
 import (
 	"github.com/itcloudy/base-framework/pkg/interfaces/repositories"
+	"github.com/itcloudy/base-framework/pkg/models"
 	"github.com/jinzhu/gorm"
 )
 
 type SystemAPIService struct {
 	DB *gorm.DB
 	repositories.ISystemAPIRepository
+}
+
+func (service *SystemAPIService) ServiceGetAllSystemAPI() (systemApis []*models.SystemApiList, err error) {
+	err = service.DB.Find(&systemApis).Error
+	return
 }

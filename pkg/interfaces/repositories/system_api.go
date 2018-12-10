@@ -10,11 +10,11 @@ import (
 
 type ISystemAPIRepository interface {
 	//根据ID查找
-	FindSystemAPIByID(DB *gorm.DB, id string) (role models.SystemApiDetail, err error)
+	FindSystemAPIByID(DB *gorm.DB, id string) (api models.SystemApiDetail, err error)
 	// 创建系统接口
-	InsertSystemAPI(DB *gorm.DB, role models.SystemApiCreate) (result models.SystemApiDetail, err error)
+	InsertSystemAPI(DB *gorm.DB, api models.SystemApiCreate) (result models.SystemApiDetail, err error)
 	// 修改系统接口
-	UpdateSystemAPI(DB *gorm.DB, role models.SystemApiUpdate) (result models.SystemApiDetail, err error)
+	UpdateSystemAPI(DB *gorm.DB, api models.SystemApiUpdate) (result models.SystemApiDetail, err error)
 	// 获得所有系统接口
-	FindAllSystemAPI(DB *gorm.DB) (roles []*models.SystemApiDetail, err error)
+	FindAllSystemAPI(DB *gorm.DB) (apis []*models.SystemApiDetail, err error)
 }
