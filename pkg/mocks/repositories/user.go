@@ -5,6 +5,7 @@ package mocks
 
 import (
 	"github.com/itcloudy/base-framework/pkg/models"
+	"github.com/jinzhu/gorm"
 	"github.com/stretchr/testify/mock"
 )
 
@@ -12,7 +13,7 @@ type MockUserRepository struct {
 	mock.Mock
 }
 
-func (m *MockUserRepository) FindUserByID(id string) (user models.UserDetail, err error) {
+func (m *MockUserRepository) FindUserByID(DB *gorm.DB,id string) (user models.UserDetail, err error) {
 	ret := m.Called(id)
 	if rf, ok := ret.Get(0).(func(string) models.UserDetail); ok {
 		user = rf(id)
@@ -22,20 +23,20 @@ func (m *MockUserRepository) FindUserByID(id string) (user models.UserDetail, er
 	return
 }
 
-func (m *MockUserRepository) FindUserByUserName(username string) (user models.UserDetail, err error) {
+func (m *MockUserRepository) FindUserByUserName(DB *gorm.DB,username string) (user models.UserDetail, err error) {
 	return
 }
 
-func (m *MockUserRepository) InsertUser(create models.UserCreate) (user models.UserDetail, err error) {
+func (m *MockUserRepository) InsertUser(DB *gorm.DB,create models.UserCreate) (user models.UserDetail, err error) {
 	return
 }
-func (m *MockUserRepository) UpdateUserAdmin(id string, isAdmin bool) (err error) {
+func (m *MockUserRepository) UpdateUserAdmin(DB *gorm.DB,id string, isAdmin bool) (err error) {
 	return
 }
-func (m *MockUserRepository) UpdateUserActive(id string, isActive bool) (err error) {
+func (m *MockUserRepository) UpdateUserActive(DB *gorm.DB,id string, isActive bool) (err error) {
 	return
 }
 
-func (m *MockUserRepository) FindUserByUserNameAndPwd(username, pwd string) (user models.UserDetail, err error) {
+func (m *MockUserRepository) FindUserByUserNameAndPwd(DB *gorm.DB,username, pwd string) (user models.UserDetail, err error) {
 	return
 }

@@ -5,7 +5,6 @@ package controllers
 
 import (
 	"encoding/json"
-	"fmt"
 	"github.com/gin-gonic/gin"
 	"github.com/itcloudy/base-framework/pkg/mocks/services"
 	"github.com/itcloudy/base-framework/pkg/models"
@@ -36,7 +35,6 @@ func TestUserController_GetUserByID(t *testing.T) {
 	router.GET("/user/:id", userController.CtlGetUserByID)
 	router.ServeHTTP(w, req)
 	json.NewDecoder(w.Body).Decode(&result)
-	fmt.Printf("%+v", result)
 	// 判断测试结果
 	assert.Equal(t, user.ID, result.ID)
 
