@@ -19,7 +19,7 @@ func TestUserService_GetUserByID(t *testing.T) {
 	user.ID = idInt
 	userRepository.On("FindUserByID", idStr).Return(user, nil)
 	userService := UserService{IUserRepository: userRepository}
-	result, _ := userService.GetUserByID( idStr)
+	result, _ := userService.GetUserByID(idStr)
 	assert.Equal(t, user.ID, result.ID)
 }
 func TestUserService_GetUserByUserName(t *testing.T) {

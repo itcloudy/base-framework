@@ -22,10 +22,12 @@ var dbinitCmd = &cobra.Command{
 		cfg := conf.Config.DB
 		conf.GetDBConnection(cfg.DbType, cfg.Host, cfg.Port, cfg.User, cfg.Password, cfg.Name, cfg.Charset, "init")
 		migrateService := services.MigrationService{}
+		migrateService.IMigrationHistoryRepository = &common.MigrationHistoryRepository{}
+
 		switch cfg.DbType {
 		case "mysql":
 		case "postgres":
-			migrateService.IMigrationHistoryRepository = &common.MigrationHistoryRepository{DB: conf.SqlxDB}
+			migrateService.DB = conf.SqlxDB
 			break
 		default:
 			panic(errors.New("un support sql type:" + cfg.DbType))
