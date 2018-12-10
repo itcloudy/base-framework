@@ -12,39 +12,14 @@ type MockUserRepository struct {
 	mock.Mock
 }
 
-func (m *MockUserRepository) GetUserByUserName(username string) (models.User, error) {
-	ret := m.Called(username)
-	var r0 models.User
-	if rf, ok := ret.Get(0).(func(string) models.User); ok {
-		r0 = rf(username)
-	} else {
-		r0 = ret.Get(0).(models.User)
-	}
-	var r1 error
-	if rf, ok := ret.Get(1).(func(string) error); ok {
-		r1 = rf(username)
-	} else {
-		r1 = ret.Error(1)
-	}
-	return r0, r1
-
-}
-func (m *MockUserRepository) GetUserByID(id int) (models.User, error) {
+func (m *MockUserRepository) FindUserByID(id string) (user models.UserDetail, err error) {
 	ret := m.Called(id)
-	var r0 models.User
-	if rf, ok := ret.Get(0).(func(int) models.User); ok {
-		r0 = rf(id)
+	if rf, ok := ret.Get(0).(func(string) models.UserDetail); ok {
+		user = rf(id)
 	} else {
-		r0 = ret.Get(0).(models.User)
+		user = ret.Get(0).(models.UserDetail)
 	}
-	var r1 error
-	if rf, ok := ret.Get(1).(func(int) error); ok {
-		r1 = rf(id)
-	} else {
-		r1 = ret.Error(1)
-	}
-	return r0, r1
-}
-func (m *MockUserRepository) FindUserByUserNameAndPwd(username, pwd string) (user models.UserDetail, err error) {
+
 	return
+
 }

@@ -4,30 +4,33 @@
 package services
 
 import (
+	"fmt"
 	"github.com/itcloudy/base-framework/pkg/mocks/repositories"
 	"github.com/itcloudy/base-framework/pkg/models"
+	"github.com/stretchr/testify/assert"
+	"strconv"
 	"testing"
 )
 
 func TestUserService_GetUserByID(t *testing.T) {
 	userRepository := new(mocks.MockUserRepository)
-	id := 101
-	user1 := models.User{}
-	user1.ID = id
-	user1.Username = "cloudy"
-	userRepository.On("GetUserByID", id).Return(user1, nil)
-	if user1.ID != id {
-		t.Errorf("service GetUserByID failed, excepted: %d, got: %d", id, user1.ID)
-	}
-	//userService := UserService{userRepository}
+	var err error
+	idStr := "101"
+	idInt, _ := strconv.Atoi(idStr)
+	var user models.UserDetail
+	userRepository.On("GetUserByID", idStr).Return(user, nil)
+	user, err = userRepository.FindUserByID(idStr)
+	fmt.Printf("========%+v\n",err)
+	assert.Equal(t, user.ID, idInt)
 }
 func TestUserService_GetUserByUserName(t *testing.T) {
 	userRepository := new(mocks.MockUserRepository)
 	name := "cloudy"
-	user1 := models.User{}
-	user1.Username = name
+	var user1 models.User
 	userRepository.On("GetUserByUserName", name).Return(user1, nil)
 	if user1.Username != name {
 		t.Errorf("service GetUserByUserName failed, excepted: %s, got: %s", name, user1.Username)
 	}
+	// 判断测试结果
+	assert.Equal(t, name, user1.Username)
 }

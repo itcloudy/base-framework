@@ -16,15 +16,15 @@ func (mo *MockUserService) GetSelf(id string) (user models.UserDetail, err error
 	return
 }
 
-func (mo *MockUserService) GetUserByID(id string) (user models.UserDetail,err  error) {
+func (mo *MockUserService) GetUserByID(id string) (user models.UserDetail, err error) {
 	ret := mo.Called(id)
 	if rf, ok := ret.Get(0).(func(string) models.UserDetail); ok {
 		user = rf(id)
 	} else {
 		user = ret.Get(0).(models.UserDetail)
-		}
+	}
 
-	return user, err
+	return
 }
 func (mo *MockUserService) GetUserByUserName(username string) (user models.UserDetail, err error) {
 	return

@@ -7,7 +7,8 @@ package daylight
 
 import (
 	"fmt"
-
+	"github.com/itcloudy/base-framework/pkg/logs"
+	"go.uber.org/zap"
 	"os/exec"
 	"regexp"
 )
@@ -17,13 +18,14 @@ func KillPid(pid string) error {
 
 	rez, err := exec.Command("tasklist", "/fi", "PID eq "+pid).Output()
 	if err != nil {
-		log.WithFields(log.Fields{"type": consts.CommandExecutionError, "err": err, "cmd": "tasklist /fi PID eq" + pid}).Error("Error executing command")
+		logs.Logger.Error("Error executing command",zap.Error(err),zap.String("cmd","tasklist /fi PID eq"+pid))
 		return err
 	}
 	if string(rez) == "" {
 		return fmt.Errorf("null")
 	}
-	log.WithFields(log.Fields{"cmd": "tasklist /fi PID eq " + pid}).Debug("command execution result")
+	logs.Logger.Error("command execution result",zap.Error(err),zap.String("cmd","tasklist /fi PID eq "+pid))
+
 	if ok, _ := regexp.MatchString(`(?i)PID`, string(rez)); !ok {
 		return fmt.Errorf("null")
 	}

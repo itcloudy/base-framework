@@ -21,20 +21,19 @@ func TestUserController_GetUserByID(t *testing.T) {
 		user   models.UserDetail
 		result models.UserDetail
 	)
-	user.ID = 1
-	user.Username = "admin"
 	//设置期望结果
-	userService.On("GetUserByID", id).Return(user,nil)
+	userService.On("GetUserByID", id).Return(user, nil)
 	userController := UserController{userService}
 	//调用测试代码
 
-	req := httptest.NewRequest("GET", "http://localhost:8080/user/1", nil)
+	req := httptest.NewRequest("GET", "http://localhost:8080/user/"+id, nil)
 	w := httptest.NewRecorder()
 
 	router := gin.Default()
 	router.GET("/user/:id", userController.CtlGetUserByID)
 	router.ServeHTTP(w, req)
 	json.NewDecoder(w.Body).Decode(&result)
+	// 判断测试结果
 	assert.Equal(t, user.ID, result.ID)
 
 }
