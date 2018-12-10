@@ -16,5 +16,5 @@ type ISystemAPIRepository interface {
 	// 修改系统接口
 	UpdateSystemAPI(DB *gorm.DB, api models.SystemApiUpdate) (result models.SystemApiDetail, err error)
 	// 获得所有系统接口
-	FindAllSystemAPI(DB *gorm.DB) (apis []*models.SystemApiDetail, err error)
+	FindAllSystemAPI(DB *gorm.DB) (apis []*models.SystemApiList, err error)
 }

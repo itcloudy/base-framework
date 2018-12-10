@@ -15,6 +15,5 @@ type SystemAPIService struct {
 }
 
 func (service *SystemAPIService) ServiceGetAllSystemAPI() (systemApis []*models.SystemApiList, err error) {
-	err = service.DB.Find(&systemApis).Error
-	return
+	return service.FindAllSystemAPI(service.DB)
 }

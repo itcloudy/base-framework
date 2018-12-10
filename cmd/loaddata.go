@@ -4,7 +4,7 @@
 package cmd
 
 import (
-	."github.com/itcloudy/base-framework/pkg/init"
+	. "github.com/itcloudy/base-framework/pkg/init"
 	"github.com/spf13/cobra"
 )
 

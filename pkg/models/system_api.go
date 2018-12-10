@@ -6,7 +6,7 @@ package models
 import "time"
 
 type SystemApiCreate struct {
-	ID      int    `json:"id" gorm:"column:id" comment:"主键ID"`
+	ID      int    `json:"id" yaml:"id" gorm:"column:id" comment:"主键ID"`
 	Name    string `json:"name" yaml:"name" gorm:"column:name" comment:"API名称"`
 	Address string `json:"address" yaml:"address" gorm:"column:address" comment:"API地址"`
 	Method  string `json:"method" yaml:"method" gorm:"column:method" comment:"API请求方法"`

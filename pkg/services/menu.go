@@ -14,6 +14,10 @@ type MenuService struct {
 	repositories.IMenuRepository
 }
 
-func (service *MenuService) ServiceGetSelfMenu(roles []string) (menus []models.MenuList, err error) {
+func (service *MenuService) ServiceGetSelfMenu(roles []string) (menus []*models.MenuList, err error) {
+	return
+}
+
+func (service *MenuService) ServiceGetAllMenu() (menus []*models.MenuList, err error) {
 	return
 }
