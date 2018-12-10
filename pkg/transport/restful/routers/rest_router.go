@@ -50,7 +50,7 @@ func addRouter(router *gin.Engine) {
 		//欢迎页面
 		router.GET("/", rest.IndexContainer().CtlInformation)
 		//文件上传
-		router.POST("/file/upload",rest.IndexContainer().CtlFileUpload)
+		router.POST("/file/upload", rest.IndexContainer().CtlFileUpload)
 		//登录
 		router.POST("/login", rest.UserContainer().CtlLogin)
 		// 用户获取自己的菜单未登录用户也可以有
@@ -67,15 +67,15 @@ func addRouter(router *gin.Engine) {
 		//管理员根据用户名获得某个用户信息
 		authRouter.GET("/username/:username", rest.UserContainer().CtlGetUserByUserName)
 		//菜单操作
-		authRouter.GET("/menu/:id",rest.MenuContainer().CtlGetMenuByID)
-		authRouter.POST("/menu",rest.MenuContainer().CtlCreateMenu)
-		authRouter.PUT("/menu/:id",rest.MenuContainer().CtlUpdateMenuByID)
-		authRouter.GET("/menus",rest.MenuContainer().CtlGetAllMenu)
+		authRouter.GET("/menu/:id", rest.MenuContainer().CtlGetMenuByID)
+		authRouter.POST("/menu", rest.MenuContainer().CtlCreateMenu)
+		authRouter.PUT("/menu/:id", rest.MenuContainer().CtlUpdateMenuByID)
+		authRouter.GET("/menus", rest.MenuContainer().CtlGetAllMenu)
 		//角色操作
-		authRouter.GET("/role/:id",rest.RoleContainer().CtlGetRoleByID)
-		authRouter.POST("/role",rest.RoleContainer().CtlCreateRole)
-		authRouter.PUT("/role/:id",rest.RoleContainer().CtlUpdateRoleByID)
-		authRouter.GET("/roles",rest.RoleContainer().CtlGetAllRole)
+		authRouter.GET("/role/:id", rest.RoleContainer().CtlGetRoleByID)
+		authRouter.POST("/role", rest.RoleContainer().CtlCreateRole)
+		authRouter.PUT("/role/:id", rest.RoleContainer().CtlUpdateRoleByID)
+		authRouter.GET("/roles", rest.RoleContainer().CtlGetAllRole)
 	}
 
 }

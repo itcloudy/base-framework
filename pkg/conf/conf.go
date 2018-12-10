@@ -105,7 +105,11 @@ type CorsConfig struct {
 	AllowWebSockets  bool
 	MaxAge           time.Duration
 }
-
+type InitConfig struct {
+	Enable bool   // 是否初始化
+	API    string // 接口初始化路径
+	Menu   string // 菜单初始化路径
+}
 type GlobalConfig struct {
 	DBUpdateToVersion string                  // 数据库升级到某个版本
 	I18ns             []string                // 服务端支持的语言，用于页面和json的提示信息
@@ -128,7 +132,8 @@ type GlobalConfig struct {
 	Log               LogConfig               // 日志
 	EmailNotification EmailNotificationConfig // 邮件配置
 	Cors              CorsConfig              // 跨域配置
-	Admin             SuperUser               //超级用户
+	Admin             SuperUser               // 超级用户
+	Init InitConfig // 初始化数据
 
 }
 
@@ -250,6 +255,16 @@ func FillRuntimePaths() error {
 	}
 	if Config.TLS.KeyFile == "" {
 		Config.TLS.KeyFile = filepath.Join(cwd, "config", "https", "key.pem")
+	}
+
+	// init data
+	if Config.Init.Menu ==""{
+		Config.Init.Menu = filepath.Join(cwd, "init", "menu_data.yml")
+
+	}
+	if Config.Init.API ==""{
+		Config.Init.API = filepath.Join(cwd, "init", "api_data.yml")
+
 	}
 	return nil
 }

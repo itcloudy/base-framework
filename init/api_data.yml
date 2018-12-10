@@ -1,0 +1,271 @@
+# system api
+
+apis:
+  # 首页
+  - name: 管理员首页
+    address: /auth/dashboard/num_admin
+    method: GET
+  - name: 商家首页
+    address: /auth/dashboard/num_shop
+    method: GET
+  # 微信
+  - name: 微信支付
+    address: /auth/pay/wxapp
+    method: POST
+  - name: 微信支付回调
+    address: /auth/pay/asyncback
+    method: POST
+  - name: 单个文件上传
+    address: /auth/weixin_upload
+    method: POST
+  - name: Token刷新
+    address: /auth/refresh
+    method: GET
+  - name: 支付记录创建
+    address: /auth/pay_record
+    method: POST
+  - name: 支付记录确认
+    address: /auth/pay_record_action/:id/:ok
+    method: GET
+  # 用户信息
+  - name: 获得个人信息
+    address: /auth/self
+    method: GET
+  - name: 个人信息修改
+    address: /auth/self
+    method: PUT
+  - name: 用户信息获取
+    address: /auth/user/:id
+    method: GET
+  - name: 用户信息修改
+    address: /auth/user/:id
+    method: PUT
+  - name: 用户列表
+    address: /auth/users
+    method: GET
+  # 菜单
+  - name: 菜单获取
+    address: /auth/menu/:id
+    method: GET
+  - name: 菜单修改
+    address: /auth/menu/:id
+    method: GET
+  - name: 系统菜单树
+    address: /auth/menutree
+    method: GET
+  - name: 用户菜单树
+    address: /auth/usermenu
+    method: GET
+  - name: 查看某个用户菜单树
+    address: /auth/usermenutree/:user_id
+    method: GET
+  - name: 菜单删除
+    address: /auth/menu/:id
+    method: DELETE
+  # 角色
+  - name: 角色获取
+    address: /auth/role/:id
+    method: GET
+  - name: 角色修改
+    address: /auth/role/:id
+    method: GET
+  - name: 角色创建
+    address: /auth/role
+    method: POST
+  - name: 角色列表
+    address: /auth/roles
+    method: GET
+  - name: 角色删除
+    address: /auth/role/:id
+    method: DELETE
+  # 公司管理
+  - name: 公司获取
+    address: /auth/company/:id
+    method: GET
+  - name: 公司入驻
+    address: /auth/company/apply
+    method: POST
+  - name: 查看个人公司信息
+    address: /auth/companyown
+    method: GET
+  - name: 公司信息修改
+    address: /auth/company/:id
+    method: PUT
+  - name: 公司列表
+    address: /auth/companies
+    method: GET
+  - name: 热门推荐
+    address: /auth/company_hot
+    method: GET
+  - name: 公司审核
+    address: /auth/company_review
+    method: POST
+  - name: 公司审核列表
+    address: /auth/pre_companies
+    method: GET
+  - name: 公司审核历史
+    address: /auth/company_history/:id
+    method: GET
+  - name: 公司审核详情
+    address: /pre_company/:id
+    method: GET
+  # 语言
+  - name: 语言获取
+    address: /auth/language/:id
+    method: GET
+  - name: 语言修改
+    address: /auth/language/:id
+    method: GET
+  - name: 语言创建
+    address: /auth/language
+    method: POST
+  - name: 语言列表
+    address: /auth/languages
+    method: GET
+  - name: 语言删除
+    address: /auth/language/:id
+    method: DELETE
+  # 公司分类
+  - name: 公司类型获取
+    address: /auth/category/:id
+    method: GET
+  - name: 公司类型修改
+    address: /auth/category/:id
+    method: GET
+  - name: 公司类型创建
+    address: /auth/category
+    method: POST
+  - name: 公司类型排序
+    address: /auth/category/:id/:action
+    method: PUT
+  - name: 公司类型列表
+    address: /auth/categories
+    method: GET
+  - name: 公司类型删除
+    address: /auth/category/:id
+    method: DELETE
+  # 公司类型扩展字段
+  - name: 公司类型扩展字段获取
+    address: /auth/category_extend/:id
+    method: GET
+  - name: 公司类型扩展字段修改
+    address: /auth/category_extend/:id
+    method: GET
+  - name: 公司类型扩展字段创建
+    address: /auth/category_extend
+    method: POST
+  - name: 公司类型扩展字段列表
+    address: /auth/category_extends
+    method: GET
+  - name: 公司类型扩展字段删除
+    address: /auth/category_extend/:id
+    method: DELETE
+  # 留言
+  - name: 留言获取
+    address: /auth/comment/:id
+    method: GET
+  - name: 留言修改
+    address: /auth/comment/:id
+    method: GET
+  - name: 留言创建
+    address: /auth/comment
+    method: POST
+  - name: 留言列表
+    address: /auth/comments
+    method: GET
+  - name: 商家删除留言
+    address: /auth/commentdelete
+    method: POST
+  - name: 用户删除留言
+    address: /auth/comment_with_user/:id
+    method: DELETE
+  - name: 我的留言
+    address: /auth/my_comment
+    method: GET
+  - name: 留言批量回复
+    address: /auth/comment/reviews_replies
+    method: POST
+  - name: 回复批量删除
+    address: /auth/comment_with_replys
+    method: DELETE
+  - name: 商家回复列表
+    address: /comments/company_reply_content
+    method: GET
+  # 留言历史
+  - name: 留言历史获取
+    address: /auth/pre_comment/:id
+    method: GET
+  - name: 留言历史列表
+    address: /auth/pre_comments
+    method: GET
+  # 满意度评价
+  - name: 满意度评价获取
+    address: /auth/satisfaction/:id
+    method: GET
+  - name: 满意度评价修改
+    address: /auth/satisfaction/:id
+    method: GET
+  - name: 满意度评价创建
+    address: /auth/satisfaction
+    method: POST
+  - name: 满意度评价列表
+    address: /auth/satisfactions
+    method: GET
+  - name: 满意度删除
+    address: /auth/satisfaction/:id
+    method: DELETE
+  # 收藏
+  - name: 收藏获取
+    address: /auth/collection/:id
+    method: GET
+  - name: 收藏创建
+    address: /auth/collection
+    method: POST
+  - name: 收藏列表
+    address: /auth/collections
+    method: GET
+  - name: 我的收藏
+    address: /auth/my_collection
+    method: GET
+  # 轮播图
+  - name: 轮播图获取
+    address: /auth/banner_image/:id
+    method: GET
+  - name: 轮播图改
+    address: /auth/banner_image/:id
+    method: GET
+  - name: 轮播图创建
+    address: /auth/banner_image
+    method: POST
+  - name: 轮播图列表
+    address: /auth/banner_images
+    method: GET
+  - name: 轮播图删除
+    address: /auth/banner_image/:id
+    method: DELETE
+  - name: 当前轮播图
+    address: /auth/current_banner_images
+    method: GET
+  # 审批模板
+  - name: 审批模板意见创建
+    address: /auth/approve
+    method: POST
+  - name: 审批模板意见获得
+    address: /auth/approve
+    method: GET
+  # 回复模板
+  - name: 回复模板创建
+    address: /auth/reply
+    method: POST
+  - name: 回复模板获得
+    address: /auth/reply
+    method: GET
+  # gachain相关
+  - name: 历史记录
+    address: /auth/chain
+    method: GET
+
+
+
+
+

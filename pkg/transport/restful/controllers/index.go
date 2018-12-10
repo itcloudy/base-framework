@@ -15,7 +15,8 @@ type IndexController struct {
 func (ctl IndexController) CtlInformation(c *gin.Context) {
 	c.JSON(http.StatusOK, "golang framework")
 }
+
 //文件上传
-func (ctl IndexController)CtlFileUpload(c *gin.Context)  {
+func (ctl IndexController) CtlFileUpload(c *gin.Context) {
 
 }

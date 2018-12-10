@@ -18,4 +18,3 @@ type ISystemAPIRepository interface {
 	// 获得所有系统接口
 	FindAllSystemAPI(DB *gorm.DB) (roles []*models.SystemApiDetail, err error)
 }
-

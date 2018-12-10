@@ -23,19 +23,23 @@ func (ctl MenuController) CtlGetSelfMenu(c *gin.Context) {
 	}
 	c.JSON(http.StatusOK, menus)
 }
+
 //根据ID获得菜单详情
-func (ctl MenuController)CtlGetMenuByID(c*gin.Context)  {
+func (ctl MenuController) CtlGetMenuByID(c *gin.Context) {
 
 }
+
 //创建菜单
-func (ctl MenuController)CtlCreateMenu(c*gin.Context)  {
+func (ctl MenuController) CtlCreateMenu(c *gin.Context) {
 
 }
+
 //更新菜单
-func (ctl MenuController)CtlUpdateMenuByID(c*gin.Context)  {
+func (ctl MenuController) CtlUpdateMenuByID(c *gin.Context) {
 
 }
+
 //获得所有的菜单
-func (ctl MenuController)CtlGetAllMenu(c*gin.Context)  {
+func (ctl MenuController) CtlGetAllMenu(c *gin.Context) {
 
 }

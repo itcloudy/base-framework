@@ -1,0 +1,87 @@
+# system menus information
+# route must be unique
+
+menus:
+  - name: 首页
+    unique_tag: admin-home
+    route: /dashboard/home
+    component: Home
+    icon: home-icon
+    sequence: 1
+  - name: 首页
+    unique_tag: compay-home
+    route: /dashboard/subHome
+    component: SubHome
+    icon: compay-home-icon
+    sequence: 2
+  - name: 商铺管理
+    unique_tag: companyManage
+    route:
+    component:
+    icon: company-icon
+    sequence: 3
+    children:
+      - name: 商铺资质审核
+        unique_tag: companyAudit
+        route: /dashboard/companyAudit
+        icon: company-audit-icon
+        sequence: 1
+        component: CompanyAudit
+      - name: 商铺列表
+        unique_tag: companyManage-list
+        route: /dashboard/companyManage
+        icon: company-list-icon
+        sequence: 2
+        component: CompanyManage
+  - name: 商铺管理
+    unique_tag: subConpanyManage
+    route: /dashboard/subCompanyInfo
+    component: SubCompanyInfo
+    icon: company-icon
+    sequence: 4
+  - name: 小程序配置
+    unique_tag: appConfig
+    route:
+    component:
+    icon: app-config-icon
+    sequence: 5
+    children:
+      - name: banner图设置
+        unique_tag: bannerConfig
+        route: /dashboard/bannerConfig
+        component: BannerConfig
+        icon: banner-config-icon
+        sequence: 1
+      - name: 九宫格配置
+        unique_tag: buttonConfig
+        route: /dashboard/buttonConfig
+        component: ButtonConfig
+        icon: button-config-icon
+        sequence: 2
+  - name: 留言管理
+    unique_tag: admin-messageManage
+    route:
+    component:
+    icon: message-manage-icon
+    sequence: 6
+    children:
+      - name: 用户留言
+        unique_tag: company-messageManage
+        route: /dashboard/messageManage
+        component: MessageManage
+        icon: message-manage-icon
+        sequence: 1
+      - name: 商家回复
+        unique_tag: manageReply
+        route: manageReply
+        component: ManageReply
+        icon: manageReply
+        sequence: 2
+      - name: 留言管理
+        unique_tag: subMsgManage
+        route: /dashboard/subMsgManage
+        component: SubMsgManage
+        icon: message-manage-icon
+        sequence: 7
+
+

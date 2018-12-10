@@ -1,5 +1,6 @@
 ConfigPath = "/Users/cloudy/Documents/go/src/github.com/itcloudy/base-framework/config/config.toml"
 DBUpdateToVersion = ""
+I18ns = []
 JwtPrivatePath = "/Users/cloudy/Documents/go/src/github.com/itcloudy/base-framework/config/jwt/tm.rsa"
 JwtPublicPath = "/Users/cloudy/Documents/go/src/github.com/itcloudy/base-framework/config/jwt/tm.rsa.pub"
 LockFilePath = "/Users/cloudy/Documents/go/src/github.com/itcloudy/base-framework/system-data/base-framework.lock"
@@ -55,9 +56,14 @@ UserDataDir = "/Users/cloudy/Documents/go/src/github.com/itcloudy/base-framework
   Host = "127.0.0.1"
   Port = 8000
 
+[Init]
+  API = "/Users/cloudy/Documents/go/src/github.com/itcloudy/base-framework/init/api_data.yml"
+  Enable = false
+  Menu = "/Users/cloudy/Documents/go/src/github.com/itcloudy/base-framework/init/menu_data.yml"
+
 [Log]
   Compress = true
-  EnableKafka = true
+  EnableKafka = false
   FileName = "/Users/cloudy/Documents/go/src/github.com/itcloudy/base-framework/logs/base-framework.log"
   KafkaAddress = ["localhost:9092"]
   MaxAge = 7

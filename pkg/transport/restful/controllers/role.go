@@ -11,19 +11,23 @@ import (
 type RoleController struct {
 	services.RoleService
 }
+
 //根据ID获得角色详情
-func (ctl RoleController)CtlGetRoleByID(c*gin.Context)  {
+func (ctl RoleController) CtlGetRoleByID(c *gin.Context) {
 
 }
+
 //创建角色
-func (ctl RoleController)CtlCreateRole(c*gin.Context)  {
+func (ctl RoleController) CtlCreateRole(c *gin.Context) {
 
 }
+
 //更新角色
-func (ctl RoleController)CtlUpdateRoleByID(c*gin.Context)  {
+func (ctl RoleController) CtlUpdateRoleByID(c *gin.Context) {
 
 }
+
 //获得所有的角色
-func (ctl RoleController)CtlGetAllRole(c*gin.Context)  {
+func (ctl RoleController) CtlGetAllRole(c *gin.Context) {
 
 }

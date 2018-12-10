@@ -13,16 +13,17 @@ type RoleService struct {
 	DB *gorm.DB
 	repositories.IRoleRepository
 }
+
 func (service *RoleService) ServiceGetRoleByID(id string) (user models.RoleDetail, err error) {
 	return service.FindRoleByID(service.DB, id)
 }
- 
+
 func (service *RoleService) ServiceRoleCreate(userCreate models.RoleCreate) (user models.RoleDetail, err error) {
 	userCreate.ID = 0
 	return service.InsertRole(service.DB, userCreate)
 
 }
-func (service RoleService)ServiceRoleUpdate(update models.RoleUpdate)(user models.RoleDetail, err error)  {
+func (service RoleService) ServiceRoleUpdate(update models.RoleUpdate) (user models.RoleDetail, err error) {
 
-	return service.UpdateRole(service.DB,update)
+	return service.UpdateRole(service.DB, update)
 }
