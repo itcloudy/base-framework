@@ -6,3 +6,4 @@ base-framework
 *.exe
 *.log
 .DS_Store
+docs/

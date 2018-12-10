@@ -19,7 +19,7 @@ var (
 	containerOnce sync.Once
 )
 
-func restContainer() IRestContainer {
+func restContainer() iRestContainer {
 	if k == nil {
 		containerOnce.Do(func() {
 			k = &kernel{}
@@ -28,7 +28,7 @@ func restContainer() IRestContainer {
 	return k
 }
 
-type IRestContainer interface {
+type iRestContainer interface {
 	UserContainer() controllers.UserController
 	MenuContainer() controllers.MenuController
 }
