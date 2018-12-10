@@ -7,32 +7,34 @@ import (
 	"github.com/itcloudy/base-framework/pkg/interfaces/repositories"
 	"github.com/itcloudy/base-framework/pkg/models"
 	"github.com/itcloudy/base-framework/tools"
+	"github.com/jinzhu/gorm"
 )
 
 const salt = "cloudy"
 
 type UserService struct {
+	DB *gorm.DB
 	repositories.IUserRepository
 }
 
 func (service *UserService) GetSelf(id string) (user models.UserDetail, err error) {
-	return service.FindUserByID(id)
+	return service.FindUserByID(service.DB, id)
 }
 func (service *UserService) GetUserByID(id string) (user models.UserDetail, err error) {
-	return service.FindUserByID(id)
+	return service.FindUserByID(service.DB, id)
 }
 func (service *UserService) GetUserByUserName(username string) (user models.UserDetail, err error) {
-	return service.FindUserByUserName(username)
+	return service.FindUserByUserName(service.DB, username)
 }
 func (service *UserService) UserCreate(userCreate models.UserCreate) (user models.UserDetail, err error) {
 	userCreate.ID = 0
 	userCreate.Pwd = tools.SHA256(tools.StringsJoin(userCreate.Password, salt))
-	return service.InsertUser(userCreate)
+	return service.InsertUser(service.DB, userCreate)
 
 }
 func (service *UserService) CheckUser(username, pwd string) (user models.UserDetail, err error) {
 	loginPwd := tools.SHA256(tools.StringsJoin(pwd, salt))
-	user, err = service.FindUserByUserNameAndPwd(username, loginPwd)
+	user, err = service.FindUserByUserNameAndPwd(service.DB, username, loginPwd)
 	return
 
 }

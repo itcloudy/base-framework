@@ -5,9 +5,18 @@ package repositories
 
 import (
 	"github.com/itcloudy/base-framework/pkg/models"
+	"github.com/jinzhu/gorm"
 )
 
 type IMenuRepository interface {
 	//获得某些角色的菜单信息
-	FindMenuByRoles(roleSlice []string) (menus []models.Menu, err error)
+	FindMenuByRoles(DB *gorm.DB, roleSlice []string) (menus []*models.MenuList, err error)
+	//根据ID查找
+	FindMenuByID(DB *gorm.DB, id string) (menu models.MenuDetail, err error)
+	// 创建菜单
+	InsertMenu(DB *gorm.DB, menu models.MenuCreate) (models.MenuDetail, error)
+	// 菜单修改
+	UpdateMenu(DB *gorm.DB, menu models.MenuUpdate) (models.MenuDetail, error)
+	// 获得所有菜单
+	FindAllMenu(DB *gorm.DB) (menus []*models.MenuList, err error)
 }

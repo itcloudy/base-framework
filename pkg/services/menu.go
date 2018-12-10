@@ -6,12 +6,14 @@ package services
 import (
 	"github.com/itcloudy/base-framework/pkg/interfaces/repositories"
 	"github.com/itcloudy/base-framework/pkg/models"
+	"github.com/jinzhu/gorm"
 )
 
 type MenuService struct {
+	DB *gorm.DB
 	repositories.IMenuRepository
 }
 
-func (service *MenuService) GetSelfMenu(roles []string) (menus []models.Menu, err error) {
+func (service *MenuService) GetSelfMenu(roles []string) (menus []models.MenuList, err error) {
 	return
 }

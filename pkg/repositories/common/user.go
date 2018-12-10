@@ -10,35 +10,33 @@ import (
 )
 
 type UserRepository struct {
-	*gorm.DB
 }
 
-func (repo *UserRepository) FindUserByUserName(username string) (user models.UserDetail, err error) {
-	err = repo.Where("username = ?", username).First(&user).Error
+func (repo *UserRepository) FindUserByUserName(DB *gorm.DB, username string) (user models.UserDetail, err error) {
+	err = DB.Where("username = ?", username).First(&user).Error
 	return
 }
-func (repo *UserRepository) FindUserByID(id string) (user models.UserDetail, err error) {
-	err = repo.Where("id = ?", id).First(&user).Error
+func (repo *UserRepository) FindUserByID(DB *gorm.DB, id string) (user models.UserDetail, err error) {
+	err = DB.Where("id = ?", id).First(&user).Error
 	return
 }
-func (repo *UserRepository) InsertUser(create models.UserCreate) (user models.UserDetail, err error) {
-	err = repo.Create(&create).Error
+func (repo *UserRepository) InsertUser(DB *gorm.DB, create models.UserCreate) (user models.UserDetail, err error) {
+	err = DB.Create(&create).Error
 	if err == nil {
-		return repo.FindUserByID(strconv.Itoa(create.ID))
+		return repo.FindUserByID(DB, strconv.Itoa(create.ID))
 	}
 	return
 }
-func (repo *UserRepository) UpdateUserAdmin(id string, isAdmin bool) (err error) {
-	err = repo.Model(models.User{}).Updates(map[string]interface{}{"IsAdmin": isAdmin}).Error
+func (repo *UserRepository) UpdateUserAdmin(DB *gorm.DB, id string, isAdmin bool) (err error) {
+	err = DB.Model(models.UserDetail{}).Updates(map[string]interface{}{"IsAdmin": isAdmin}).Error
 	return
 }
-func (repo *UserRepository) UpdateUserActive(id string, isActive bool) (err error) {
-	err = repo.Model(models.User{}).Updates(map[string]interface{}{"IsActive": isActive}).Error
+func (repo *UserRepository) UpdateUserActive(DB *gorm.DB, id string, isActive bool) (err error) {
+	err = DB.Model(models.UserDetail{}).Updates(map[string]interface{}{"IsActive": isActive}).Error
 	return
 }
 
-func (repo *UserRepository) FindUserByUserNameAndPwd(username, pwd string) (user models.UserDetail, err error) {
-	err = repo.Model(models.User{}).Where("username = ? and pwd = ? and is_active = ?", username, pwd, true).First(&user).Error
-
+func (repo *UserRepository) FindUserByUserNameAndPwd(DB *gorm.DB, username, pwd string) (user models.UserDetail, err error) {
+	err = DB.Model(models.UserDetail{}).Where("username = ? and pwd = ? and is_active = ?", username, pwd, true).First(&user).Error
 	return
 }

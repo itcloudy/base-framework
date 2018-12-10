@@ -24,7 +24,7 @@ func (mo *MockUserService) GetUserByID(id string) (user models.UserDetail, err e
 		user = ret.Get(0).(models.UserDetail)
 	}
 
-	return user,err
+	return user, err
 }
 func (mo *MockUserService) GetUserByUserName(username string) (user models.UserDetail, err error) {
 	return

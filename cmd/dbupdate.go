@@ -9,10 +9,9 @@ import (
 	"github.com/itcloudy/base-framework/pkg/logs"
 	"github.com/itcloudy/base-framework/pkg/repositories/common"
 	"github.com/itcloudy/base-framework/pkg/services"
+	"github.com/spf13/cobra"
 	"go.uber.org/zap"
 	"time"
-
-	"github.com/spf13/cobra"
 )
 
 var dbupdateCmd = &cobra.Command{
@@ -39,7 +38,6 @@ var dbupdateCmd = &cobra.Command{
 		} else {
 			logs.Logger.Info("update database success", zap.String("db name", conf.Config.DB.Name), zap.Time("time", time.Now()))
 			logs.Logger.Sync()
-
 		}
 		conf.SqlxDB.Close()
 

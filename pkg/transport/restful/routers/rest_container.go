@@ -34,15 +34,15 @@ type IRestContainer interface {
 }
 
 func (k *kernel) UserContainer() controllers.UserController {
-	dbType := conf.Config.DB.DbType
 	userService := services.UserService{}
 
+	userService.IUserRepository = &common.UserRepository{}
+	dbType := conf.Config.DB.DbType
 	switch dbType {
 	case "mysql":
 	case "postgres":
-		userService.IUserRepository = &common.UserRepository{DB: conf.DBConn}
+		userService.DB = conf.DBConn
 		break
-
 	default:
 		panic(errors.New("un support sql type:" + dbType))
 
@@ -51,12 +51,13 @@ func (k *kernel) UserContainer() controllers.UserController {
 	return userController
 }
 func (k *kernel) MenuContainer() controllers.MenuController {
-	dbType := conf.Config.DB.DbType
 	menuService := services.MenuService{}
+	menuService.IMenuRepository = &common.MenuRepository{}
+	dbType := conf.Config.DB.DbType
 	switch dbType {
 	case "mysql":
 	case "postgres":
-		menuService.IMenuRepository = &common.MenuRepository{DB: conf.DBConn}
+		menuService.DB = conf.DBConn
 		break
 	default:
 		panic(errors.New("un support sql type:" + dbType))

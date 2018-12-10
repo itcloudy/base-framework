@@ -6,6 +6,7 @@ package publisher
 import (
 	"github.com/centrifugal/gocent"
 	"github.com/itcloudy/base-framework/pkg/conf"
+	"github.com/itcloudy/base-framework/pkg/logs"
 
 	"sync"
 	"time"
@@ -37,7 +38,7 @@ var (
 
 // InitCentrifugo client
 func InitCentrifugo(cfg conf.CentrifugoConfig) {
-	log.Infof("Init Centrifugo client, connect information: %v", cfg)
+	logs.Logger.Error("Init Centrifugo client, connect information:" + cfg.String())
 	config = cfg
 	publisher = gocent.New(gocent.Config{Addr: cfg.URL, Key: cfg.Secret})
 }

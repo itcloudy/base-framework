@@ -13,22 +13,21 @@ import (
 const noVersion = "0.0.0"
 
 type MigrationHistoryRepository struct {
-	*sqlx.DB
 }
 
-func (repo *MigrationHistoryRepository) CurrentVersion() (version string, err error) {
+func (repo *MigrationHistoryRepository) CurrentVersion(DB *sqlx.DB) (version string, err error) {
 	var mh models.MigrationHistory
-	repo.Select(&mh, "SELECT * FROM migration_history ORDER BY id DESC ")
+	DB.Select(&mh, "SELECT * FROM migration_history ORDER BY id DESC ")
 	if mh.Version == "" {
 		return noVersion, nil
 	}
 	return mh.Version, err
 }
-func (repo *MigrationHistoryRepository) ApplyMigrations(collection version.Collection, migrates map[string]string) (err error) {
+func (repo *MigrationHistoryRepository) ApplyMigrations(DB *sqlx.DB, collection version.Collection, migrates map[string]string) (err error) {
 	// 对版本进行排序
 	sort.Sort(collection)
 	// 开启事务
-	tx := repo.MustBegin()
+	tx := DB.MustBegin()
 
 	for _, v := range collection {
 		tx.MustExec(migrates[v.String()])
@@ -41,7 +40,7 @@ func (repo *MigrationHistoryRepository) ApplyMigrations(collection version.Colle
 	return
 
 }
-func (repo *MigrationHistoryRepository) ListMigration() (migrates []models.MigrationHistory, err error) {
-	err = repo.Select(&migrates, "SELECT * FROM migration_history")
+func (repo *MigrationHistoryRepository) ListMigration(DB *sqlx.DB) (migrates []models.MigrationHistory, err error) {
+	err = DB.Select(&migrates, "SELECT * FROM migration_history")
 	return
 }

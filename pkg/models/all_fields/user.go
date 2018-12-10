@@ -6,9 +6,9 @@ package all_fileds
 import "time"
 
 type User struct {
-	ID              int       `json:"id" comment:"主键ID"`
-	CreatedAt       time.Time `json:"created_at,omitempty" comment:"记录创建时间"`
-	UpdatedAt       time.Time `json:"updated_at,omitempty" comment:"记录更新时间"`
+	ID              int       `json:"id" gorm:"column:id" comment:"主键ID"`
+	CreatedAt       time.Time `json:"created_at,omitempty" gorm:"column:created_at" comment:"记录创建时间"`
+	UpdatedAt       time.Time `json:"updated_at,omitempty" gorm:"column:updated_at" comment:"记录更新时间"`
 	Username        string    `json:"username,omitempty" comment:"用户名"`
 	Alias           string    `json:"alias,omitempty" comment:"昵称"`
 	HeadImage       string    `json:"head_image,omitempty" comment:"头像"`
@@ -19,4 +19,10 @@ type User struct {
 	Pwd             string    `json:"pwd,omitempty" comment:"数据库存储加密密码"`
 	IsAdmin         bool      `json:"is_admin,omitempty" comment:"超级用户"`
 	IsActive        bool      `json:"is_active,omitempty" comment:"用户有效"`
+	Roles           []*Role   `json:"roles" comment:"用户角色"`
+	RoleList        []int     `gorm:"-" json:"role_list,omitempty" comment:"角色ID列表"`
+}
+
+func (mh *User) TableName() string {
+	return "users"
 }

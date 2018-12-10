@@ -6,5 +6,5 @@ package services
 import "github.com/itcloudy/base-framework/pkg/models"
 
 type IMenuService interface {
-	GetSelfMenu(roles []string) (menus []models.Menu, err error)
+	GetSelfMenu(roles []string) (menus []models.MenuList, err error)
 }

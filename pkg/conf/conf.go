@@ -53,6 +53,10 @@ type CentrifugoConfig struct {
 	URL    string
 }
 
+func (c CentrifugoConfig) String() string {
+	return fmt.Sprintf("Secret: %s URL: %s", c.Secret, c.URL)
+}
+
 // Log represents parameters of log
 type LogConfig struct {
 	EnableKafka  bool

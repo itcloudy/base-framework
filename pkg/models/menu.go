@@ -5,23 +5,68 @@ package models
 
 import "time"
 
-type Menu struct {
-	ID        int       `json:"id" comment:"主键ID"`
-	CreatedAt time.Time `json:"created_at,omitempty" comment:"记录创建时间"`
-	UpdatedAt time.Time `json:"updated_at,omitempty" comment:"记录更新时间"`
-	Parent    *Menu     `json:"parent,omitempty" comment:"上级菜单"`
-	ParentID  int       `json:"parent_id" comment:"上级菜单ID"`
-	Name      string    `json:"name" db:"index" yaml:"name" validate:"required" comment:"菜单名称"`
-	Route     string    `json:"route,omitempty" yaml:"route" comment:"菜单路由"`
-	Component string    `json:"component,omitempty" yaml:"component" comment:"菜单组件"`
-	Icon      string    `json:"icon,omitempty" yaml:"icon" validate:"required" comment:"菜单样式类"`
-	Sequence  int       `json:"sequence" yaml:"sequence" validate:"required" comment:"菜单顺序"`
-	Tree      string    `json:"-" yaml:"tree" comment:"菜单继承树"`
-	Children  []*Menu   `json:"children,omitempty" yaml:"children" comment:"子菜单"`
-	UniqueTag string    `json:"-" db:"unique_index" validate:"required" comment:"菜单唯一标识"`
+type MenuCreate struct {
+	ID        int    `json:"id" gorm:"column:id" comment:"主键ID"`
+	ParentID  int    `json:"parent_id" gorm:"column:parent_id" comment:"上级菜单ID"`
+	Name      string `json:"name" gorm:"column:name" validate:"required" comment:"菜单名称"`
+	Route     string `json:"route,omitempty" gorm:"column:route" comment:"菜单路由"`
+	Component string `json:"component,omitempty" gorm:"column:component"  comment:"菜单组件"`
+	Icon      string `json:"icon,omitempty" validate:"required" comment:"菜单样式类"`
+	Sequence  int    `json:"sequence" gorm:"column:sequence"  validate:"required" comment:"菜单顺序"`
+	UniqueTag string `json:"-" gorm:"column:unique_tag" validate:"required" comment:"菜单唯一标识"`
 }
 
-// TableName returns name of table
-func (mh *Menu) TableName() string {
-	return "menus"
+func (mh *MenuCreate) TableName() string {
+	return "menu"
+}
+
+type MenuUpdate struct {
+	ParentID  int    `json:"parent_id" gorm:"column:parent_id" comment:"上级菜单ID"`
+	Name      string `json:"name" gorm:"column:name" validate:"required" comment:"菜单名称"`
+	Route     string `json:"route,omitempty" gorm:"column:route" comment:"菜单路由"`
+	Component string `json:"component,omitempty" gorm:"column:component"  comment:"菜单组件"`
+	Icon      string `json:"icon,omitempty" validate:"required" comment:"菜单样式类"`
+	Sequence  int    `json:"sequence" gorm:"column:sequence"  validate:"required" comment:"菜单顺序"`
+	UniqueTag string `json:"-" gorm:"column:unique_tag" validate:"required" comment:"菜单唯一标识"`
+}
+
+func (mh *MenuUpdate) TableName() string {
+	return "menu"
+}
+
+type MenuList struct {
+	ID        int           `json:"id" gorm:"column:id" comment:"主键ID"`
+	Parent    *MenuDetail   `json:"parent,omitempty" gorm:"-" comment:"上级菜单"`
+	ParentID  int           `json:"parent_id" gorm:"column:parent_id" comment:"上级菜单ID"`
+	Name      string        `json:"name" gorm:"column:name" validate:"required" comment:"菜单名称"`
+	Route     string        `json:"route,omitempty" gorm:"column:route" comment:"菜单路由"`
+	Component string        `json:"component,omitempty" gorm:"column:component"  comment:"菜单组件"`
+	Icon      string        `json:"icon,omitempty" validate:"required" comment:"菜单样式类"`
+	Sequence  int           `json:"sequence" gorm:"column:sequence"  validate:"required" comment:"菜单顺序"`
+	Tree      string        `json:"-" gorm:"column:tree" comment:"菜单继承树"`
+	Children  []*MenuDetail `json:"children,omitempty" gorm:"-" comment:"子菜单"`
+}
+
+func (mh *MenuList) TableName() string {
+	return "menu"
+}
+
+type MenuDetail struct {
+	ID        int           `json:"id" gorm:"column:id" comment:"主键ID"`
+	CreatedAt time.Time     `json:"created_at,omitempty" gorm:"column:created_at" comment:"记录创建时间"`
+	UpdatedAt time.Time     `json:"updated_at,omitempty" gorm:"column:updated_at" comment:"记录更新时间"`
+	Parent    *MenuDetail   `json:"parent,omitempty" gorm:"-" comment:"上级菜单"`
+	ParentID  int           `json:"parent_id" gorm:"column:parent_id" comment:"上级菜单ID"`
+	Name      string        `json:"name" gorm:"column:name" validate:"required" comment:"菜单名称"`
+	Route     string        `json:"route,omitempty" gorm:"column:route" comment:"菜单路由"`
+	Component string        `json:"component,omitempty" gorm:"column:component"  comment:"菜单组件"`
+	Icon      string        `json:"icon,omitempty" validate:"required" comment:"菜单样式类"`
+	Sequence  int           `json:"sequence" gorm:"column:sequence"  validate:"required" comment:"菜单顺序"`
+	Tree      string        `json:"-" gorm:"column:tree" comment:"菜单继承树"`
+	Children  []*MenuDetail `json:"children,omitempty" gorm:"-" comment:"子菜单"`
+	UniqueTag string        `json:"-" gorm:"column:unique_tag" validate:"required" comment:"菜单唯一标识"`
+}
+
+func (mh *MenuDetail) TableName() string {
+	return "menu"
 }

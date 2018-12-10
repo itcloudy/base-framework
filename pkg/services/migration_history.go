@@ -13,10 +13,12 @@ import (
 	"github.com/itcloudy/base-framework/pkg/models"
 	"github.com/itcloudy/base-framework/pkg/repositories/common"
 	"github.com/itcloudy/base-framework/tools"
+	"github.com/jmoiron/sqlx"
 )
 
 // 数据库升级服务
 type MigrationService struct {
+	DB *sqlx.DB
 	repositories.IMigrationHistoryRepository
 }
 
@@ -24,7 +26,7 @@ type MigrationService struct {
 获得已升级的最新版本
 */
 func (service *MigrationService) GetCurrentVersion() (version string, err error) {
-	return service.CurrentVersion()
+	return service.CurrentVersion(service.DB)
 
 }
 
@@ -56,7 +58,7 @@ func (service *MigrationService) FirstMigration() (err error) {
 	if len(collection) < 1 {
 		return errors.New("no need update version, code logic has problem")
 	}
-	err = service.ApplyMigrations(collection, needUpdateMap)
+	err = service.ApplyMigrations(service.DB, collection, needUpdateMap)
 	if err == nil {
 		// 插入超级管理员
 		var superUser models.UserCreate
@@ -66,7 +68,7 @@ func (service *MigrationService) FirstMigration() (err error) {
 		switch cfg.DbType {
 		case "mysql":
 		case "postgres":
-			userService.IUserRepository = &common.UserRepository{DB: conf.DBConn}
+			userService.IUserRepository = &common.UserRepository{}
 			break
 		default:
 			panic(errors.New("un support sql type:" + cfg.DbType))
@@ -103,7 +105,7 @@ func (service *MigrationService) UpdateToOneVersion() (err error) {
 	}
 
 	// 获得已经安装的最新版本
-	if lastVersion, err = service.CurrentVersion(); err != nil {
+	if lastVersion, err = service.CurrentVersion(service.DB); err != nil {
 		return
 	}
 	if last, err = version.NewVersion(lastVersion); err != nil {
@@ -131,7 +133,7 @@ func (service *MigrationService) UpdateToOneVersion() (err error) {
 	if len(collection) < 1 {
 		return errors.New("no need update version, code logic has problem")
 	}
-	return service.ApplyMigrations(collection, needUpdateMap)
+	return service.ApplyMigrations(service.DB, collection, needUpdateMap)
 }
 
 /*
@@ -143,7 +145,7 @@ func (service *MigrationService) GetAllListMigration() (migrates []models.Migrat
 	migrates = append(migrates, migration.AllUpdateMigrations[conf.Config.DB.DbType]...)
 	var verSlice []string
 	// 获得已经安装的版本
-	installedMigrates, _ = service.ListMigration()
+	installedMigrates, _ = service.ListMigration(service.DB)
 	//获得已安装的版本
 	for _, migrate := range installedMigrates {
 		verSlice = append(verSlice, migrate.Version)

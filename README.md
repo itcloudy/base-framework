@@ -8,6 +8,7 @@
 * 日志写入到文件，文件备份大小可配置，同时支持日志写到Kafka
 * 系统表对应的struct间的关系可视化
 * 同时提供rest接口和rpc接口
+* 支持controller，service层测单元测试
 
 ## 相关命令
 

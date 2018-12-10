@@ -5,16 +5,16 @@ package all_fileds
 
 import "time"
 
-type RoleMenu struct {
+type UserRole struct {
 	ID        int       `json:"id" gorm:"column:id" comment:"主键ID"`
 	CreatedAt time.Time `json:"created_at,omitempty" gorm:"column:created_at" comment:"记录创建时间"`
 	UpdatedAt time.Time `json:"updated_at,omitempty" gorm:"column:updated_at" comment:"记录更新时间"`
-	Role      *Role     `json:"role" yaml:"role" comment:"角色"`
-	RoleID    int       `json:"role_id" yaml:"role_id" comment:"角色ID"`
-	Menu      *Menu     `json:"menu" yaml:"menu" comment:"菜单"`
-	MenuID    int       `json:"menu_id" yaml:"menu_id" comment:"菜单ID"`
+	Role      *Role     `json:"role" gorm:"-" comment:"角色"`
+	RoleID    int       `json:"role_id" gorm:"column:role_id" comment:"角色ID"`
+	User      *User     `json:"user" gorm:"-" comment:"用户"`
+	UserID    int       `json:"user_id" gorm:"column:user_id" comment:"用户ID"`
 }
 
-func (mh *RoleMenu) TableName() string {
-	return "role_menu"
+func (mh *UserRole) TableName() string {
+	return "user_role"
 }

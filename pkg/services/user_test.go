@@ -18,14 +18,14 @@ func TestUserService_GetUserByID(t *testing.T) {
 	var user models.UserDetail
 	user.ID = idInt
 	userRepository.On("FindUserByID", idStr).Return(user, nil)
-	userService:= UserService{IUserRepository:userRepository}
-	result, _ := userService.GetUserByID(idStr)
+	userService := UserService{IUserRepository: userRepository}
+	result, _ := userService.GetUserByID(nil, idStr)
 	assert.Equal(t, user.ID, result.ID)
 }
 func TestUserService_GetUserByUserName(t *testing.T) {
 	userRepository := new(mocks.MockUserRepository)
 	name := "cloudy"
-	var user models.User
+	var user models.UserDetail
 	user.Username = name
 	userRepository.On("FindUserByUserName", name).Return(user, nil)
 	// 判断测试结果

@@ -10,7 +10,7 @@ import (
 
 var startCmd = &cobra.Command{
 	Use:    "start",
-	Short:  "Starting node",
+	Short:  "start server",
 	PreRun: loadConfig,
 	Run: func(cmd *cobra.Command, args []string) {
 		daylight.Start()
