@@ -34,7 +34,7 @@ func (repo *MenuRepository) InsertMenu(DB *gorm.DB, create models.MenuCreate) (r
 
 // 修改
 func (repo *MenuRepository) UpdateMenu(DB *gorm.DB, menu models.MenuUpdate) (result models.MenuDetail, err error) {
-	err = DB.Model(&menu).Updates(menu).Error
+	err = DB.Updates(menu).Error
 	return
 }
 

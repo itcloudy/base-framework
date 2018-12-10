@@ -6,9 +6,9 @@ package services
 import "github.com/itcloudy/base-framework/pkg/models"
 
 type IUserService interface {
-	GetSelf(id string) (user models.UserDetail, err error)
-	GetUserByID(id string) (user models.UserDetail, err error)
-	GetUserByUserName(username string) (user models.UserDetail, err error)
-	UserCreate(userCreate models.UserCreate) (user models.UserDetail, err error)
-	CheckUser(username, pwd string) (user models.UserDetail, err error)
+	ServiceGetSelf(id string) (user models.UserDetail, err error)
+	ServiceGetUserByID(id string) (user models.UserDetail, err error)
+	ServiceGetUserByUserName(username string) (user models.UserDetail, err error)
+	ServiceUserCreate(userCreate models.UserCreate) (user models.UserDetail, err error)
+	ServiceCheckUser(username, pwd string) (user models.UserDetail, err error)
 }

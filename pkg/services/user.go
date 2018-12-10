@@ -17,22 +17,22 @@ type UserService struct {
 	repositories.IUserRepository
 }
 
-func (service *UserService) GetSelf(id string) (user models.UserDetail, err error) {
+func (service *UserService) ServiceGetSelf(id string) (user models.UserDetail, err error) {
 	return service.FindUserByID(service.DB, id)
 }
-func (service *UserService) GetUserByID(id string) (user models.UserDetail, err error) {
+func (service *UserService) ServiceGetUserByID(id string) (user models.UserDetail, err error) {
 	return service.FindUserByID(service.DB, id)
 }
-func (service *UserService) GetUserByUserName(username string) (user models.UserDetail, err error) {
+func (service *UserService) ServiceGetUserByUserName(username string) (user models.UserDetail, err error) {
 	return service.FindUserByUserName(service.DB, username)
 }
-func (service *UserService) UserCreate(userCreate models.UserCreate) (user models.UserDetail, err error) {
+func (service *UserService) ServiceUserCreate(userCreate models.UserCreate) (user models.UserDetail, err error) {
 	userCreate.ID = 0
 	userCreate.Pwd = tools.SHA256(tools.StringsJoin(userCreate.Password, salt))
 	return service.InsertUser(service.DB, userCreate)
 
 }
-func (service *UserService) CheckUser(username, pwd string) (user models.UserDetail, err error) {
+func (service *UserService) ServiceCheckUser(username, pwd string) (user models.UserDetail, err error) {
 	loginPwd := tools.SHA256(tools.StringsJoin(pwd, salt))
 	user, err = service.FindUserByUserNameAndPwd(service.DB, username, loginPwd)
 	return

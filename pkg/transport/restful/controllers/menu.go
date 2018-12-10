@@ -14,18 +14,28 @@ type MenuController struct {
 	services.MenuService
 }
 
-// @tags  菜单
-// @Description 用户菜单获取
-// @Summary 用户菜单获取
-// @Accept  json
-// @Produce  json
-// @Success 200 {string} json "{"code":200,"data":{"token":"Bearer eyJhbGciOiJSUzI1NiIsInR5cCI6IkpXVCJ9.eyJleHAiOjc1MzIxNjMwODMsIk5hbWUiOiJhZG1pbiIsIlJvbGUiOm51bGwsIlVzZXJJZCI6MiwiSXNBZG1pbiI6ZmFsc2V9.HZq5jBw4-ZQipQPnq0K7Ei0_LvaRXZGNgKqLoFnhV_vpfQupmddsDMZbiI_Yy0Zhd7J7AvRGDXMfVwW9-TidsDrux6-L4KQWIV0Mrlj4SXgW13HvMSXW0XzHYQBxiai61AeJx4VmQR84s2lI5hmKuiVOpsyOZAduJoO1K26b8X4","user":{"id":2,"name":"admin","alias":"","email":"","password":"","roles":[],"openid":"admin","active":true,"is_admin":false}},"message":"success"}"
-// @Router /user/{id} [get]
+// 用户获取自己的菜单
 func (ctl MenuController) CtlGetSelfMenu(c *gin.Context) {
 
-	menus, err := ctl.MenuService.GetSelfMenu(c.GetStringSlice(consts.LoginUserRoleIds))
+	menus, err := ctl.MenuService.ServiceGetSelfMenu(c.GetStringSlice(consts.LoginUserRoleIds))
 	if err != nil {
 
 	}
 	c.JSON(http.StatusOK, menus)
+}
+//根据ID获得菜单详情
+func (ctl MenuController)CtlGetMenuByID(c*gin.Context)  {
+
+}
+//创建菜单
+func (ctl MenuController)CtlCreateMenu(c*gin.Context)  {
+
+}
+//更新菜单
+func (ctl MenuController)CtlUpdateMenuByID(c*gin.Context)  {
+
+}
+//获得所有的菜单
+func (ctl MenuController)CtlGetAllMenu(c*gin.Context)  {
+
 }

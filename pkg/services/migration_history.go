@@ -25,7 +25,7 @@ type MigrationService struct {
 /*
 获得已升级的最新版本
 */
-func (service *MigrationService) GetCurrentVersion() (version string, err error) {
+func (service *MigrationService) ServiceGetCurrentVersion() (version string, err error) {
 	return service.CurrentVersion(service.DB)
 
 }
@@ -33,7 +33,7 @@ func (service *MigrationService) GetCurrentVersion() (version string, err error)
 /*
 第一次初始化
 */
-func (service *MigrationService) FirstMigration() (err error) {
+func (service *MigrationService) ServiceFirstMigration() (err error) {
 	// 删除数据库中的表
 	err = dropTables()
 	if err != nil {
@@ -82,7 +82,7 @@ func (service *MigrationService) FirstMigration() (err error) {
 		superUser.Mobile = admin.Mobile
 		superUser.IsActive = true
 		superUser.IsAdmin = true
-		_, err = userService.UserCreate(superUser)
+		_, err = userService.ServiceUserCreate(superUser)
 	}
 	conf.DBConn.Close()
 	return
@@ -91,7 +91,7 @@ func (service *MigrationService) FirstMigration() (err error) {
 /*
 升级到某个版本，若中间存在多个，则中间版本同样升级
 */
-func (service *MigrationService) UpdateToOneVersion() (err error) {
+func (service *MigrationService) ServiceUpdateToOneVersion() (err error) {
 	var (
 		collection version.Collection
 
@@ -139,7 +139,7 @@ func (service *MigrationService) UpdateToOneVersion() (err error) {
 /*
 列出所有的版本，包括系统中存在的没有安装的
 */
-func (service *MigrationService) GetAllListMigration() (migrates []models.MigrationHistory, err error) {
+func (service *MigrationService) ServiceGetAllListMigration() (migrates []models.MigrationHistory, err error) {
 	var installedMigrates []models.MigrationHistory
 	migrates = migration.AllInitMigrations[conf.Config.DB.DbType]
 	migrates = append(migrates, migration.AllUpdateMigrations[conf.Config.DB.DbType]...)

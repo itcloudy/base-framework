@@ -5,15 +5,10 @@ package services
 
 import (
 	"github.com/itcloudy/base-framework/pkg/interfaces/repositories"
-	"github.com/itcloudy/base-framework/pkg/models"
 	"github.com/jinzhu/gorm"
 )
 
-type MenuService struct {
+type SystemAPIService struct {
 	DB *gorm.DB
-	repositories.IMenuRepository
-}
-
-func (service *MenuService) ServiceGetSelfMenu(roles []string) (menus []models.MenuList, err error) {
-	return
+	repositories.ISystemAPIRepository
 }

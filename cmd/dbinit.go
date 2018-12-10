@@ -33,7 +33,7 @@ var dbinitCmd = &cobra.Command{
 			panic(errors.New("un support sql type:" + cfg.DbType))
 
 		}
-		if err := migrateService.FirstMigration(); err != nil {
+		if err := migrateService.ServiceFirstMigration(); err != nil {
 			logs.Logger.Fatal("init database failed", zap.String("type", conf.Config.DB.Name), zap.Error(err))
 
 		} else {

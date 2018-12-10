@@ -37,6 +37,6 @@ func (repo *UserRepository) UpdateUserActive(DB *gorm.DB, id string, isActive bo
 }
 
 func (repo *UserRepository) FindUserByUserNameAndPwd(DB *gorm.DB, username, pwd string) (user models.UserDetail, err error) {
-	err = DB.Model(models.UserDetail{}).Where("username = ? and pwd = ? and is_active = ?", username, pwd, true).First(&user).Error
+	err = DB.Where("username = ? and pwd = ? and is_active = ?", username, pwd, true).First(&user).Error
 	return
 }

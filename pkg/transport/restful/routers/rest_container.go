@@ -29,26 +29,47 @@ func restContainer() iRestContainer {
 }
 
 type iRestContainer interface {
+	IndexContainer() controllers.IndexController
 	UserContainer() controllers.UserController
 	MenuContainer() controllers.MenuController
+	RoleContainer() controllers.RoleController
 }
 
+func (k *kernel) IndexContainer() controllers.IndexController {
+	return controllers.IndexController{}
+}
 func (k *kernel) UserContainer() controllers.UserController {
-	userService := services.UserService{}
+	service := services.UserService{}
 
-	userService.IUserRepository = &common.UserRepository{}
+	service.IUserRepository = &common.UserRepository{}
 	dbType := conf.Config.DB.DbType
 	switch dbType {
 	case "mysql":
 	case "postgres":
-		userService.DB = conf.DBConn
+		service.DB = conf.DBConn
 		break
 	default:
 		panic(errors.New("un support sql type:" + dbType))
 
 	}
-	userController := controllers.UserController{IUserService: &userService}
-	return userController
+	controller := controllers.UserController{IUserService: &service}
+	return controller
+}
+func (k *kernel) RoleContainer() controllers.RoleController {
+	service := services.RoleService{}
+	service.IRoleRepository = &common.RoleRepository{}
+	dbType := conf.Config.DB.DbType
+	switch dbType {
+	case "mysql":
+	case "postgres":
+		service.DB = conf.DBConn
+		break
+	default:
+		panic(errors.New("un support sql type:" + dbType))
+
+	}
+	controller := controllers.RoleController{RoleService: service}
+	return controller
 }
 func (k *kernel) MenuContainer() controllers.MenuController {
 	menuService := services.MenuService{}

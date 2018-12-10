@@ -3,8 +3,8 @@
 // license that can be found in the LICENSE file.
 package services
 
-import "github.com/itcloudy/base-framework/pkg/models"
+import "github.com/jinzhu/gorm"
 
-type IMenuService interface {
-	ServiceGetSelfMenu(roles []string) (menus []models.MenuList, err error)
+type FileUploadService struct {
+	DB *gorm.DB
 }
