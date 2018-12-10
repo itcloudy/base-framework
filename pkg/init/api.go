@@ -50,7 +50,7 @@ func initApi() {
 	apis, _ := apiService.ServiceGetAllSystemAPI()
 	if len(apis) > 0 {
 		logs.Logger.Error("system api not empty can't init", zap.String("path", filePath))
-		panic("system api not empty can't init")
+		os.Exit(-1)
 	} else {
 		insertApis(systemapis, &apiService)
 	}

@@ -24,19 +24,19 @@ func initMenus() {
 	var systemMs *systemMenus
 	if filePath == "" {
 		logs.Logger.Error("menu init file path is empty", zap.String("path", filePath))
-		panic("menu init file path is empty")
+		os.Exit(-1)
 	}
 	//读取菜单文件
 	menuData, err := ioutil.ReadFile(filePath)
 	if err != nil {
 		logs.Logger.Error("menu init file read filed", zap.String("path", filePath))
-		panic("menu init file read filed, file path: " + filePath)
+		os.Exit(-1)
 	}
 	//映射菜单
 	err = yaml.Unmarshal(menuData, &systemMs)
 	if err != nil {
 		logs.Logger.Error("menu init file parser filed", zap.String("path", filePath))
-		panic("menu init file parser filed, err information: ")
+		os.Exit(-1)
 	}
 	menuService := services.MenuService{}
 	dbType := conf.Config.DB.DbType
@@ -53,7 +53,7 @@ func initMenus() {
 	menus, _ := menuService.ServiceGetAllMenu()
 	if len(menus) > 0 {
 		logs.Logger.Error("system menu not empty can't init")
-		panic("system menu not empty can't init")
+		os.Exit(-1)
 	}
 	//导入数据
 	for _, m := range systemMs.Menus {
@@ -67,7 +67,6 @@ func insertMenus(men *models.MenuDetail, service *services.MenuService) {
 		m       models.MenuDetail
 		err     error
 	)
-
 	sysMenu.Name = men.Name
 	sysMenu.Component = men.Component
 	sysMenu.Icon = men.Icon

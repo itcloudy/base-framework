@@ -6,6 +6,7 @@ package init
 import (
 	"github.com/itcloudy/base-framework/pkg/conf"
 	"github.com/itcloudy/base-framework/pkg/logs"
+	"os"
 )
 
 func LoadInitData() {
@@ -23,6 +24,9 @@ func LoadInitData() {
 			logs.Logger.Info("load init api data success")
 
 		}
+	}else{
+		logs.Logger.Error("start load init data failed,config file init enable is false")
+		os.Exit(-1)
 	}
 
 }
