@@ -19,7 +19,23 @@ func (m *MockUserRepository) FindUserByID(id string) (user models.UserDetail, er
 	} else {
 		user = ret.Get(0).(models.UserDetail)
 	}
-
 	return
+}
 
+func (m *MockUserRepository) FindUserByUserName(username string) (user models.UserDetail, err error) {
+	return
+}
+
+func (m *MockUserRepository) InsertUser(create models.UserCreate) (user models.UserDetail, err error) {
+	return
+}
+func (m *MockUserRepository) UpdateUserAdmin(id string, isAdmin bool) (err error) {
+	return
+}
+func (m *MockUserRepository) UpdateUserActive(id string, isActive bool) (err error) {
+	return
+}
+
+func (m *MockUserRepository) FindUserByUserNameAndPwd(username, pwd string) (user models.UserDetail, err error) {
+	return
 }

@@ -5,11 +5,13 @@ package controllers
 
 import (
 	"encoding/json"
+	"fmt"
 	"github.com/gin-gonic/gin"
 	"github.com/itcloudy/base-framework/pkg/mocks/services"
 	"github.com/itcloudy/base-framework/pkg/models"
 	"github.com/stretchr/testify/assert"
 	"net/http/httptest"
+	"strconv"
 	"testing"
 )
 
@@ -21,6 +23,7 @@ func TestUserController_GetUserByID(t *testing.T) {
 		user   models.UserDetail
 		result models.UserDetail
 	)
+	user.ID ,_=strconv.Atoi(id)
 	//设置期望结果
 	userService.On("GetUserByID", id).Return(user, nil)
 	userController := UserController{userService}
@@ -33,6 +36,7 @@ func TestUserController_GetUserByID(t *testing.T) {
 	router.GET("/user/:id", userController.CtlGetUserByID)
 	router.ServeHTTP(w, req)
 	json.NewDecoder(w.Body).Decode(&result)
+	fmt.Printf("%+v", result)
 	// 判断测试结果
 	assert.Equal(t, user.ID, result.ID)
 

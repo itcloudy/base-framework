@@ -24,14 +24,13 @@ func (mo *MockUserService) GetUserByID(id string) (user models.UserDetail, err e
 		user = ret.Get(0).(models.UserDetail)
 	}
 
-	return
+	return user,err
 }
 func (mo *MockUserService) GetUserByUserName(username string) (user models.UserDetail, err error) {
 	return
 }
 func (mo *MockUserService) UserCreate(userCreate models.UserCreate) (user models.UserDetail, err error) {
 	return
-
 }
 func (mo *MockUserService) CheckUser(username, pwd string) (user models.UserDetail, err error) {
 	return

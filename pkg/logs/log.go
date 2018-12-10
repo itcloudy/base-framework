@@ -31,6 +31,7 @@ func (lk *LogKafka) Write(p []byte) (n int, err error) {
 
 }
 func InitLogger(mode string, fileName string, maxSize, maxBackups, maxAge int, compress bool, enableKafka bool, kafkaAddress []string) {
+	// 打印错误级别的日志
 	highPriority := zap.LevelEnablerFunc(func(lvl zapcore.Level) bool {
 		return lvl >= zapcore.ErrorLevel
 	})
