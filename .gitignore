@@ -11,3 +11,5 @@ config/*
 system-data/
 user-data/
 *.yml
+*.pid
+*.lock
