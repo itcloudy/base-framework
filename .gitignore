@@ -10,3 +10,4 @@ docs/
 config/*
 system-data/
 user-data/
+*.yml
