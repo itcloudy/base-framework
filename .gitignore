@@ -8,8 +8,6 @@ base-framework
 .DS_Store
 docs/
 config/*
-system-data/
-user-data/
 *.yml
 *.pid
 *.lock
