@@ -14,3 +14,6 @@ type SystemApi struct {
 	Method    string    `json:"method" yaml:"method" gorm:"column:method" comment:"API请求方法"`
 	Display   string    `json:"display" yaml:"-" gorm:"column:display" comment:"显示名称"`
 }
+func (mh *SystemApi) TableName() string {
+	return "system_api"
+}

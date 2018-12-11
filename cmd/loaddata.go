@@ -13,6 +13,7 @@ var loaddataCmd = &cobra.Command{
 	Short:  "load data from init folder",
 	PreRun: loadConfig,
 	Run: func(cmd *cobra.Command, args []string) {
+
 		LoadInitData()
 	},
 }

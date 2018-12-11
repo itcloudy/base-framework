@@ -8,6 +8,7 @@ import (
 	"github.com/itcloudy/base-framework/pkg/conf"
 	"github.com/itcloudy/base-framework/pkg/logs"
 	"github.com/itcloudy/base-framework/pkg/models"
+	"github.com/itcloudy/base-framework/pkg/repositories/common"
 	"github.com/itcloudy/base-framework/pkg/services"
 	"go.uber.org/zap"
 	"gopkg.in/yaml.v2"
@@ -38,6 +39,7 @@ func initApi() {
 		panic("api init file parser filed, err information: ")
 	}
 	apiService := services.SystemAPIService{}
+	apiService.ISystemAPIRepository = &common.SystemAPIRepository{}
 	dbType := conf.Config.DB.DbType
 	switch dbType {
 	case "mysql":

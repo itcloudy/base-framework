@@ -11,6 +11,8 @@ import (
 
 func LoadInitData() {
 	if conf.Config.Init.Enable {
+		cfg := conf.Config.DB
+		conf.GetDBConnection(cfg.DbType, cfg.Host, cfg.Port, cfg.User, cfg.Password, cfg.Name, cfg.Charset, "")
 		logs.Logger.Info("start load init data")
 		if conf.Config.Init.API != "" {
 			logs.Logger.Info("start load init api data")

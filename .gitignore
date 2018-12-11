@@ -7,3 +7,6 @@ base-framework
 *.log
 .DS_Store
 docs/
+config/*
+system-data/
+user-data/
