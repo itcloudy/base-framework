@@ -43,7 +43,6 @@ func (repo *MenuRepository) DeleteMenu(DB *gorm.DB, ids []string) (err error) {
 	return DB.Where("id IN (?)", ids).Delete(models.MenuDetail{}).Error
 }
 // 查询菜单
-//todo 查询语句：query string, queryArgs ...interface{}
 func (repo *MenuRepository) FindAllMenu(DB *gorm.DB, offset, limit int, order string, query string, queryArgs ...interface{}) (menus []*models.MenuList, count int, err error) {
 	err = DB.Find(&menus).Error
 	return

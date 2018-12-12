@@ -23,6 +23,6 @@ type IUserRepository interface {
 	UpdateUserActive(DB *gorm.DB, id string, isActive bool) error
 	//根据密码和用户名查询用户
 	FindUserByUserNameAndPwd(DB *gorm.DB, username, pwd string) (models.UserDetail, error)
-	// 查询系统接口
+	// 查询用户
 	FindAllUser(DB *gorm.DB, offset, limit int, order string, query string, queryArgs ...interface{}) (users []*models.UserList, count int, err error)
 }

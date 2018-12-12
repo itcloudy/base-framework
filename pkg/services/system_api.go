@@ -17,7 +17,6 @@ type SystemAPIService struct {
 func (service *SystemAPIService) ServiceGetAllSystemAPI(offset, limit int, order string, query string, queryArgs ...interface{}) (results []*models.SystemApiList, count int, err error) {
 	return service.FindAllSystemAPI(service.DB, offset, limit, order, query, queryArgs)
 }
-
 func (service *SystemAPIService) ServiceGetSystemAPIByID(id string) (result models.SystemApiDetail, err error) {
 	return service.FindSystemAPIByID(service.DB, id)
 }

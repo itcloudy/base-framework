@@ -12,7 +12,9 @@ import (
 type MockUserRepository struct {
 	mock.Mock
 }
-
+func (m *MockUserRepository) FindUserByUserName(DB *gorm.DB, username string) (user models.UserDetail, err error) {
+	return
+}
 func (m *MockUserRepository) FindUserByID(DB *gorm.DB, id string) (user models.UserDetail, err error) {
 	ret := m.Called(id)
 	if rf, ok := ret.Get(0).(func(string) models.UserDetail); ok {
@@ -23,13 +25,14 @@ func (m *MockUserRepository) FindUserByID(DB *gorm.DB, id string) (user models.U
 	return
 }
 
-func (m *MockUserRepository) FindUserByUserName(DB *gorm.DB, username string) (user models.UserDetail, err error) {
-	return
-}
-
 func (m *MockUserRepository) InsertUser(DB *gorm.DB, model models.UserCreate) (user models.UserDetail, err error) {
 	return
 }
+// 删除用户
+func (m *MockUserRepository)DeleteUser(DB *gorm.DB, ids []string) (err error){
+	return
+}
+
 func (m *MockUserRepository) UpdateUserAdmin(DB *gorm.DB, id string, isAdmin bool) (err error) {
 	return
 }
@@ -40,3 +43,8 @@ func (m *MockUserRepository) UpdateUserActive(DB *gorm.DB, id string, isActive b
 func (m *MockUserRepository) FindUserByUserNameAndPwd(DB *gorm.DB, username, pwd string) (user models.UserDetail, err error) {
 	return
 }
+// 查询系统接口
+func (m *MockUserRepository)FindAllUser(DB *gorm.DB, offset, limit int, order string, query string, queryArgs ...interface{}) (users []*models.UserList, count int, err error){
+	return
+}
+

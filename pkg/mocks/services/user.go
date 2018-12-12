@@ -5,6 +5,7 @@ package services
 
 import (
 	"github.com/itcloudy/base-framework/pkg/models"
+	"github.com/jinzhu/gorm"
 	"github.com/stretchr/testify/mock"
 )
 
@@ -15,7 +16,7 @@ type MockUserService struct {
 func (mo *MockUserService) GetSelf(id string) (user models.UserDetail, err error) {
 	return
 }
-
+//根据用户ID查找用户
 func (mo *MockUserService) GetUserByID(id string) (user models.UserDetail, err error) {
 	ret := mo.Called(id)
 	if rf, ok := ret.Get(0).(func(string) models.UserDetail); ok {
@@ -26,13 +27,32 @@ func (mo *MockUserService) GetUserByID(id string) (user models.UserDetail, err e
 
 	return user, err
 }
-func (mo *MockUserService) GetUserByUserName(username string) (user models.UserDetail, err error) {
+//根据用户名查找用户
+func (mo *MockUserService) FindUserByUserName(DB *gorm.DB, username string) (result models.UserDetail,err  error){
 	return
 }
-func (mo *MockUserService) UserCreate(userCreate models.UserCreate) (user models.UserDetail, err error) {
-	return
-}
-func (mo *MockUserService) CheckUser(username, pwd string) (user models.UserDetail, err error) {
-	return
 
+// 创建用户
+func (mo *MockUserService) InsertUser(DB *gorm.DB, model models.UserCreate) (result models.UserDetail,err  error){
+	return
+}
+// 删除用户
+func (mo *MockUserService) DeleteUser(DB *gorm.DB, ids []string) (err error){
+	return
+}
+//管理员更改
+func (mo *MockUserService) UpdateUserAdmin(DB *gorm.DB, id string, isAdmin bool) (err error){
+	return
+}
+// 用户有效更改
+func (mo *MockUserService) UpdateUserActive(DB *gorm.DB, id string, isActive bool) (err error){
+	return
+}
+//根据密码和用户名查询用户
+func (mo *MockUserService) FindUserByUserNameAndPwd(DB *gorm.DB, username, pwd string) (models.UserDetail, error){
+	return
+}
+// 查询系统接口
+func (mo *MockUserService) FindAllUser(DB *gorm.DB, offset, limit int, order string, query string, queryArgs ...interface{}) (users []*models.UserList, count int, err error){
+	return
 }
