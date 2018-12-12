@@ -14,11 +14,15 @@ type IUserRepository interface {
 	//根据用户ID查找用户
 	FindUserByID(DB *gorm.DB, id string) (models.UserDetail, error)
 	// 创建用户
-	InsertUser(DB *gorm.DB, create models.UserCreate) (models.UserDetail, error)
+	InsertUser(DB *gorm.DB, model models.UserCreate) (models.UserDetail, error)
+	// 删除用户
+	DeleteUser(DB *gorm.DB, ids []string) error
 	//管理员更改
 	UpdateUserAdmin(DB *gorm.DB, id string, isAdmin bool) error
 	// 用户有效更改
 	UpdateUserActive(DB *gorm.DB, id string, isActive bool) error
 	//根据密码和用户名查询用户
 	FindUserByUserNameAndPwd(DB *gorm.DB, username, pwd string) (models.UserDetail, error)
+	// 查询系统接口
+	FindAllUser(DB *gorm.DB, offset, limit int, order string, query string, queryArgs ...interface{}) (users []*models.UserList, count int, err error)
 }

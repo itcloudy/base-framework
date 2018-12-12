@@ -12,7 +12,7 @@ type UserCreate struct {
 	ID              int    `json:"id" gorm:"column:id" comment:"主键ID"`
 	Username        string `json:"username,omitempty" gorm:"column:username" comment:"用户名"`
 	Alias           string `json:"alias,omitempty" gorm:"column:alias" comment:"昵称"`
-	HeadImage       string `json:"head_image,omitempty" gorm:"column:head_image" comment:"头像"`
+	Avatar          string `json:"avatar,omitempty" gorm:"column:avatar" comment:"头像"`
 	Email           string `json:"email,omitempty" gorm:"column:email" comment:"邮箱"`
 	Mobile          string `json:"mobile,omitempty" gorm:"column:mobile" comment:"手机号码"`
 	Password        string `json:"password,omitempty" gorm:"-:" comment:"密码"`
@@ -28,11 +28,11 @@ func (mh *UserCreate) TableName() string {
 
 //用户更新
 type UserUpdate struct {
-	ID        int    `json:"id" gorm:"column:id" comment:"主键ID"`
-	Alias     string `json:"alias,omitempty" gorm:"column:alias" comment:"昵称"`
-	HeadImage string `json:"head_image,omitempty" gorm:"column:head_image" comment:"头像"`
-	Email     string `json:"email,omitempty" gorm:"column:email" comment:"邮箱"`
-	Mobile    string `json:"mobile,omitempty" gorm:"column:mobile" comment:"手机号码"`
+	ID     int    `json:"id" gorm:"column:id" comment:"主键ID"`
+	Alias  string `json:"alias,omitempty" gorm:"column:alias" comment:"昵称"`
+	Avatar string `json:"avatar,omitempty" gorm:"column:avatar" comment:"头像"`
+	Email  string `json:"email,omitempty" gorm:"column:email" comment:"邮箱"`
+	Mobile string `json:"mobile,omitempty" gorm:"column:mobile" comment:"手机号码"`
 }
 
 func (mh *UserUpdate) TableName() string {
@@ -46,7 +46,7 @@ type UserDetail struct {
 	UpdatedAt time.Time `json:"updated_at,omitempty" gorm:"column:updated_at" comment:"记录更新时间"`
 	Username  string    `json:"username,omitempty" gorm:"column:username" comment:"用户名"`
 	Alias     string    `json:"alias,omitempty" gorm:"column:alias" comment:"昵称"`
-	HeadImage string    `json:"head_image,omitempty" gorm:"column:head_image" comment:"头像"`
+	Avatar    string    `json:"avatar,omitempty" gorm:"column:avatar" comment:"头像"`
 	Email     string    `json:"email,omitempty" gorm:"column:email" comment:"邮箱"`
 	Mobile    string    `json:"mobile,omitempty" gorm:"column:mobile" comment:"手机号码"`
 	Pwd       string    `json:"-" gorm:"column:pwd" comment:"数据库存储加密密码"`
@@ -65,7 +65,7 @@ type UserList struct {
 	UpdatedAt time.Time `json:"updated_at,omitempty" gorm:"column:updated_at" comment:"记录更新时间"`
 	Username  string    `json:"username,omitempty" gorm:"column:username" comment:"用户名"`
 	Alias     string    `json:"alias,omitempty" gorm:"column:alias" comment:"昵称"`
-	HeadImage string    `json:"head_image,omitempty" gorm:"column:head_image" comment:"头像"`
+	Avatar    string    `json:"avatar,omitempty" gorm:"column:avatar" comment:"头像"`
 	Email     string    `json:"email,omitempty" gorm:"column:email" comment:"邮箱"`
 	Mobile    string    `json:"mobile,omitempty" gorm:"column:mobile" comment:"手机号码"`
 	IsAdmin   bool      `json:"is_admin" gorm:"column:is_admin" comment:"超级用户"`

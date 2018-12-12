@@ -33,6 +33,7 @@ type iRestContainer interface {
 	UserContainer() controllers.UserController
 	MenuContainer() controllers.MenuController
 	RoleContainer() controllers.RoleController
+	SystemAPIContainer() controllers.SystemAPIController
 }
 
 func (k *kernel) IndexContainer() controllers.IndexController {
@@ -72,18 +73,34 @@ func (k *kernel) RoleContainer() controllers.RoleController {
 	return controller
 }
 func (k *kernel) MenuContainer() controllers.MenuController {
-	menuService := services.MenuService{}
-	menuService.IMenuRepository = &common.MenuRepository{}
+	service := services.MenuService{}
+	service.IMenuRepository = &common.MenuRepository{}
 	dbType := conf.Config.DB.DbType
 	switch dbType {
 	case "mysql":
 	case "postgres":
-		menuService.DB = conf.DBConn
+		service.DB = conf.DBConn
 		break
 	default:
 		panic(errors.New("un support sql type:" + dbType))
 
 	}
-	menuController := controllers.MenuController{MenuService: menuService}
-	return menuController
+	controller := controllers.MenuController{MenuService: service}
+	return controller
+}
+func (k *kernel) SystemAPIContainer() controllers.SystemAPIController {
+	service := services.SystemAPIService{}
+	service.ISystemAPIRepository = &common.SystemAPIRepository{}
+	dbType := conf.Config.DB.DbType
+	switch dbType {
+	case "mysql":
+	case "postgres":
+		service.DB = conf.DBConn
+		break
+	default:
+		panic(errors.New("un support sql type:" + dbType))
+
+	}
+	controller := controllers.SystemAPIController{SystemAPIService: service}
+	return controller
 }

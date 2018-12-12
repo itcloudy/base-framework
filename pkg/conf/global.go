@@ -15,6 +15,11 @@ import (
 	"path"
 )
 
+type Pagination struct {
+	Total   int
+	Size    int
+	Current int
+}
 type ResponseJson struct {
 	Code    uint        `yaml:"code" json:"code"`       // response code
 	Data    interface{} `yaml:"data" json:"data"`       // response data

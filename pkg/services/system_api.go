@@ -14,6 +14,19 @@ type SystemAPIService struct {
 	repositories.ISystemAPIRepository
 }
 
-func (service *SystemAPIService) ServiceGetAllSystemAPI() (systemApis []*models.SystemApiList, err error) {
-	return service.FindAllSystemAPI(service.DB)
+func (service *SystemAPIService) ServiceGetAllSystemAPI(offset, limit int, order string, query string, queryArgs ...interface{}) (results []*models.SystemApiList, count int, err error) {
+	return service.FindAllSystemAPI(service.DB, offset, limit, order, query, queryArgs)
+}
+
+func (service *SystemAPIService) ServiceGetSystemAPIByID(id string) (result models.SystemApiDetail, err error) {
+	return service.FindSystemAPIByID(service.DB, id)
+}
+func (service *SystemAPIService) ServiceSystemAPIDelete(ids []string) ( err error) {
+	return service.DeleteSystemAPI(service.DB, ids)
+}
+func (service *SystemAPIService) ServiceSystemAPIUpdate(model models.SystemApiUpdate) (result models.SystemApiDetail, err error) {
+	return service.UpdateSystemAPI(service.DB, model)
+}
+func (service *SystemAPIService) ServiceSystemAPICreate(model models.SystemApiCreate) (result models.SystemApiDetail, err error) {
+	return service.InsertSystemAPI(service.DB, model)
 }

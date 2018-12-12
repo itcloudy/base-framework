@@ -37,6 +37,7 @@ type SystemApiDetail struct {
 	Address   string    `json:"address" yaml:"address" gorm:"column:address" comment:"API地址"`
 	Method    string    `json:"method" yaml:"method" gorm:"column:method" comment:"API请求方法"`
 	Display   string    `json:"display" yaml:"-" gorm:"column:display" comment:"显示名称"`
+	IsActive  bool      `json:"is_active" yaml:"is_active" gorm:"column:is_active" comment:"有效"`
 }
 
 func (mh *SystemApiDetail) TableName() string {
@@ -44,11 +45,12 @@ func (mh *SystemApiDetail) TableName() string {
 }
 
 type SystemApiList struct {
-	ID      int    `json:"id" gorm:"column:id" comment:"主键ID"`
-	Name    string `json:"name" yaml:"name" gorm:"column:name" comment:"API名称"`
-	Address string `json:"address" yaml:"address" gorm:"column:address" comment:"API地址"`
-	Method  string `json:"method" yaml:"method" gorm:"column:method" comment:"API请求方法"`
-	Display string `json:"display" yaml:"-" gorm:"column:display" comment:"显示名称"`
+	ID       int    `json:"id" gorm:"column:id" comment:"主键ID"`
+	Name     string `json:"name" yaml:"name" gorm:"column:name" comment:"API名称"`
+	Address  string `json:"address" yaml:"address" gorm:"column:address" comment:"API地址"`
+	Method   string `json:"method" yaml:"method" gorm:"column:method" comment:"API请求方法"`
+	Display  string `json:"display" yaml:"-" gorm:"column:display" comment:"显示名称"`
+	IsActive bool   `json:"is_active" yaml:"is_active" gorm:"column:is_active" comment:"有效"`
 }
 
 func (mh *SystemApiList) TableName() string {

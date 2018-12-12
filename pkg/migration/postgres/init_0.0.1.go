@@ -50,7 +50,7 @@ create  table users (
   updated_at timestamp NOT NULL  default CURRENT_TIMESTAMP ,
   username VARCHAR(50) NOT NULL,
   alias  VARCHAR(50),
-  head_image VARCHAR(200),
+  avatar VARCHAR(200),
   email VARCHAR(50),
   pwd VARCHAR(200),
   mobile VARCHAR(50),

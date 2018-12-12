@@ -45,7 +45,7 @@ func (ctl UserController) CtlGetUserByUserName(c *gin.Context) {
 	if err != nil {
 
 	}
-	c.JSON(http.StatusOK, user)
+	common.GenResponse(c, consts.Success, user, "")
 }
 
 // @tags  用户
@@ -60,7 +60,7 @@ func (ctl UserController) CtlGetSelf(c *gin.Context) {
 	if err != nil {
 
 	}
-	c.JSON(http.StatusOK, user)
+	common.GenResponse(c, consts.Success, user, "")
 }
 
 func (ctl UserController) CtlLogin(c *gin.Context) {

@@ -6,6 +6,7 @@ package init
 import (
 	"errors"
 	"github.com/itcloudy/base-framework/pkg/conf"
+	"github.com/itcloudy/base-framework/pkg/consts"
 	"github.com/itcloudy/base-framework/pkg/logs"
 	"github.com/itcloudy/base-framework/pkg/models"
 	"github.com/itcloudy/base-framework/pkg/repositories/common"
@@ -49,7 +50,7 @@ func initApi() {
 	default:
 		panic(errors.New("un support sql type:" + dbType))
 	}
-	apis, _ := apiService.ServiceGetAllSystemAPI()
+	apis, _, _ := apiService.ServiceGetAllSystemAPI(0, consts.DefaultLimit, "", "")
 	if len(apis) > 0 {
 		logs.Logger.Error("system api not empty can't init", zap.String("path", filePath))
 		os.Exit(-1)

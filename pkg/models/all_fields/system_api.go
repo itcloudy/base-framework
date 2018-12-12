@@ -13,7 +13,9 @@ type SystemApi struct {
 	Address   string    `json:"address" yaml:"address" gorm:"column:address" comment:"API地址"`
 	Method    string    `json:"method" yaml:"method" gorm:"column:method" comment:"API请求方法"`
 	Display   string    `json:"display" yaml:"-" gorm:"column:display" comment:"显示名称"`
+	IsActive  bool      `json:"is_active" yaml:"is_active" gorm:"column:is_active" comment:"有效"`
 }
+
 func (mh *SystemApi) TableName() string {
 	return "system_api"
 }

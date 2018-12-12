@@ -27,7 +27,7 @@ func (ctl RoleController) CtlUpdateRoleByID(c *gin.Context) {
 
 }
 
-//获得所有的角色
+//查询的角色
 func (ctl RoleController) CtlGetAllRole(c *gin.Context) {
 
 }

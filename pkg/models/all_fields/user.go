@@ -11,7 +11,7 @@ type User struct {
 	UpdatedAt       time.Time `json:"updated_at,omitempty" gorm:"column:updated_at" comment:"记录更新时间"`
 	Username        string    `json:"username,omitempty" comment:"用户名"`
 	Alias           string    `json:"alias,omitempty" comment:"昵称"`
-	HeadImage       string    `json:"head_image,omitempty" comment:"头像"`
+	Avatar          string    `json:"avatar,omitempty" comment:"头像"`
 	Email           string    `json:"email,omitempty" comment:"邮箱"`
 	Mobile          string    `json:"mobile,omitempty" comment:"手机号码"`
 	Password        string    `json:"password,omitempty" comment:"密码"`

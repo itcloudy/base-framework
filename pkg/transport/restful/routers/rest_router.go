@@ -52,7 +52,7 @@ func addRouter(router *gin.Engine) {
 		//文件上传
 		router.POST("/file/upload", rest.IndexContainer().CtlFileUpload)
 		//登录
-		router.POST("/login", rest.UserContainer().CtlLogin)
+		router.POST("/login/account", rest.UserContainer().CtlLogin)
 		// 用户获取自己的菜单未登录用户也可以有
 		router.GET("/menu/self", rest.MenuContainer().CtlGetSelfMenu)
 
@@ -62,6 +62,9 @@ func addRouter(router *gin.Engine) {
 	authRouter := router.Group("/auth")
 	authRouter.Use(middles.CasbinJwtAuthorize(conf.Enforcer))
 	{
+		//获得个人信息
+		authRouter.GET("/selfinfo", rest.UserContainer().CtlGetSelf)
+
 		//管理员根据ID获得某个用户信息
 		authRouter.GET("/user/:id", rest.UserContainer().CtlGetUserByID)
 		//管理员根据用户名获得某个用户信息
@@ -76,6 +79,11 @@ func addRouter(router *gin.Engine) {
 		authRouter.POST("/role", rest.RoleContainer().CtlCreateRole)
 		authRouter.PUT("/role/:id", rest.RoleContainer().CtlUpdateRoleByID)
 		authRouter.GET("/roles", rest.RoleContainer().CtlGetAllRole)
+		//系统接口操作
+		authRouter.GET("/system_api/:id", rest.SystemAPIContainer().CtlGetSystemAPIByID)
+		authRouter.POST("/system_api", rest.SystemAPIContainer().CtlCreateSystemAPI)
+		authRouter.PUT("/system_api/:id", rest.SystemAPIContainer().CtlUpdateSystemAPIByID)
+		authRouter.GET("/system_apis", rest.SystemAPIContainer().CtlGetAllSystemAPI)
 	}
 
 }

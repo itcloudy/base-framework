@@ -26,15 +26,20 @@ func (service *UserService) ServiceGetUserByID(id string) (user models.UserDetai
 func (service *UserService) ServiceGetUserByUserName(username string) (user models.UserDetail, err error) {
 	return service.FindUserByUserName(service.DB, username)
 }
-func (service *UserService) ServiceUserCreate(userCreate models.UserCreate) (user models.UserDetail, err error) {
-	userCreate.ID = 0
-	userCreate.Pwd = tools.SHA256(tools.StringsJoin(userCreate.Password, salt))
-	return service.InsertUser(service.DB, userCreate)
-
+func (service *UserService) ServiceUserCreate(model models.UserCreate) (user models.UserDetail, err error) {
+	model.ID = 0
+	model.Pwd = tools.SHA256(tools.StringsJoin(model.Password, salt))
+	return service.InsertUser(service.DB, model)
+}
+func (service *UserService) ServiceUserDelete(ids []string) (err error) {
+	return service.DeleteUser(service.DB, ids)
 }
 func (service *UserService) ServiceCheckUser(username, pwd string) (user models.UserDetail, err error) {
 	loginPwd := tools.SHA256(tools.StringsJoin(pwd, salt))
 	user, err = service.FindUserByUserNameAndPwd(service.DB, username, loginPwd)
 	return
 
+}
+func (service *UserService) ServiceGetAllUser(offset, limit int, order string, query string, queryArgs ...interface{}) (users []*models.UserList, count int, err error) {
+	return
 }

@@ -51,3 +51,7 @@ const (
 	// token is valid
 	TokenValid = "TOKEN_VALID"
 )
+const (
+	DefaultOffset = 0
+	DefaultLimit  = 20
+)

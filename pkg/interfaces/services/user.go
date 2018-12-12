@@ -10,5 +10,7 @@ type IUserService interface {
 	ServiceGetUserByID(id string) (user models.UserDetail, err error)
 	ServiceGetUserByUserName(username string) (user models.UserDetail, err error)
 	ServiceUserCreate(userCreate models.UserCreate) (user models.UserDetail, err error)
+	ServiceUserDelete(ids []string) (err error)
 	ServiceCheckUser(username, pwd string) (user models.UserDetail, err error)
+	ServiceGetAllUser(offset, limit int, order string, query string, queryArgs ...interface{}) (users []*models.UserList, count int, err error)
 }

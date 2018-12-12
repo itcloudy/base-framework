@@ -24,10 +24,11 @@ func (repo *MenuRepository) FindMenuByID(DB *gorm.DB, id string) (menu models.Me
 }
 
 // 创建菜单
-func (repo *MenuRepository) InsertMenu(DB *gorm.DB, create models.MenuCreate) (result models.MenuDetail, err error) {
-	err = DB.Create(&create).Error
+func (repo *MenuRepository) InsertMenu(DB *gorm.DB, model models.MenuCreate) (result models.MenuDetail, err error) {
+	model.ID = 0
+	err = DB.Create(&model).Error
 	if err == nil {
-		return repo.FindMenuByID(DB, strconv.Itoa(create.ID))
+		return repo.FindMenuByID(DB, strconv.Itoa(model.ID))
 	}
 	return
 }
@@ -35,11 +36,15 @@ func (repo *MenuRepository) InsertMenu(DB *gorm.DB, create models.MenuCreate) (r
 // 修改
 func (repo *MenuRepository) UpdateMenu(DB *gorm.DB, menu models.MenuUpdate) (result models.MenuDetail, err error) {
 	err = DB.Updates(menu).Error
+
 	return
 }
-
-// 获得所有菜单
-func (repo *MenuRepository) FindAllMenu(DB *gorm.DB) (menus []*models.MenuList, err error) {
+func (repo *MenuRepository) DeleteMenu(DB *gorm.DB, ids []string) (err error) {
+	return DB.Where("id IN (?)", ids).Delete(models.MenuDetail{}).Error
+}
+// 查询菜单
+//todo 查询语句：query string, queryArgs ...interface{}
+func (repo *MenuRepository) FindAllMenu(DB *gorm.DB, offset, limit int, order string, query string, queryArgs ...interface{}) (menus []*models.MenuList, count int, err error) {
 	err = DB.Find(&menus).Error
 	return
 }

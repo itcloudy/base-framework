@@ -143,9 +143,11 @@ func (service *MigrationService) ServiceGetAllListMigration() (migrates []models
 	var installedMigrates []models.MigrationHistory
 	migrates = migration.AllInitMigrations[conf.Config.DB.DbType]
 	migrates = append(migrates, migration.AllUpdateMigrations[conf.Config.DB.DbType]...)
-	var verSlice []string
+	var (
+		verSlice []string
+	)
 	// 获得已经安装的版本
-	installedMigrates, _ = service.ListMigration(service.DB)
+	installedMigrates, _, _ = service.ListMigration(service.DB)
 	//获得已安装的版本
 	for _, migrate := range installedMigrates {
 		verSlice = append(verSlice, migrate.Version)

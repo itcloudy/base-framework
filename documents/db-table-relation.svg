@@ -147,7 +147,7 @@
 <polyline fill="none" stroke="#000000" points="168.6104,-1079.5 320.3447,-1079.5 "/>
 <text text-anchor="middle" x="244.4775" y="-1064.3" font-family="Times,serif" font-size="14.00" fill="#000000">Alias string</text>
 <polyline fill="none" stroke="#000000" points="168.6104,-1057.5 320.3447,-1057.5 "/>
-<text text-anchor="middle" x="244.4775" y="-1042.3" font-family="Times,serif" font-size="14.00" fill="#000000">HeadImage string</text>
+<text text-anchor="middle" x="244.4775" y="-1042.3" font-family="Times,serif" font-size="14.00" fill="#000000">Avatar string</text>
 <polyline fill="none" stroke="#000000" points="168.6104,-1035.5 320.3447,-1035.5 "/>
 <text text-anchor="middle" x="244.4775" y="-1020.3" font-family="Times,serif" font-size="14.00" fill="#000000">Email string</text>
 <polyline fill="none" stroke="#000000" points="168.6104,-1013.5 320.3447,-1013.5 "/>

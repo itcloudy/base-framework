@@ -67,7 +67,7 @@ func Start() {
 
 	conf.GetDBConnection(cfg.DbType, cfg.Host, cfg.Port, cfg.User, cfg.Password, cfg.Name, cfg.Charset, "")
 	// todo only for test
-	fmt.Printf("%+v\n",conf.DBConn.AutoMigrate(all_fileds.SystemApi{},all_fileds.Menu{}).Error)
+	fmt.Printf("%+v\n", conf.DBConn.AutoMigrate(all_fileds.SystemApi{}, all_fileds.Menu{}).Error)
 
 	transport.ServerStart()
 

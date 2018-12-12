@@ -20,12 +20,16 @@ func (repo *UserRepository) FindUserByID(DB *gorm.DB, id string) (user models.Us
 	err = DB.Where("id = ?", id).First(&user).Error
 	return
 }
-func (repo *UserRepository) InsertUser(DB *gorm.DB, create models.UserCreate) (user models.UserDetail, err error) {
-	err = DB.Create(&create).Error
+func (repo *UserRepository) InsertUser(DB *gorm.DB, model models.UserCreate) (user models.UserDetail, err error) {
+	model.ID = 0
+	err = DB.Create(&model).Error
 	if err == nil {
-		return repo.FindUserByID(DB, strconv.Itoa(create.ID))
+		return repo.FindUserByID(DB, strconv.Itoa(model.ID))
 	}
 	return
+}
+func (repo *UserRepository) DeleteUser(DB *gorm.DB, ids []string) (err error) {
+	return DB.Where("id IN (?)", ids).Delete(models.UserDetail{}).Error
 }
 func (repo *UserRepository) UpdateUserAdmin(DB *gorm.DB, id string, isAdmin bool) (err error) {
 	err = DB.Model(models.UserDetail{}).Updates(map[string]interface{}{"IsAdmin": isAdmin}).Error
@@ -38,5 +42,11 @@ func (repo *UserRepository) UpdateUserActive(DB *gorm.DB, id string, isActive bo
 
 func (repo *UserRepository) FindUserByUserNameAndPwd(DB *gorm.DB, username, pwd string) (user models.UserDetail, err error) {
 	err = DB.Where("username = ? and pwd = ? and is_active = ?", username, pwd, true).First(&user).Error
+	return
+}
+
+// 查询菜单
+func (repo *UserRepository) FindAllUser(DB *gorm.DB, offset, limit int, order string, query string, queryArgs ...interface{}) (users []*models.UserList, count int, err error) {
+	err = DB.Find(&users).Error
 	return
 }

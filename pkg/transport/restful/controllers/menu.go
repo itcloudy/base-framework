@@ -7,6 +7,8 @@ import (
 	"github.com/gin-gonic/gin"
 	"github.com/itcloudy/base-framework/pkg/consts"
 	"github.com/itcloudy/base-framework/pkg/services"
+	"github.com/itcloudy/base-framework/pkg/transport/restful/common"
+	"github.com/itcloudy/base-framework/tools"
 	"net/http"
 )
 
@@ -39,7 +41,19 @@ func (ctl MenuController) CtlUpdateMenuByID(c *gin.Context) {
 
 }
 
-//获得所有的菜单
+//查询的菜单
 func (ctl MenuController) CtlGetAllMenu(c *gin.Context) {
+	var (
+		page  int
+		limit int
+		order string
+	)
+	limit = tools.StrToInt(c.Query("size"))
+	page = tools.StrToInt(c.Query("current"))
+	offset := page * limit
+	apis, _, err := ctl.MenuService.ServiceGetAllMenu(offset, limit, order, "")
+	if err != nil {
 
+	}
+	common.GenResponse(c, consts.Success, apis, "")
 }

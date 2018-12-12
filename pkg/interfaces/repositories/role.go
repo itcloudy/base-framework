@@ -15,6 +15,8 @@ type IRoleRepository interface {
 	InsertRole(DB *gorm.DB, role models.RoleCreate) (result models.RoleDetail, err error)
 	// 修改角色
 	UpdateRole(DB *gorm.DB, role models.RoleUpdate) (result models.RoleDetail, err error)
-	// 获得所有角色
-	FindAllRole(DB *gorm.DB) (roles []*models.RoleList, err error)
+	// 删除角色
+	DeleteRole(DB *gorm.DB, ids []string) error
+	// 查询角色
+	FindAllRole(DB *gorm.DB, offset, limit int, order string, query string, queryArgs ...interface{}) (roles []*models.RoleList, count int, err error)
 }

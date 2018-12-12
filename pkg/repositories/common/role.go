@@ -19,10 +19,11 @@ func (repo *RoleRepository) FindRoleByID(DB *gorm.DB, id string) (role models.Ro
 }
 
 // 创建角色
-func (repo *RoleRepository) InsertRole(DB *gorm.DB, create models.RoleCreate) (result models.RoleDetail, err error) {
-	err = DB.Create(&create).Error
+func (repo *RoleRepository) InsertRole(DB *gorm.DB, model models.RoleCreate) (result models.RoleDetail, err error) {
+	model.ID = 0
+	err = DB.Create(&model).Error
 	if err == nil {
-		return repo.FindRoleByID(DB, strconv.Itoa(create.ID))
+		return repo.FindRoleByID(DB, strconv.Itoa(model.ID))
 	}
 
 	return
@@ -33,9 +34,12 @@ func (repo *RoleRepository) UpdateRole(DB *gorm.DB, role models.RoleUpdate) (res
 	err = DB.Updates(role).Error
 	return
 }
-
-// 获得所有角色
-func (repo *RoleRepository) FindAllRole(DB *gorm.DB) (roles []*models.RoleList, err error) {
+// 删除角色
+func (repo *RoleRepository) DeleteRole(DB *gorm.DB, ids []string) (err error) {
+	return DB.Where("id IN (?)", ids).Delete(models.RoleDetail{}).Error
+}
+// 查询角色
+func (repo *RoleRepository) FindAllRole(DB *gorm.DB, offset, limit int, order string, query string, queryArgs ...interface{}) (roles []*models.RoleList, count int, err error) {
 	err = DB.Find(&roles).Error
 	return
 }

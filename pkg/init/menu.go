@@ -6,6 +6,7 @@ package init
 import (
 	"errors"
 	"github.com/itcloudy/base-framework/pkg/conf"
+	"github.com/itcloudy/base-framework/pkg/consts"
 	"github.com/itcloudy/base-framework/pkg/logs"
 	"github.com/itcloudy/base-framework/pkg/models"
 	"github.com/itcloudy/base-framework/pkg/repositories/common"
@@ -52,7 +53,7 @@ func initMenus() {
 
 	}
 	//如果系统菜单数据不为空则不能导入
-	menus, _ := menuService.ServiceGetAllMenu()
+	menus, _, _ := menuService.ServiceGetAllMenu(0, consts.DefaultLimit, "", "")
 	if len(menus) > 0 {
 		logs.Logger.Error("system menu not empty can't init")
 		os.Exit(-1)
@@ -60,7 +61,7 @@ func initMenus() {
 	//导入数据
 	for _, m := range systemMs.Menus {
 
-		insertMenus(&m,&menuService)
+		insertMenus(&m, &menuService)
 	}
 }
 func insertMenus(men *models.MenuDetail, service *services.MenuService) {
@@ -76,7 +77,7 @@ func insertMenus(men *models.MenuDetail, service *services.MenuService) {
 	sysMenu.ParentID = men.ParentID
 	sysMenu.Sequence = men.Sequence
 	sysMenu.UniqueTag = men.UniqueTag
-	m, err = service.InsertMenu(service.DB,sysMenu)
+	m, err = service.InsertMenu(service.DB, sysMenu)
 	if err != nil {
 		logs.Logger.Error("system menu create failed", zap.Error(err), zap.String("unique tag", m.UniqueTag))
 		logs.Logger.Sync()

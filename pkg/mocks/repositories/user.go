@@ -27,7 +27,7 @@ func (m *MockUserRepository) FindUserByUserName(DB *gorm.DB, username string) (u
 	return
 }
 
-func (m *MockUserRepository) InsertUser(DB *gorm.DB, create models.UserCreate) (user models.UserDetail, err error) {
+func (m *MockUserRepository) InsertUser(DB *gorm.DB, model models.UserCreate) (user models.UserDetail, err error) {
 	return
 }
 func (m *MockUserRepository) UpdateUserAdmin(DB *gorm.DB, id string, isAdmin bool) (err error) {

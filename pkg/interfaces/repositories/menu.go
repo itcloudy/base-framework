@@ -17,6 +17,8 @@ type IMenuRepository interface {
 	InsertMenu(DB *gorm.DB, menu models.MenuCreate) (models.MenuDetail, error)
 	// 菜单修改
 	UpdateMenu(DB *gorm.DB, menu models.MenuUpdate) (models.MenuDetail, error)
-	// 获得所有菜单
-	FindAllMenu(DB *gorm.DB) (menus []*models.MenuList, err error)
+	// 删除菜单
+	DeleteMenu(DB *gorm.DB, ids []string) error
+	// 查询菜单
+	FindAllMenu(DB *gorm.DB, offset, limit int, order string, query string, queryArgs ...interface{}) (menus []*models.MenuList, count int, err error)
 }

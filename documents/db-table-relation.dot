@@ -4,7 +4,7 @@ digraph GoERD {
 	subgraph all_fileds {
 		graph [label=all_fileds];
 		"node-User"		 [height=4.2917,
-			label="{User|<f0>ID\ int|<f1>CreatedAt\ time.Time|<f2>UpdatedAt\ time.Time|<f3>Username\ string|<f4>Alias\ string|<f5>HeadImage\ string|<\
+			label="{User|<f0>ID\ int|<f1>CreatedAt\ time.Time|<f2>UpdatedAt\ time.Time|<f3>Username\ string|<f4>Alias\ string|<f5>Avatar\ string|<\
 f6>Email\ string|<f7>Mobile\ string|<f8>Password\ string|<f9>ConfirmPassword\ string|<f10>Pwd\ string|<f11>IsAdmin\ bool|<f12>IsActive\ \
 bool}",
 			pos="75.867,712.5",

@@ -26,7 +26,7 @@ func LoadInitData() {
 			logs.Logger.Info("load init api data success")
 
 		}
-	}else{
+	} else {
 		logs.Logger.Error("start load init data failed,config file init enable is false")
 		os.Exit(-1)
 	}

@@ -6,5 +6,9 @@ package services
 import "github.com/itcloudy/base-framework/pkg/models"
 
 type ISystemAPIService interface {
-	ServiceGetAllSystemAPI(systemApis []models.SystemApiList, err error)
+	ServiceGetSystemAPIByID(id string) (model models.SystemApiDetail, err error)
+	ServiceSystemAPICreate(model models.SystemApiCreate) (result models.SystemApiDetail, err error)
+	ServiceSystemAPIUpdate(update models.SystemApiUpdate) (result models.SystemApiDetail, err error)
+	ServiceSystemAPIDelete(ids []string) (err error)
+	ServiceGetAllSystemAPI(offset, limit int, order string, query string, queryArgs ...interface{}) (systemApis []models.SystemApiList, err error)
 }

@@ -40,7 +40,7 @@ func (repo *MigrationHistoryRepository) ApplyMigrations(DB *sqlx.DB, collection 
 	return
 
 }
-func (repo *MigrationHistoryRepository) ListMigration(DB *sqlx.DB) (migrates []models.MigrationHistory, err error) {
+func (repo *MigrationHistoryRepository) ListMigration(DB *sqlx.DB) (migrates []models.MigrationHistory, count int, err error) {
 	err = DB.Select(&migrates, "SELECT * FROM migration_history")
 	return
 }
