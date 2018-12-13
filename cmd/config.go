@@ -211,10 +211,8 @@ func init() {
 	// 初始化数据
 	configCmd.Flags().BoolVar(&conf.Config.Init.Enable, "init-data", false, "Enable load data ")
 	configCmd.Flags().StringVar(&conf.Config.Init.API, "init-api", "", "API data file path")
-	configCmd.Flags().StringVar(&conf.Config.Init.Menu, "init-menu", "", "menu data file path")
 
 	viper.BindPFlag("Init.Enable", configCmd.Flags().Lookup("init-data"))
 	viper.BindPFlag("Init.API", configCmd.Flags().Lookup("init-api"))
-	viper.BindPFlag("Init.Menu", configCmd.Flags().Lookup("init-menu"))
 
 }

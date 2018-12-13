@@ -20,12 +20,6 @@ func LoadInitData() {
 			logs.Logger.Info("load init api data success")
 
 		}
-		if conf.Config.Init.Menu != "" {
-			logs.Logger.Info("start load init menu data")
-			initMenus()
-			logs.Logger.Info("load init api data success")
-
-		}
 	} else {
 		logs.Logger.Error("start load init data failed,config file init enable is false")
 		os.Exit(-1)

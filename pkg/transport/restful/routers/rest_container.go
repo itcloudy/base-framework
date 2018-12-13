@@ -30,7 +30,6 @@ func restContainer() iRestContainer {
 type iRestContainer interface {
 	IndexContainer() controllers.IndexController
 	UserContainer() controllers.UserController
-	MenuContainer() controllers.MenuController
 	RoleContainer() controllers.RoleController
 	SystemAPIContainer() controllers.SystemAPIController
 }
@@ -63,13 +62,7 @@ func (k *kernel) RoleContainer() controllers.RoleController {
 	controller := controllers.RoleController{RoleService: service}
 	return controller
 }
-func (k *kernel) MenuContainer() controllers.MenuController {
-	service := services.MenuService{}
-	service.IMenuRepository = &common.MenuRepository{}
-	service.DB = conf.DBConn
-	controller := controllers.MenuController{MenuService: service}
-	return controller
-}
+
 func (k *kernel) SystemAPIContainer() controllers.SystemAPIController {
 	service := services.SystemAPIService{}
 	service.ISystemAPIRepository = &common.SystemAPIRepository{}

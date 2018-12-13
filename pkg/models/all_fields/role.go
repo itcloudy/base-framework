@@ -14,7 +14,6 @@ type Role struct {
 	InheritIds     []int       `json:"inherit_ids,omitempty" gorm:"-" comment:"所继承的角色ID"`
 	InheritStrings string      `json:"inherit_strings" gorm:"column:inherit_strings" comment:"所继承角色ID逗号分隔"`
 	Inherits       []*Role     `json:"inherits,omitempty" gorm:"-" comment:"继承的角色"`
-	RoleMenus      []*RoleMenu `json:"role_menus" gorm:"-" comment:"角色拥有的菜单"`
 	IsActive       bool        `json:"is_active" gorm:"column:is_active" comment:"有效"`
 }
 

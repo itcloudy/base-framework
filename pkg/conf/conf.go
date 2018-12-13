@@ -108,7 +108,6 @@ type CorsConfig struct {
 type InitConfig struct {
 	Enable bool   // 是否初始化
 	API    string // 接口初始化路径
-	Menu   string // 菜单初始化路径
 }
 type GlobalConfig struct {
 	DBUpdateToVersion string                  // 数据库升级到某个版本
@@ -257,11 +256,7 @@ func FillRuntimePaths() error {
 		Config.TLS.KeyFile = filepath.Join(cwd, "config", "https", "key.pem")
 	}
 
-	// init data
-	if Config.Init.Menu == "" {
-		Config.Init.Menu = filepath.Join(cwd, "init", "menu_data.yml")
 
-	}
 	if Config.Init.API == "" {
 		Config.Init.API = filepath.Join(cwd, "init", "api_data.yml")
 

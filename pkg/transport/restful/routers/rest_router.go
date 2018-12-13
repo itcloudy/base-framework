@@ -53,8 +53,7 @@ func addRouter(router *gin.Engine) {
 		router.POST("/file/upload", rest.IndexContainer().CtlFileUpload)
 		//登录
 		router.POST("/login/account", rest.UserContainer().CtlLogin)
-		// 用户获取自己的菜单未登录用户也可以有
-		router.GET("/menu/self", rest.MenuContainer().CtlGetSelfMenu)
+
 
 	}
 
@@ -69,11 +68,7 @@ func addRouter(router *gin.Engine) {
 		authRouter.GET("/user/:id", rest.UserContainer().CtlGetUserByID)
 		//管理员根据用户名获得某个用户信息
 		authRouter.GET("/username/:username", rest.UserContainer().CtlGetUserByUserName)
-		//菜单操作
-		authRouter.GET("/menu/:id", rest.MenuContainer().CtlGetMenuByID)
-		authRouter.POST("/menu", rest.MenuContainer().CtlCreateMenu)
-		authRouter.PUT("/menu/:id", rest.MenuContainer().CtlUpdateMenuByID)
-		authRouter.GET("/menus", rest.MenuContainer().CtlGetAllMenu)
+
 		//角色操作
 		authRouter.GET("/role/:id", rest.RoleContainer().CtlGetRoleByID)
 		authRouter.POST("/role", rest.RoleContainer().CtlCreateRole)
