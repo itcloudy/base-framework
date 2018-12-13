@@ -17,6 +17,7 @@ func (repo *UserRepository) FindUserByUserName(DB *gorm.DB, username string) (us
 	return
 }
 func (repo *UserRepository) FindUserByID(DB *gorm.DB, id string) (user models.UserDetail, err error) {
+
 	err = DB.Where("id = ?", id).First(&user).Error
 	return
 }

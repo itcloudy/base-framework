@@ -52,8 +52,7 @@ func addRouter(router *gin.Engine) {
 		//文件上传
 		router.POST("/file/upload", rest.IndexContainer().CtlFileUpload)
 		//登录
-		router.POST("/login/account", rest.UserContainer().CtlLogin)
-
+		router.POST("/login/account", rest.UserContainer().CtlLoginAccount)
 
 	}
 
@@ -62,7 +61,7 @@ func addRouter(router *gin.Engine) {
 	authRouter.Use(middles.CasbinJwtAuthorize(conf.Enforcer))
 	{
 		//获得个人信息
-		authRouter.GET("/selfinfo", rest.UserContainer().CtlGetSelf)
+		authRouter.GET("/self_info", rest.UserContainer().CtlGetSelfInformation)
 
 		//管理员根据ID获得某个用户信息
 		authRouter.GET("/user/:id", rest.UserContainer().CtlGetUserByID)

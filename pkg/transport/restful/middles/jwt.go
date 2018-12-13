@@ -27,7 +27,7 @@ type JwtClaims struct {
 	Name      string
 	RoleIds   []string
 	RoleCodes []string
-	UserId    int
+	UserId    string
 	IsAdmin   bool
 }
 
@@ -60,7 +60,7 @@ func InitKeys() {
 }
 
 // GenerateJWT generates a new JWT token
-func GenerateJWT(name string, roleIds, roleCodes []string, userId int, isAdmin bool) string {
+func GenerateJWT(name string, roleIds, roleCodes []string, userId string, isAdmin bool) string {
 
 	claims := JwtClaims{
 		&jwt.StandardClaims{

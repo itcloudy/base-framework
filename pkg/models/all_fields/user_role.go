@@ -13,6 +13,7 @@ type UserRole struct {
 	RoleID    int       `json:"role_id" gorm:"column:role_id" comment:"角色ID"`
 	User      *User     `json:"user" gorm:"-" comment:"用户"`
 	UserID    int       `json:"user_id" gorm:"column:user_id" comment:"用户ID"`
+	IsActive  bool      `json:"is_active" gorm:"column:is_active" comment:"有效"`
 }
 
 func (mh *UserRole) TableName() string {

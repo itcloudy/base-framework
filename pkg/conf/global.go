@@ -16,9 +16,9 @@ import (
 )
 
 type Pagination struct {
-	Total   int
-	Size    int
-	Current int
+	Total   int `json:"total"`
+	Size    int `json:"pageSize"`
+	Current int `json:"current"`
 }
 type ResponseJson struct {
 	Code    uint        `yaml:"code" json:"code"`       // response code

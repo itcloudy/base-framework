@@ -256,7 +256,6 @@ func FillRuntimePaths() error {
 		Config.TLS.KeyFile = filepath.Join(cwd, "config", "https", "key.pem")
 	}
 
-
 	if Config.Init.API == "" {
 		Config.Init.API = filepath.Join(cwd, "init", "api_data.yml")
 

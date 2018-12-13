@@ -9,11 +9,12 @@ const (
 	//controller 层的错误代码为4000开始
 	BindingJsonErr = 40000 // 绑定json失败
 
-	//service 层的错误代码从50000开始
-	ValidateErr           = 50000 // 数据验证失败
-	UserNameOrPasswordErr = 50001 // 用户名或密码错误
-	PermissionErr         = 50002 // 没有权限
-	TokenValidErr         = 50003 // token无效
+	//service 层的错误代码从50000开始	common.GenResponse(c, consts.Success, response, "")
+	ServerErr             = 50000 //
+	ValidateErr           = 50005 // 数据验证失败
+	UserNameOrPasswordErr = 50006 // 用户名或密码错误
+	PermissionErr         = 50007 // 没有权限
+	TokenValidErr         = 50008 // token无效
 
 	//repository层的错误代码从60000开始
 	DBInSertErr = 60000 // 数据插入失败

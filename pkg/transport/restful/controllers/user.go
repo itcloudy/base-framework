@@ -4,6 +4,7 @@
 package controllers
 
 import (
+	"fmt"
 	"github.com/gin-gonic/gin"
 	"github.com/itcloudy/base-framework/pkg/consts"
 	"github.com/itcloudy/base-framework/pkg/interfaces/services"
@@ -49,22 +50,21 @@ func (ctl UserController) CtlGetUserByUserName(c *gin.Context) {
 	common.GenResponse(c, consts.Success, user, "")
 }
 
-// @tags  用户
-// @Description 获得登录用户的信息
-// @Summary 用户信息获取
-// @Accept  json
-// @Produce  json
-// @Success 200 {string} json "{"code":200,"data":{"token":"Bearer eyJhbGciOiJSUzI1NiIsInR5cCI6IkpXVCJ9.eyJleHAiOjc1MzIxNjMwODMsIk5hbWUiOiJhZG1pbiIsIlJvbGUiOm51bGwsIlVzZXJJZCI6MiwiSXNBZG1pbiI6ZmFsc2V9.HZq5jBw4-ZQipQPnq0K7Ei0_LvaRXZGNgKqLoFnhV_vpfQupmddsDMZbiI_Yy0Zhd7J7AvRGDXMfVwW9-TidsDrux6-L4KQWIV0Mrlj4SXgW13HvMSXW0XzHYQBxiai61AeJx4VmQR84s2lI5hmKuiVOpsyOZAduJoO1K26b8X4","user":{"id":2,"name":"admin","alias":"","email":"","password":"","roles":[],"openid":"admin","active":true,"is_admin":false}},"message":"success"}"
-// @Router /user/{id} [get]
-func (ctl UserController) CtlGetSelf(c *gin.Context) {
+// 获得登录用户的信息
+func (ctl UserController) CtlGetSelfInformation(c *gin.Context) {
 	user, err := ctl.ServiceGetUserByID(c.GetString(consts.LoginUserID))
 	if err != nil {
-
+		common.GenResponse(c, consts.ServerErr, "", "")
+		return
 	}
-	common.GenResponse(c, consts.Success, user, "")
+	response := make(map[string]interface{})
+	response["information"] = user
+	common.GenResponse(c, consts.Success, response, "")
 }
+func (ctl UserController) CtlRefreshToken(c *gin.Context) {
 
-func (ctl UserController) CtlLogin(c *gin.Context) {
+}
+func (ctl UserController) CtlLoginAccount(c *gin.Context) {
 	var (
 		user       models.UserAuth
 		userDetail models.UserDetail
@@ -74,16 +74,18 @@ func (ctl UserController) CtlLogin(c *gin.Context) {
 		common.GenResponse(c, consts.BindingJsonErr, nil, "bing json failed")
 		return
 	}
-	if userDetail, err = ctl.ServiceCheckUser(user.Username, user.Password); err != nil || userDetail.ID == 0 {
-		common.GenResponse(c, consts.UserNameOrPasswordErr, nil, "username or password error")
-		return
-	}
 	response := make(map[string]interface{})
-	response["user_detail"] = userDetail
-	response["token"] = middles.GenerateJWT(userDetail.Username,
-		[]string{}, []string{}, userDetail.ID, userDetail.IsAdmin)
-	common.GenResponse(c, consts.Success, response, "")
-
+	response["type"] = "account"
+	code := consts.UserNameOrPasswordErr
+	if userDetail, err = ctl.ServiceCheckUser(user.Username, user.Password); err != nil || userDetail.ID == 0 {
+		response["currentAuthority"] = "guest"
+	} else {
+		code = consts.Success
+		response["currentAuthority"] = "admin"
+		response["token"] = middles.GenerateJWT(userDetail.Username,
+			[]string{}, []string{}, fmt.Sprintf("%d", userDetail.ID), userDetail.IsAdmin)
+	}
+	common.GenResponse(c, code, response, "")
 }
 
 //查询的角色
@@ -93,8 +95,8 @@ func (ctl UserController) CtlGetAllUser(c *gin.Context) {
 		size  int
 		order string
 	)
-	size = tools.StringToIntDefault(c.Query("size"), consts.DefaultSize)
-	page = tools.StringToIntDefault(c.Query("current"), consts.DefaultPage)
+	size = tools.StringToIntDefault(c.Query("pageSize"), consts.DefaultSize)
+	page = tools.StringToIntDefault(c.Query("currentPage"), consts.DefaultPage)
 	users, _, err := ctl.ServiceGetAllUser(page, size, order, "")
 	if err != nil {
 

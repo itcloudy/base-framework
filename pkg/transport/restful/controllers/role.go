@@ -37,8 +37,8 @@ func (ctl RoleController) CtlGetAllRole(c *gin.Context) {
 		size  int
 		order string
 	)
-	size = tools.StringToIntDefault(c.Query("size"), consts.DefaultSize)
-	page = tools.StringToIntDefault(c.Query("current"), consts.DefaultPage)
+	size = tools.StringToIntDefault(c.Query("pageSize"), consts.DefaultSize)
+	page = tools.StringToIntDefault(c.Query("currentPage"), consts.DefaultPage)
 	apis, _, err := ctl.RoleService.ServiceGetAllRole(page, size, order, "")
 	if err != nil {
 

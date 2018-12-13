@@ -43,8 +43,8 @@ func (ctl SystemAPIController) CtlGetAllSystemAPI(c *gin.Context) {
 		order string
 	)
 	result := make(map[string]interface{})
-	size = tools.StringToIntDefault(c.Query("size"), consts.DefaultSize)
-	page = tools.StringToIntDefault(c.Query("current"), consts.DefaultPage)
+	size = tools.StringToIntDefault(c.Query("pageSize"), consts.DefaultSize)
+	page = tools.StringToIntDefault(c.Query("currentPage"), consts.DefaultPage)
 	list, pagination, err := ctl.SystemAPIService.ServiceGetAllSystemAPI(page, size, order, "")
 	if err != nil {
 
