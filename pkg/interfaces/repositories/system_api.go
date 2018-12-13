@@ -15,6 +15,8 @@ type ISystemAPIRepository interface {
 	InsertSystemAPI(DB *gorm.DB, api models.SystemApiCreate) (result models.SystemApiDetail, err error)
 	// 修改系统接口
 	UpdateSystemAPI(DB *gorm.DB, api models.SystemApiUpdate) (result models.SystemApiDetail, err error)
+	// 接口禁用可用
+	ActiveSystemAPI(DB *gorm.DB, ids []string, active bool) error
 	// 删除系统接口
 	DeleteSystemAPI(DB *gorm.DB, ids []string) error
 	// 查询系统接口

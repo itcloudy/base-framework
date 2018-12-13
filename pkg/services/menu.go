@@ -15,7 +15,7 @@ type MenuService struct {
 }
 
 func (service *MenuService) ServiceGetSelfMenu(roles []string) (menus []*models.MenuList, err error) {
-	return service.FindMenuByRoles(service.DB,roles)
+	return service.FindMenuByRoles(service.DB, roles)
 }
 func (service *MenuService) ServiceGetMenuByID(id string) (user models.MenuDetail, err error) {
 	return service.FindMenuByID(service.DB, id)
@@ -29,7 +29,7 @@ func (service *MenuService) ServiceMenuUpdate(update models.MenuUpdate) (user mo
 	return service.UpdateMenu(service.DB, update)
 }
 
-func (service *MenuService) ServiceMenuDelete(ids []string) ( err error) {
+func (service *MenuService) ServiceMenuDelete(ids []string) (err error) {
 	return service.DeleteMenu(service.DB, ids)
 }
 func (service *MenuService) ServiceGetAllMenu(offset, limit int, order string, query string, queryArgs ...interface{}) (menus []*models.MenuList, count int, err error) {

@@ -35,12 +35,12 @@ func (repo *MigrationHistoryRepository) ApplyMigrations(DB *sqlx.DB, collection 
 	for _, v := range collection {
 		tx.MustExec("insert into migration_history (version, data ) values ($1,$2)", v.String(), migrates[v.String()])
 	}
-
 	tx.Commit()
 	return
 
 }
 func (repo *MigrationHistoryRepository) ListMigration(DB *sqlx.DB) (migrates []models.MigrationHistory, count int, err error) {
 	err = DB.Select(&migrates, "SELECT * FROM migration_history")
+	count = len(migrates)
 	return
 }

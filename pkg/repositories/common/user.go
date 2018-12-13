@@ -39,14 +39,13 @@ func (repo *UserRepository) UpdateUserActive(DB *gorm.DB, id string, isActive bo
 	err = DB.Model(models.UserDetail{}).Updates(map[string]interface{}{"IsActive": isActive}).Error
 	return
 }
-
 func (repo *UserRepository) FindUserByUserNameAndPwd(DB *gorm.DB, username, pwd string) (user models.UserDetail, err error) {
 	err = DB.Where("username = ? and pwd = ? and is_active = ?", username, pwd, true).First(&user).Error
 	return
 }
 
-// 查询菜单
+// 查询用户
 func (repo *UserRepository) FindAllUser(DB *gorm.DB, offset, limit int, order string, query string, queryArgs ...interface{}) (users []*models.UserList, count int, err error) {
-	err = DB.Find(&users).Error
+	err = DB.Order(order).Offset(offset).Limit(limit).Find(&users).Error
 	return
 }

@@ -36,14 +36,14 @@ func (repo *MenuRepository) InsertMenu(DB *gorm.DB, model models.MenuCreate) (re
 // 修改
 func (repo *MenuRepository) UpdateMenu(DB *gorm.DB, menu models.MenuUpdate) (result models.MenuDetail, err error) {
 	err = DB.Updates(menu).Error
-
 	return
 }
 func (repo *MenuRepository) DeleteMenu(DB *gorm.DB, ids []string) (err error) {
 	return DB.Where("id IN (?)", ids).Delete(models.MenuDetail{}).Error
 }
+
 // 查询菜单
 func (repo *MenuRepository) FindAllMenu(DB *gorm.DB, offset, limit int, order string, query string, queryArgs ...interface{}) (menus []*models.MenuList, count int, err error) {
-	err = DB.Find(&menus).Error
+	err = DB.Order(order).Offset(offset).Limit(limit).Find(&menus).Error
 	return
 }

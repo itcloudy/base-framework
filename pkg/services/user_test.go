@@ -28,6 +28,8 @@ func TestUserService_GetUserByUserName(t *testing.T) {
 	var user models.UserDetail
 	user.Username = name
 	userRepository.On("FindUserByUserName", name).Return(user, nil)
+	userService := UserService{IUserRepository: userRepository}
+	result, _ := userService.ServiceGetUserByUserName(name)
 	// 判断测试结果
-	assert.Equal(t, name, user.Username)
+	assert.Equal(t, name, result.Username)
 }

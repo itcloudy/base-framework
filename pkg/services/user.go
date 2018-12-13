@@ -38,8 +38,7 @@ func (service *UserService) ServiceCheckUser(username, pwd string) (user models.
 	loginPwd := tools.SHA256(tools.StringsJoin(pwd, salt))
 	user, err = service.FindUserByUserNameAndPwd(service.DB, username, loginPwd)
 	return
-
 }
 func (service *UserService) ServiceGetAllUser(offset, limit int, order string, query string, queryArgs ...interface{}) (users []*models.UserList, count int, err error) {
-	return
+	return service.FindAllUser(service.DB, offset, limit, order, query, queryArgs)
 }

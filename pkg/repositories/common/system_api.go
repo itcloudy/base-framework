@@ -38,14 +38,20 @@ func (repo *SystemAPIRepository) UpdateSystemAPI(DB *gorm.DB, api models.SystemA
 	err = DB.Updates(api).Error
 	return
 }
+
+// 接口禁用可用
+func (repo *SystemAPIRepository) ActiveSystemAPI(DB *gorm.DB, ids []string, active bool) (err error) {
+	return DB.Model(&models.SystemApiDetail{}).Where("id IN (?)", ids).Update("IsActive", active).Error
+}
+
 // 删除系统接口
-func (repo *SystemAPIRepository) DeleteSystemAPI(DB *gorm.DB, ids []string) ( err error) {
+func (repo *SystemAPIRepository) DeleteSystemAPI(DB *gorm.DB, ids []string) (err error) {
 	return DB.Where("id IN (?)", ids).Delete(models.SystemApiDetail{}).Error
 
 }
 
 // 查询系统接口
 func (repo *SystemAPIRepository) FindAllSystemAPI(DB *gorm.DB, offset, limit int, order string, query string, queryArgs ...interface{}) (apis []*models.SystemApiList, count int, err error) {
-	err = DB.Find(&apis).Error
+	err = DB.Order(order).Offset(offset).Limit(limit).Find(&apis).Error
 	return
 }

@@ -25,7 +25,6 @@ func (repo *RoleRepository) InsertRole(DB *gorm.DB, model models.RoleCreate) (re
 	if err == nil {
 		return repo.FindRoleByID(DB, strconv.Itoa(model.ID))
 	}
-
 	return
 }
 
@@ -34,12 +33,14 @@ func (repo *RoleRepository) UpdateRole(DB *gorm.DB, role models.RoleUpdate) (res
 	err = DB.Updates(role).Error
 	return
 }
+
 // 删除角色
 func (repo *RoleRepository) DeleteRole(DB *gorm.DB, ids []string) (err error) {
 	return DB.Where("id IN (?)", ids).Delete(models.RoleDetail{}).Error
 }
+
 // 查询角色
 func (repo *RoleRepository) FindAllRole(DB *gorm.DB, offset, limit int, order string, query string, queryArgs ...interface{}) (roles []*models.RoleList, count int, err error) {
-	err = DB.Find(&roles).Error
+	err = DB.Order(order).Offset(offset).Limit(limit).Find(&roles).Error
 	return
 }
