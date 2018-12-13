@@ -24,5 +24,5 @@ type IUserRepository interface {
 	//根据密码和用户名查询用户
 	FindUserByUserNameAndPwd(DB *gorm.DB, username, pwd string) (models.UserDetail, error)
 	// 查询用户
-	FindAllUser(DB *gorm.DB, page, size int, order string, query string, queryArgs ...interface{}) (users []*models.UserList, count int, err error)
+	FindAllUser(DB *gorm.DB, page, size int, order string, query string, queryArgs ...interface{}) (users []*models.UserList, total int, err error)
 }

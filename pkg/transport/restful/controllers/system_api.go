@@ -42,11 +42,14 @@ func (ctl SystemAPIController) CtlGetAllSystemAPI(c *gin.Context) {
 		size  int
 		order string
 	)
+	returnDatas := make(map[string]interface{})
 	size = tools.StringToIntDefault(c.Query("size"), consts.DefaultSize)
 	page = tools.StringToIntDefault(c.Query("current"), consts.DefaultPage)
-	apis, _, err := ctl.SystemAPIService.ServiceGetAllSystemAPI(page, size, order, "")
+	list, pagination, err := ctl.SystemAPIService.ServiceGetAllSystemAPI(page, size, order, "")
 	if err != nil {
 
 	}
-	common.GenResponse(c, consts.Success, apis, "")
+	returnDatas["pagination"] = pagination
+	returnDatas["list"] = list
+	common.GenResponse(c, consts.Success, returnDatas, "")
 }

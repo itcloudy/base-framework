@@ -15,5 +15,5 @@ type IMigrationHistoryRepository interface {
 	//升级到某个版本，若中间存在多个，则中间版本同样升级
 	ApplyMigrations(DB *sqlx.DB, collection version.Collection, migrates map[string]string) (err error)
 	//列出所有的版本，包括系统中存在的没有安装的
-	ListMigration(DB *sqlx.DB) (migrates []models.MigrationHistory, count int, err error)
+	ListMigration(DB *sqlx.DB) (migrates []models.MigrationHistory, total int, err error)
 }

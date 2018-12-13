@@ -18,5 +18,5 @@ type IRoleRepository interface {
 	// 删除角色
 	DeleteRole(DB *gorm.DB, ids []string) error
 	// 查询角色
-	FindAllRole(DB *gorm.DB, page, size int, order string, query string, queryArgs ...interface{}) (roles []*models.RoleList, count int, err error)
+	FindAllRole(DB *gorm.DB, page, size int, order string, query string, queryArgs ...interface{}) (roles []*models.RoleList, total int, err error)
 }

@@ -53,6 +53,6 @@ func (m *MockUserRepository) FindUserByUserNameAndPwd(DB *gorm.DB, username, pwd
 }
 
 // 查询系统接口
-func (m *MockUserRepository) FindAllUser(DB *gorm.DB, page, size int, order string, query string, queryArgs ...interface{}) (users []*models.UserList, count int, err error) {
+func (m *MockUserRepository) FindAllUser(DB *gorm.DB, page, size int, order string, query string, queryArgs ...interface{}) (users []*models.UserList, total int, err error) {
 	return
 }

@@ -48,11 +48,14 @@ func (ctl MenuController) CtlGetAllMenu(c *gin.Context) {
 		size  int
 		order string
 	)
+	returnDatas := make(map[string]interface{})
 	size = tools.StringToIntDefault(c.Query("size"), consts.DefaultSize)
 	page = tools.StringToIntDefault(c.Query("current"), consts.DefaultPage)
-	apis, _, err := ctl.MenuService.ServiceGetAllMenu(page, size, order, "")
+	menus, pagination, err := ctl.MenuService.ServiceGetAllMenu(page, size, order, "")
 	if err != nil {
 
 	}
-	common.GenResponse(c, consts.Success, apis, "")
+	returnDatas["pagination"] = pagination
+	returnDatas["list"] = menus
+	common.GenResponse(c, consts.Success, returnDatas, "")
 }

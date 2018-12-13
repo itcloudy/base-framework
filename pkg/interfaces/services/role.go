@@ -13,5 +13,5 @@ type IRoleService interface {
 	ServiceRoleCreate(model models.RoleCreate) (result models.RoleDetail, err error)
 	ServiceRoleUpdate(update models.RoleCreate) (result models.RoleDetail, err error)
 	ServiceRoleDelete(ids []string) (err error)
-	ServiceGetAllRole(page, size int, order string, query string, queryArgs ...interface{}) (count int, users []*models.RoleList, pagination conf.Pagination, err error)
+	ServiceGetAllRole(page, size int, order string, query string, queryArgs ...interface{}) (total int, users []*models.RoleList, pagination conf.Pagination, err error)
 }
