@@ -20,5 +20,5 @@ type ISystemAPIRepository interface {
 	// 删除系统接口
 	DeleteSystemAPI(DB *gorm.DB, ids []string) error
 	// 查询系统接口
-	FindAllSystemAPI(DB *gorm.DB, offset, limit int, order string, query string, queryArgs ...interface{}) (apis []*models.SystemApiList, count int, err error)
+	FindAllSystemAPI(DB *gorm.DB, page, size int, order string, query string, queryArgs ...interface{}) (apis []*models.SystemApiList, count int, err error)
 }

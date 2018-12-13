@@ -3,7 +3,10 @@
 // license that can be found in the LICENSE file.
 package services
 
-import "github.com/itcloudy/base-framework/pkg/models"
+import (
+	"github.com/itcloudy/base-framework/pkg/conf"
+	"github.com/itcloudy/base-framework/pkg/models"
+)
 
 type IUserService interface {
 	ServiceGetSelf(id string) (user models.UserDetail, err error)
@@ -12,5 +15,5 @@ type IUserService interface {
 	ServiceUserCreate(userCreate models.UserCreate) (user models.UserDetail, err error)
 	ServiceUserDelete(ids []string) (err error)
 	ServiceCheckUser(username, pwd string) (user models.UserDetail, err error)
-	ServiceGetAllUser(offset, limit int, order string, query string, queryArgs ...interface{}) (users []*models.UserList, count int, err error)
+	ServiceGetAllUser(page, size int, order string, query string, queryArgs ...interface{}) (users []*models.UserList, pagination conf.Pagination, err error)
 }

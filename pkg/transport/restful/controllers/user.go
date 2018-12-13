@@ -10,6 +10,7 @@ import (
 	"github.com/itcloudy/base-framework/pkg/models"
 	"github.com/itcloudy/base-framework/pkg/transport/restful/common"
 	"github.com/itcloudy/base-framework/pkg/transport/restful/middles"
+	"github.com/itcloudy/base-framework/tools"
 	"net/http"
 )
 
@@ -83,4 +84,20 @@ func (ctl UserController) CtlLogin(c *gin.Context) {
 		[]string{}, []string{}, userDetail.ID, userDetail.IsAdmin)
 	common.GenResponse(c, consts.Success, response, "")
 
+}
+
+//查询的角色
+func (ctl UserController) CtlGetAllUser(c *gin.Context) {
+	var (
+		page  int
+		size  int
+		order string
+	)
+	size = tools.StringToIntDefault(c.Query("size"), consts.DefaultSize)
+	page = tools.StringToIntDefault(c.Query("current"), consts.DefaultPage)
+	users, _, err := ctl.ServiceGetAllUser(page, size, order, "")
+	if err != nil {
+
+	}
+	common.GenResponse(c, consts.Success, users, "")
 }

@@ -45,13 +45,12 @@ func (ctl MenuController) CtlUpdateMenuByID(c *gin.Context) {
 func (ctl MenuController) CtlGetAllMenu(c *gin.Context) {
 	var (
 		page  int
-		limit int
+		size  int
 		order string
 	)
-	limit = tools.StrToInt(c.Query("size"))
-	page = tools.StrToInt(c.Query("current"))
-	offset := page * limit
-	apis, _, err := ctl.MenuService.ServiceGetAllMenu(offset, limit, order, "")
+	size = tools.StringToIntDefault(c.Query("size"), consts.DefaultSize)
+	page = tools.StringToIntDefault(c.Query("current"), consts.DefaultPage)
+	apis, _, err := ctl.MenuService.ServiceGetAllMenu(page, size, order, "")
 	if err != nil {
 
 	}

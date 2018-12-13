@@ -52,6 +52,6 @@ const (
 	TokenValid = "TOKEN_VALID"
 )
 const (
-	DefaultOffset = 0
-	DefaultLimit  = 20
+	DefaultPage = 1
+	DefaultSize = 20
 )

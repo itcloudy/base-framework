@@ -38,6 +38,13 @@ func StrToInt(s string) int {
 	i, _ := strconv.Atoi(s)
 	return i
 }
+func StringToIntDefault(str string, defVal int) int {
+	if in, err := strconv.Atoi(str); err != nil {
+		return defVal
+	} else {
+		return in
+	}
+}
 
 // StrToFloat64 converts string to float64
 func StrToFloat64(s string) float64 {

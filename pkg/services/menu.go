@@ -32,6 +32,6 @@ func (service *MenuService) ServiceMenuUpdate(update models.MenuUpdate) (user mo
 func (service *MenuService) ServiceMenuDelete(ids []string) (err error) {
 	return service.DeleteMenu(service.DB, ids)
 }
-func (service *MenuService) ServiceGetAllMenu(offset, limit int, order string, query string, queryArgs ...interface{}) (menus []*models.MenuList, count int, err error) {
-	return service.FindAllMenu(service.DB, offset, limit, order, query, queryArgs)
+func (service *MenuService) ServiceGetAllMenu(page, size int, order string, query string, queryArgs ...interface{}) (menus []*models.MenuList, count int, err error) {
+	return service.FindAllMenu(service.DB, page, size, order, query, queryArgs)
 }

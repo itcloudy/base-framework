@@ -30,6 +30,6 @@ func (service *RoleService) ServiceRoleUpdate(update models.RoleUpdate) (user mo
 func (service *RoleService) ServiceRoleDelete(ids []string) (err error) {
 	return service.DeleteRole(service.DB, ids)
 }
-func (service *RoleService) ServiceGetAllRole(offset, limit int, order string, query string, queryArgs ...interface{}) (results []*models.RoleList, count int, err error) {
-	return service.FindAllRole(service.DB, offset, limit, order, query, queryArgs)
+func (service *RoleService) ServiceGetAllRole(page, size int, order string, query string, queryArgs ...interface{}) (results []*models.RoleList, count int, err error) {
+	return service.FindAllRole(service.DB, page, size, order, query, queryArgs)
 }

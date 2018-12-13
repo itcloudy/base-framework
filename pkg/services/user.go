@@ -4,6 +4,7 @@
 package services
 
 import (
+	"github.com/itcloudy/base-framework/pkg/conf"
 	"github.com/itcloudy/base-framework/pkg/interfaces/repositories"
 	"github.com/itcloudy/base-framework/pkg/models"
 	"github.com/itcloudy/base-framework/tools"
@@ -39,6 +40,7 @@ func (service *UserService) ServiceCheckUser(username, pwd string) (user models.
 	user, err = service.FindUserByUserNameAndPwd(service.DB, username, loginPwd)
 	return
 }
-func (service *UserService) ServiceGetAllUser(offset, limit int, order string, query string, queryArgs ...interface{}) (users []*models.UserList, count int, err error) {
-	return service.FindAllUser(service.DB, offset, limit, order, query, queryArgs)
+func (service *UserService) ServiceGetAllUser(page, size int, order string, query string, queryArgs ...interface{}) (users []*models.UserList, pagination conf.Pagination, err error) {
+	service.FindAllUser(service.DB, page, size, order, query, queryArgs)
+	return
 }

@@ -43,7 +43,7 @@ func (repo *MenuRepository) DeleteMenu(DB *gorm.DB, ids []string) (err error) {
 }
 
 // 查询菜单
-func (repo *MenuRepository) FindAllMenu(DB *gorm.DB, offset, limit int, order string, query string, queryArgs ...interface{}) (menus []*models.MenuList, count int, err error) {
-	err = DB.Order(order).Offset(offset).Limit(limit).Find(&menus).Error
+func (repo *MenuRepository) FindAllMenu(DB *gorm.DB, page, size int, order string, query string, queryArgs ...interface{}) (menus []*models.MenuList, count int, err error) {
+	err = DB.Order(order).Offset((page - 1) * size).Limit(size).Find(&menus).Error
 	return
 }

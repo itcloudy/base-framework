@@ -8,6 +8,7 @@ import (
 	"github.com/itcloudy/base-framework/pkg/consts"
 	"github.com/itcloudy/base-framework/pkg/services"
 	"github.com/itcloudy/base-framework/pkg/transport/restful/common"
+	"github.com/itcloudy/base-framework/tools"
 	"net/http"
 )
 
@@ -36,7 +37,14 @@ func (ctl SystemAPIController) CtlUpdateSystemAPIByID(c *gin.Context) {
 
 //查询的接口
 func (ctl SystemAPIController) CtlGetAllSystemAPI(c *gin.Context) {
-	apis, _, err := ctl.SystemAPIService.ServiceGetAllSystemAPI(0, consts.DefaultLimit, "", "")
+	var (
+		page  int
+		size  int
+		order string
+	)
+	size = tools.StringToIntDefault(c.Query("size"), consts.DefaultSize)
+	page = tools.StringToIntDefault(c.Query("current"), consts.DefaultPage)
+	apis, _, err := ctl.SystemAPIService.ServiceGetAllSystemAPI(page, size, order, "")
 	if err != nil {
 
 	}

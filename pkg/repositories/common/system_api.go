@@ -51,7 +51,7 @@ func (repo *SystemAPIRepository) DeleteSystemAPI(DB *gorm.DB, ids []string) (err
 }
 
 // 查询系统接口
-func (repo *SystemAPIRepository) FindAllSystemAPI(DB *gorm.DB, offset, limit int, order string, query string, queryArgs ...interface{}) (apis []*models.SystemApiList, count int, err error) {
-	err = DB.Order(order).Offset(offset).Limit(limit).Find(&apis).Error
+func (repo *SystemAPIRepository) FindAllSystemAPI(DB *gorm.DB, page, size int, order string, query string, queryArgs ...interface{}) (apis []*models.SystemApiList, count int, err error) {
+	err = DB.Order(order).Offset((page - 1) * size).Limit(size).Find(&apis).Error
 	return
 }

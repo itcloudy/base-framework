@@ -4,6 +4,7 @@
 package services
 
 import (
+	"github.com/itcloudy/base-framework/pkg/conf"
 	"github.com/itcloudy/base-framework/pkg/models"
 	"github.com/jinzhu/gorm"
 	"github.com/stretchr/testify/mock"
@@ -65,6 +66,6 @@ func (mo *MockUserService) FindUserByUserNameAndPwd(DB *gorm.DB, username, pwd s
 }
 
 // 查询系统接口
-func (mo *MockUserService) FindAllUser(DB *gorm.DB, offset, limit int, order string, query string, queryArgs ...interface{}) (users []*models.UserList, count int, err error) {
+func (mo *MockUserService) FindAllUser(DB *gorm.DB, page, size int, order string, query string, queryArgs ...interface{}) (users []*models.UserList, pagination conf.Pagination, err error) {
 	return
 }
