@@ -4,7 +4,6 @@
 package routers
 
 import (
-	"errors"
 	"github.com/itcloudy/base-framework/pkg/conf"
 	"github.com/itcloudy/base-framework/pkg/repositories/common"
 	"github.com/itcloudy/base-framework/pkg/services"
@@ -43,7 +42,7 @@ func (k *kernel) UserContainer() controllers.UserController {
 	service := services.UserService{}
 
 	service.IUserRepository = &common.UserRepository{}
-	dbType := conf.Config.DB.DbType
+	/*dbType := conf.Config.DB.DbType
 	switch dbType {
 	case "mysql":
 	case "postgres":
@@ -52,55 +51,29 @@ func (k *kernel) UserContainer() controllers.UserController {
 	default:
 		panic(errors.New("un support sql type:" + dbType))
 
-	}
+	}*/
+	service.DB = conf.DBConn
 	controller := controllers.UserController{IUserService: &service}
 	return controller
 }
 func (k *kernel) RoleContainer() controllers.RoleController {
 	service := services.RoleService{}
 	service.IRoleRepository = &common.RoleRepository{}
-	dbType := conf.Config.DB.DbType
-	switch dbType {
-	case "mysql":
-	case "postgres":
-		service.DB = conf.DBConn
-		break
-	default:
-		panic(errors.New("un support sql type:" + dbType))
-
-	}
+	service.DB = conf.DBConn
 	controller := controllers.RoleController{RoleService: service}
 	return controller
 }
 func (k *kernel) MenuContainer() controllers.MenuController {
 	service := services.MenuService{}
 	service.IMenuRepository = &common.MenuRepository{}
-	dbType := conf.Config.DB.DbType
-	switch dbType {
-	case "mysql":
-	case "postgres":
-		service.DB = conf.DBConn
-		break
-	default:
-		panic(errors.New("un support sql type:" + dbType))
-
-	}
+	service.DB = conf.DBConn
 	controller := controllers.MenuController{MenuService: service}
 	return controller
 }
 func (k *kernel) SystemAPIContainer() controllers.SystemAPIController {
 	service := services.SystemAPIService{}
 	service.ISystemAPIRepository = &common.SystemAPIRepository{}
-	dbType := conf.Config.DB.DbType
-	switch dbType {
-	case "mysql":
-	case "postgres":
-		service.DB = conf.DBConn
-		break
-	default:
-		panic(errors.New("un support sql type:" + dbType))
-
-	}
+	service.DB = conf.DBConn
 	controller := controllers.SystemAPIController{SystemAPIService: service}
 	return controller
 }
