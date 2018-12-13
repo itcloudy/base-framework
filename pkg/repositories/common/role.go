@@ -41,6 +41,9 @@ func (repo *RoleRepository) DeleteRole(DB *gorm.DB, ids []string) (err error) {
 
 // 查询角色
 func (repo *RoleRepository) FindAllRole(DB *gorm.DB, page, size int, order string, query string, queryArgs ...interface{}) (roles []*models.RoleList, count int, err error) {
+	if len(order) == 0 {
+		order = "id desc"
+	}
 	err = DB.Order(order).Offset((page - 1) * size).Limit(size).Find(&roles).Error
 	return
 }

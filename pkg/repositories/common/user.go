@@ -46,6 +46,9 @@ func (repo *UserRepository) FindUserByUserNameAndPwd(DB *gorm.DB, username, pwd 
 
 // 查询用户
 func (repo *UserRepository) FindAllUser(DB *gorm.DB, page, size int, order string, query string, queryArgs ...interface{}) (users []*models.UserList, count int, err error) {
+	if len(order) == 0 {
+		order = "id desc"
+	}
 	err = DB.Order(order).Offset((page - 1) * size).Limit(size).Find(&users).Error
 	return
 }
