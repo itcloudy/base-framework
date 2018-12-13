@@ -53,7 +53,7 @@ func initMenus() {
 
 	}
 	//如果系统菜单数据不为空则不能导入
-	menus, _, _ := menuService.ServiceGetAllMenu(0, consts.DefaultLimit, "", "")
+	menus, _, _ := menuService.ServiceGetAllMenu(consts.DefaultPage, consts.DefaultSize, "", "")
 	if len(menus) > 0 {
 		logs.Logger.Error("system menu not empty can't init")
 		os.Exit(-1)

@@ -139,10 +139,10 @@ func (service *MigrationService) ServiceUpdateToOneVersion() (err error) {
 /*
 列出所有的版本，包括系统中存在的没有安装的
 */
-func (service *MigrationService) ServiceGetAllListMigration() (migrates []models.MigrationHistory, err error) {
+func (service *MigrationService) ServiceGetAllListMigration() (results []models.MigrationHistory, err error) {
 	var installedMigrates []models.MigrationHistory
-	migrates = migration.AllInitMigrations[conf.Config.DB.DbType]
-	migrates = append(migrates, migration.AllUpdateMigrations[conf.Config.DB.DbType]...)
+	results = migration.AllInitMigrations[conf.Config.DB.DbType]
+	results = append(results, migration.AllUpdateMigrations[conf.Config.DB.DbType]...)
 	var (
 		verSlice []string
 	)
@@ -153,9 +153,9 @@ func (service *MigrationService) ServiceGetAllListMigration() (migrates []models
 		verSlice = append(verSlice, migrate.Version)
 	}
 	//判断已经安装的版本
-	for k, migrate := range migrates {
+	for k, migrate := range results {
 		if tools.StringInSlice(verSlice, migrate.Version) {
-			migrates[k].Installed = true
+			results[k].Installed = true
 		}
 	}
 	return

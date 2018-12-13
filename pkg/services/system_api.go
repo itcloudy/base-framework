@@ -4,6 +4,7 @@
 package services
 
 import (
+	"github.com/itcloudy/base-framework/pkg/conf"
 	"github.com/itcloudy/base-framework/pkg/interfaces/repositories"
 	"github.com/itcloudy/base-framework/pkg/models"
 	"github.com/jinzhu/gorm"
@@ -14,9 +15,6 @@ type SystemAPIService struct {
 	repositories.ISystemAPIRepository
 }
 
-func (service *SystemAPIService) ServiceGetAllSystemAPI(page, size int, order string, query string, queryArgs ...interface{}) (results []*models.SystemApiList, count int, err error) {
-	return service.FindAllSystemAPI(service.DB, page, size, order, query, queryArgs)
-}
 func (service *SystemAPIService) ServiceGetSystemAPIByID(id string) (result models.SystemApiDetail, err error) {
 	return service.FindSystemAPIByID(service.DB, id)
 }
@@ -32,4 +30,10 @@ func (service *SystemAPIService) ServiceSystemAPICreate(model models.SystemApiCr
 func (service *SystemAPIService) ServiceActiveSystemAPI(ids []string, active bool) (err error) {
 	return service.ActiveSystemAPI(service.DB, ids, active)
 
+}
+func (service *SystemAPIService) ServiceGetAllSystemAPI(page, size int, order string, query string, queryArgs ...interface{}) (results []*models.SystemApiList, pagination conf.Pagination, err error) {
+	pagination.Current = page
+	pagination.Size = size
+	results, pagination.Total, err = service.FindAllSystemAPI(service.DB, page, size, order, query, queryArgs)
+	return
 }

@@ -18,16 +18,16 @@ type UserService struct {
 	repositories.IUserRepository
 }
 
-func (service *UserService) ServiceGetSelf(id string) (user models.UserDetail, err error) {
+func (service *UserService) ServiceGetSelf(id string) (result models.UserDetail, err error) {
 	return service.FindUserByID(service.DB, id)
 }
-func (service *UserService) ServiceGetUserByID(id string) (user models.UserDetail, err error) {
+func (service *UserService) ServiceGetUserByID(id string) (result models.UserDetail, err error) {
 	return service.FindUserByID(service.DB, id)
 }
-func (service *UserService) ServiceGetUserByUserName(username string) (user models.UserDetail, err error) {
+func (service *UserService) ServiceGetUserByUserName(username string) (result models.UserDetail, err error) {
 	return service.FindUserByUserName(service.DB, username)
 }
-func (service *UserService) ServiceUserCreate(model models.UserCreate) (user models.UserDetail, err error) {
+func (service *UserService) ServiceUserCreate(model models.UserCreate) (result models.UserDetail, err error) {
 	model.ID = 0
 	model.Pwd = tools.SHA256(tools.StringsJoin(model.Password, salt))
 	return service.InsertUser(service.DB, model)
@@ -35,12 +35,14 @@ func (service *UserService) ServiceUserCreate(model models.UserCreate) (user mod
 func (service *UserService) ServiceUserDelete(ids []string) (err error) {
 	return service.DeleteUser(service.DB, ids)
 }
-func (service *UserService) ServiceCheckUser(username, pwd string) (user models.UserDetail, err error) {
+func (service *UserService) ServiceCheckUser(username, pwd string) (result models.UserDetail, err error) {
 	loginPwd := tools.SHA256(tools.StringsJoin(pwd, salt))
-	user, err = service.FindUserByUserNameAndPwd(service.DB, username, loginPwd)
+	result, err = service.FindUserByUserNameAndPwd(service.DB, username, loginPwd)
 	return
 }
-func (service *UserService) ServiceGetAllUser(page, size int, order string, query string, queryArgs ...interface{}) (users []*models.UserList, pagination conf.Pagination, err error) {
-	service.FindAllUser(service.DB, page, size, order, query, queryArgs)
+func (service *UserService) ServiceGetAllUser(page, size int, order string, query string, queryArgs ...interface{}) (results []*models.UserList, pagination conf.Pagination, err error) {
+	pagination.Current = page
+	pagination.Size = size
+	results, pagination.Total, err = service.FindAllUser(service.DB, page, size, order, query, queryArgs)
 	return
 }

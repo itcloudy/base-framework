@@ -50,7 +50,7 @@ func initApi() {
 	default:
 		panic(errors.New("un support sql type:" + dbType))
 	}
-	apis, _, _ := apiService.ServiceGetAllSystemAPI(0, consts.DefaultLimit, "", "")
+	apis, _, _ := apiService.ServiceGetAllSystemAPI(consts.DefaultPage, consts.DefaultSize, "", "")
 	if len(apis) > 0 {
 		logs.Logger.Error("system api not empty can't init", zap.String("path", filePath))
 		os.Exit(-1)
