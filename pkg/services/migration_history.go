@@ -74,6 +74,7 @@ func (service *MigrationService) ServiceFirstMigration() (err error) {
 			panic(errors.New("un support sql type:" + cfg.DbType))
 
 		}
+		userService.DB = conf.DBConn
 		admin := conf.Config.Admin
 		superUser.Username = admin.UserName
 		superUser.Password = admin.Password

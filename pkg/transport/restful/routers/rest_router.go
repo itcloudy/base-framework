@@ -77,7 +77,7 @@ func addRouter(router *gin.Engine) {
 		authRouter.GET("/system_api/:id", rest.SystemAPIContainer().CtlGetSystemAPIByID)
 		authRouter.POST("/system_api", rest.SystemAPIContainer().CtlCreateSystemAPI)
 		authRouter.PUT("/system_api/:id", rest.SystemAPIContainer().CtlUpdateSystemAPIByID)
-		router.GET("/system_apis", rest.SystemAPIContainer().CtlGetAllSystemAPI)
+		authRouter.GET("/system_apis", rest.SystemAPIContainer().CtlGetAllSystemAPI)
 	}
 
 }

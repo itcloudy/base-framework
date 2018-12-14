@@ -6,6 +6,7 @@ package controllers
 import (
 	"github.com/gin-gonic/gin"
 	"github.com/itcloudy/base-framework/pkg/consts"
+	"github.com/itcloudy/base-framework/pkg/models"
 	"github.com/itcloudy/base-framework/pkg/services"
 	"github.com/itcloudy/base-framework/pkg/transport/restful/common"
 	"github.com/itcloudy/base-framework/tools"
@@ -27,7 +28,21 @@ func (ctl SystemAPIController) CtlGetSystemAPIByID(c *gin.Context) {
 
 //创建接口
 func (ctl SystemAPIController) CtlCreateSystemAPI(c *gin.Context) {
-
+	var (
+		systemAPI models.SystemApiCreate
+		result    models.SystemApiDetail
+		err       error
+	)
+	if err = c.ShouldBindJSON(&systemAPI); err != nil {
+		common.GenResponse(c, consts.BindingJsonErr, nil, "bing json failed")
+		return
+	}
+	result, err = ctl.ServiceSystemAPICreate(systemAPI)
+	if err != nil {
+		common.GenResponse(c, consts.DBInSertErr, nil, err.Error())
+		return
+	}
+	common.GenResponse(c, consts.Success, result, "")
 }
 
 //更新接口

@@ -8,6 +8,7 @@ import (
 	"github.com/itcloudy/base-framework/pkg/interfaces/repositories"
 	"github.com/itcloudy/base-framework/pkg/models"
 	"github.com/jinzhu/gorm"
+	"gopkg.in/go-playground/validator.v9"
 )
 
 type SystemAPIService struct {
@@ -25,6 +26,11 @@ func (service *SystemAPIService) ServiceSystemAPIUpdate(model models.SystemApiUp
 	return service.UpdateSystemAPI(service.DB, model)
 }
 func (service *SystemAPIService) ServiceSystemAPICreate(model models.SystemApiCreate) (result models.SystemApiDetail, err error) {
+	var validate *validator.Validate
+	validate = validator.New()
+	if err = validate.Struct(model); err != nil {
+		return
+	}
 	return service.InsertSystemAPI(service.DB, model)
 }
 func (service *SystemAPIService) ServiceActiveSystemAPI(ids []string, active bool) (err error) {
