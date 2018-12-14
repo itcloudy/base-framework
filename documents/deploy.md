@@ -5,6 +5,7 @@
 删除项目代码中的包引入前缀github.com/itcloudy
 ```sh
 git clone https://github.com/itcloudy/base-framework.git
+git checkout -b 2.0 2.0
 ```
 * 编译
 ```sh
