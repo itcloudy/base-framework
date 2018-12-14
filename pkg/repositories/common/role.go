@@ -6,14 +6,13 @@ package common
 import (
 	"github.com/itcloudy/base-framework/pkg/models"
 	"github.com/jinzhu/gorm"
-	"strconv"
 )
 
 type RoleRepository struct {
 }
 
 //根据ID查找
-func (repo *RoleRepository) FindRoleByID(DB *gorm.DB, id string) (role models.RoleDetail, err error) {
+func (repo *RoleRepository) FindRoleByID(DB *gorm.DB, id int) (role models.RoleDetail, err error) {
 	err = DB.Where("id = ?", id).First(&role).Error
 	return
 }
@@ -23,7 +22,7 @@ func (repo *RoleRepository) InsertRole(DB *gorm.DB, model models.RoleCreate) (re
 	model.ID = 0
 	err = DB.Create(&model).Error
 	if err == nil {
-		return repo.FindRoleByID(DB, strconv.Itoa(model.ID))
+		return repo.FindRoleByID(DB, model.ID)
 	}
 	return
 }
@@ -35,7 +34,7 @@ func (repo *RoleRepository) UpdateRole(DB *gorm.DB, role models.RoleUpdate) (res
 }
 
 // 删除角色
-func (repo *RoleRepository) DeleteRole(DB *gorm.DB, ids []string) (err error) {
+func (repo *RoleRepository) DeleteRole(DB *gorm.DB, ids []int) (err error) {
 	return DB.Where("id IN (?)", ids).Delete(models.RoleDetail{}).Error
 }
 

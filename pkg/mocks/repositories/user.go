@@ -22,7 +22,7 @@ func (m *MockUserRepository) FindUserByUserName(DB *gorm.DB, username string) (u
 	}
 	return
 }
-func (m *MockUserRepository) FindUserByID(DB *gorm.DB, id string) (user models.UserDetail, err error) {
+func (m *MockUserRepository) FindUserByID(DB *gorm.DB, id int) (user models.UserDetail, err error) {
 	ret := m.Called(id)
 	if rf, ok := ret.Get(0).(func(string) models.UserDetail); ok {
 		user = rf(id)
@@ -37,14 +37,14 @@ func (m *MockUserRepository) InsertUser(DB *gorm.DB, model models.UserCreate) (u
 }
 
 // 删除用户
-func (m *MockUserRepository) DeleteUser(DB *gorm.DB, ids []string) (err error) {
+func (m *MockUserRepository) DeleteUser(DB *gorm.DB, ids []int) (err error) {
 	return
 }
 
-func (m *MockUserRepository) UpdateUserAdmin(DB *gorm.DB, id string, isAdmin bool) (err error) {
+func (m *MockUserRepository) UpdateUserAdmin(DB *gorm.DB, id int, isAdmin bool) (err error) {
 	return
 }
-func (m *MockUserRepository) UpdateUserActive(DB *gorm.DB, id string, isActive bool) (err error) {
+func (m *MockUserRepository) UpdateUserActive(DB *gorm.DB, id int, isActive bool) (err error) {
 	return
 }
 

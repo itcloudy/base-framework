@@ -15,7 +15,7 @@ type RoleService struct {
 	repositories.IRoleRepository
 }
 
-func (service *RoleService) ServiceGetRoleByID(id string) (result models.RoleDetail, err error) {
+func (service *RoleService) ServiceGetRoleByID(id int) (result models.RoleDetail, err error) {
 	return service.FindRoleByID(service.DB, id)
 }
 
@@ -28,7 +28,7 @@ func (service *RoleService) ServiceRoleUpdate(update models.RoleUpdate) (result 
 	return service.UpdateRole(service.DB, update)
 }
 
-func (service *RoleService) ServiceRoleDelete(ids []string) (err error) {
+func (service *RoleService) ServiceRoleDelete(ids []int) (err error) {
 	return service.DeleteRole(service.DB, ids)
 }
 func (service *RoleService) ServiceGetAllRole(page, size int, order string, query string, queryArgs ...interface{}) (results []*models.RoleList, pagination conf.Pagination, err error) {

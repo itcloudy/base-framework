@@ -9,9 +9,9 @@ import (
 )
 
 type ISystemAPIService interface {
-	ServiceGetSystemAPIByID(id string) (model models.SystemApiDetail, err error)
+	ServiceGetSystemAPIByID(id int) (model models.SystemApiDetail, err error)
 	ServiceSystemAPICreate(model models.SystemApiCreate) (result models.SystemApiDetail, err error)
 	ServiceSystemAPIUpdate(update models.SystemApiUpdate) (result models.SystemApiDetail, err error)
-	ServiceSystemAPIDelete(ids []string) (err error)
+	ServiceSystemAPIDelete(ids []int) (err error)
 	ServiceGetAllSystemAPI(page, size int, order string, query string, queryArgs ...interface{}) (systemApis []models.SystemApiList, pagination conf.Pagination, err error)
 }

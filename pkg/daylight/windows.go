@@ -14,7 +14,7 @@ import (
 )
 
 // KillPid kills the process with the specified pid
-func KillPid(pid string) error {
+func KillPid(pid int) error {
 
 	rez, err := exec.Command("tasklist", "/fi", "PID eq "+pid).Output()
 	if err != nil {

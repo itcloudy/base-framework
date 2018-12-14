@@ -12,15 +12,15 @@ type IUserRepository interface {
 	//根据用户名查找用户
 	FindUserByUserName(DB *gorm.DB, username string) (models.UserDetail, error)
 	//根据用户ID查找用户
-	FindUserByID(DB *gorm.DB, id string) (models.UserDetail, error)
+	FindUserByID(DB *gorm.DB, id int) (models.UserDetail, error)
 	// 创建用户
 	InsertUser(DB *gorm.DB, model models.UserCreate) (models.UserDetail, error)
 	// 删除用户
-	DeleteUser(DB *gorm.DB, ids []string) error
+	DeleteUser(DB *gorm.DB, ids []int) error
 	//管理员更改
-	UpdateUserAdmin(DB *gorm.DB, id string, isAdmin bool) error
+	UpdateUserAdmin(DB *gorm.DB, id int, isAdmin bool) error
 	// 用户有效更改
-	UpdateUserActive(DB *gorm.DB, id string, isActive bool) error
+	UpdateUserActive(DB *gorm.DB, id int, isActive bool) error
 	//根据密码和用户名查询用户
 	FindUserByUserNameAndPwd(DB *gorm.DB, username, pwd string) (models.UserDetail, error)
 	// 查询用户

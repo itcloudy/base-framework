@@ -7,14 +7,13 @@ import (
 	"github.com/itcloudy/base-framework/pkg/models"
 	"github.com/itcloudy/base-framework/tools"
 	"github.com/jinzhu/gorm"
-	"strconv"
 )
 
 type SystemAPIRepository struct {
 }
 
 //根据ID查找
-func (repo *SystemAPIRepository) FindSystemAPIByID(DB *gorm.DB, id string) (api models.SystemApiDetail, err error) {
+func (repo *SystemAPIRepository) FindSystemAPIByID(DB *gorm.DB, id int) (api models.SystemApiDetail, err error) {
 	err = DB.Where("id = ?", id).First(&api).Error
 	return
 }
@@ -26,7 +25,7 @@ func (repo *SystemAPIRepository) InsertSystemAPI(DB *gorm.DB, model models.Syste
 	model.ID = 0
 	err = DB.Create(&model).Error
 	if err == nil {
-		return repo.FindSystemAPIByID(DB, strconv.Itoa(model.ID))
+		return repo.FindSystemAPIByID(DB,  model.ID)
 	}
 	return
 }
@@ -40,12 +39,12 @@ func (repo *SystemAPIRepository) UpdateSystemAPI(DB *gorm.DB, api models.SystemA
 }
 
 // 接口禁用可用
-func (repo *SystemAPIRepository) ActiveSystemAPI(DB *gorm.DB, ids []string, active bool) (err error) {
+func (repo *SystemAPIRepository) ActiveSystemAPI(DB *gorm.DB, ids []int, active bool) (err error) {
 	return DB.Model(&models.SystemApiDetail{}).Where("id IN (?)", ids).Update("IsActive", active).Error
 }
 
 // 删除系统接口
-func (repo *SystemAPIRepository) DeleteSystemAPI(DB *gorm.DB, ids []string) (err error) {
+func (repo *SystemAPIRepository) DeleteSystemAPI(DB *gorm.DB, ids []int) (err error) {
 	return DB.Where("id IN (?)", ids).Delete(models.SystemApiDetail{}).Error
 
 }

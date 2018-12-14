@@ -6,7 +6,6 @@ package common
 import (
 	"github.com/itcloudy/base-framework/pkg/models"
 	"github.com/jinzhu/gorm"
-	"strconv"
 )
 
 type UserRepository struct {
@@ -16,7 +15,7 @@ func (repo *UserRepository) FindUserByUserName(DB *gorm.DB, username string) (us
 	err = DB.Where("username = ?", username).First(&user).Error
 	return
 }
-func (repo *UserRepository) FindUserByID(DB *gorm.DB, id string) (user models.UserDetail, err error) {
+func (repo *UserRepository) FindUserByID(DB *gorm.DB, id int) (user models.UserDetail, err error) {
 
 	err = DB.Where("id = ?", id).First(&user).Error
 	return
@@ -25,18 +24,18 @@ func (repo *UserRepository) InsertUser(DB *gorm.DB, model models.UserCreate) (us
 	model.ID = 0
 	err = DB.Create(&model).Error
 	if err == nil {
-		return repo.FindUserByID(DB, strconv.Itoa(model.ID))
+		return repo.FindUserByID(DB, model.ID)
 	}
 	return
 }
-func (repo *UserRepository) DeleteUser(DB *gorm.DB, ids []string) (err error) {
+func (repo *UserRepository) DeleteUser(DB *gorm.DB, ids []int) (err error) {
 	return DB.Where("id IN (?)", ids).Delete(models.UserDetail{}).Error
 }
-func (repo *UserRepository) UpdateUserAdmin(DB *gorm.DB, id string, isAdmin bool) (err error) {
+func (repo *UserRepository) UpdateUserAdmin(DB *gorm.DB, id int, isAdmin bool) (err error) {
 	err = DB.Model(models.UserDetail{}).Updates(map[string]interface{}{"IsAdmin": isAdmin}).Error
 	return
 }
-func (repo *UserRepository) UpdateUserActive(DB *gorm.DB, id string, isActive bool) (err error) {
+func (repo *UserRepository) UpdateUserActive(DB *gorm.DB, id int, isActive bool) (err error) {
 	err = DB.Model(models.UserDetail{}).Updates(map[string]interface{}{"IsActive": isActive}).Error
 	return
 }

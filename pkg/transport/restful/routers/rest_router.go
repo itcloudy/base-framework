@@ -75,6 +75,7 @@ func addRouter(router *gin.Engine) {
 		authRouter.GET("/roles", rest.RoleContainer().CtlGetAllRole)
 		//系统接口操作
 		authRouter.GET("/system_api/:id", rest.SystemAPIContainer().CtlGetSystemAPIByID)
+		authRouter.POST("/system_api_active", rest.SystemAPIContainer().CtlActiveActionSystemAPI)
 		authRouter.POST("/system_api", rest.SystemAPIContainer().CtlCreateSystemAPI)
 		authRouter.PUT("/system_api/:id", rest.SystemAPIContainer().CtlUpdateSystemAPIByID)
 		authRouter.GET("/system_apis", rest.SystemAPIContainer().CtlGetAllSystemAPI)

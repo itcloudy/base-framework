@@ -16,10 +16,10 @@ type SystemAPIService struct {
 	repositories.ISystemAPIRepository
 }
 
-func (service *SystemAPIService) ServiceGetSystemAPIByID(id string) (result models.SystemApiDetail, err error) {
+func (service *SystemAPIService) ServiceGetSystemAPIByID(id int) (result models.SystemApiDetail, err error) {
 	return service.FindSystemAPIByID(service.DB, id)
 }
-func (service *SystemAPIService) ServiceSystemAPIDelete(ids []string) (err error) {
+func (service *SystemAPIService) ServiceSystemAPIDelete(ids []int) (err error) {
 	return service.DeleteSystemAPI(service.DB, ids)
 }
 func (service *SystemAPIService) ServiceSystemAPIUpdate(model models.SystemApiUpdate) (result models.SystemApiDetail, err error) {
@@ -33,7 +33,7 @@ func (service *SystemAPIService) ServiceSystemAPICreate(model models.SystemApiCr
 	}
 	return service.InsertSystemAPI(service.DB, model)
 }
-func (service *SystemAPIService) ServiceActiveSystemAPI(ids []string, active bool) (err error) {
+func (service *SystemAPIService) ServiceActiveSystemAPI(ids []int, active bool) (err error) {
 	return service.ActiveSystemAPI(service.DB, ids, active)
 
 }

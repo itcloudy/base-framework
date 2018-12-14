@@ -18,10 +18,10 @@ type UserService struct {
 	repositories.IUserRepository
 }
 
-func (service *UserService) ServiceGetSelf(id string) (result models.UserDetail, err error) {
+func (service *UserService) ServiceGetSelf(id int) (result models.UserDetail, err error) {
 	return service.FindUserByID(service.DB, id)
 }
-func (service *UserService) ServiceGetUserByID(id string) (result models.UserDetail, err error) {
+func (service *UserService) ServiceGetUserByID(id int) (result models.UserDetail, err error) {
 	return service.FindUserByID(service.DB, id)
 }
 func (service *UserService) ServiceGetUserByUserName(username string) (result models.UserDetail, err error) {
@@ -32,7 +32,7 @@ func (service *UserService) ServiceUserCreate(model models.UserCreate) (result m
 	model.Pwd = tools.SHA256(tools.StringsJoin(model.Password, salt))
 	return service.InsertUser(service.DB, model)
 }
-func (service *UserService) ServiceUserDelete(ids []string) (err error) {
+func (service *UserService) ServiceUserDelete(ids []int) (err error) {
 	return service.DeleteUser(service.DB, ids)
 }
 func (service *UserService) ServiceCheckUser(username, pwd string) (result models.UserDetail, err error) {

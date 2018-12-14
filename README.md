@@ -35,5 +35,6 @@ Use "base-framework [command] --help" for more information about a command.
 
 ```
 
-
+## 部署文档
+[deply](./documents/deploy.md)
 相关文档在 documents下

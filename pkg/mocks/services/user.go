@@ -14,12 +14,12 @@ type MockUserService struct {
 	mock.Mock
 }
 
-func (mo *MockUserService) GetSelf(id string) (user models.UserDetail, err error) {
+func (mo *MockUserService) GetSelf(id int) (user models.UserDetail, err error) {
 	return
 }
 
 //根据用户ID查找用户
-func (mo *MockUserService) GetUserByID(id string) (user models.UserDetail, err error) {
+func (mo *MockUserService) GetUserByID(id int) (user models.UserDetail, err error) {
 	ret := mo.Called(id)
 	if rf, ok := ret.Get(0).(func(string) models.UserDetail); ok {
 		user = rf(id)
@@ -46,17 +46,17 @@ func (mo *MockUserService) InsertUser(DB *gorm.DB, model models.UserCreate) (res
 }
 
 // 删除用户
-func (mo *MockUserService) DeleteUser(DB *gorm.DB, ids []string) (err error) {
+func (mo *MockUserService) DeleteUser(DB *gorm.DB, ids []int) (err error) {
 	return
 }
 
 //管理员更改
-func (mo *MockUserService) UpdateUserAdmin(DB *gorm.DB, id string, isAdmin bool) (err error) {
+func (mo *MockUserService) UpdateUserAdmin(DB *gorm.DB, id int, isAdmin bool) (err error) {
 	return
 }
 
 // 用户有效更改
-func (mo *MockUserService) UpdateUserActive(DB *gorm.DB, id string, isActive bool) (err error) {
+func (mo *MockUserService) UpdateUserActive(DB *gorm.DB, id int, isActive bool) (err error) {
 	return
 }
 

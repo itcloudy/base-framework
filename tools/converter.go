@@ -63,3 +63,9 @@ func BytesToInt(s []byte) int {
 	i, _ := strconv.Atoi(string(s))
 	return i
 }
+func StrToBool(s string) bool {
+	if s == "0" || s == "false" {
+		return false
+	}
+	return true
+}
