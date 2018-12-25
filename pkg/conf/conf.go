@@ -109,6 +109,17 @@ type InitConfig struct {
 	Enable bool   // 是否初始化
 	API    string // 接口初始化路径
 }
+type ElasticConfig struct {
+	Enable        bool
+	URLs          []string
+	Sniff         bool
+	Sniffer       time.Duration
+	HealthCheck   bool
+	HealthChecker time.Duration
+	AuthUserName  string
+	AuthPassword  string
+	Gzip          bool
+}
 type GlobalConfig struct {
 	DBUpdateToVersion string                  // 数据库升级到某个版本
 	I18ns             []string                // 服务端支持的语言，用于页面和json的提示信息
@@ -133,6 +144,8 @@ type GlobalConfig struct {
 	Cors              CorsConfig              // 跨域配置
 	Admin             SuperUser               // 超级用户
 	Init              InitConfig              // 初始化数据
+	Elastic           ElasticConfig           // elastic配置
+
 
 }
 

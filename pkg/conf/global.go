@@ -10,6 +10,7 @@ import (
 	"github.com/jinzhu/gorm"
 	"github.com/jmoiron/sqlx"
 	"github.com/nicksnyder/go-i18n/v2/i18n"
+	"github.com/olivere/elastic"
 	"golang.org/x/text/language"
 	"os"
 	"path"
@@ -33,7 +34,8 @@ var (
 
 	// Config global parameters
 	Config GlobalConfig
-
+	// Elasticsearch client
+	ElasticClient *elastic.Client
 	// casbin
 	Enforcer *casbin.Enforcer
 	// 全局语言对象

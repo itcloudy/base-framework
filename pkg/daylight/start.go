@@ -5,7 +5,6 @@ package daylight
 
 import (
 	"github.com/itcloudy/base-framework/pkg/logs"
-	"github.com/itcloudy/base-framework/pkg/models/all_fields"
 	"github.com/itcloudy/base-framework/pkg/transport"
 	"github.com/itcloudy/base-framework/pkg/transport/restful/middles"
 	"go.uber.org/zap"
@@ -66,9 +65,9 @@ func Start() {
 	cfg := conf.Config.DB
 
 	conf.GetDBConnection(cfg.DbType, cfg.Host, cfg.Port, cfg.User, cfg.Password, cfg.Name, cfg.Charset, "")
-	// todo only for test
-	fmt.Printf("%+v\n", conf.DBConn.AutoMigrate(all_fileds.SystemApi{}).Error)
-
+	if conf.Config.Elastic.Enable{
+		conf.GetElasticClient(conf.Config.Elastic)
+	}
 	transport.ServerStart()
 
 	select {}

@@ -8,6 +8,7 @@ import (
 	"github.com/itcloudy/base-framework/pkg/conf"
 	"github.com/itcloudy/base-framework/pkg/consts"
 	"github.com/itcloudy/base-framework/pkg/logs"
+	"github.com/olivere/elastic"
 	"go.uber.org/zap"
 	"time"
 
@@ -214,5 +215,29 @@ func init() {
 
 	viper.BindPFlag("Init.Enable", configCmd.Flags().Lookup("init-data"))
 	viper.BindPFlag("Init.API", configCmd.Flags().Lookup("init-api"))
+
+	// elastic
+	configCmd.Flags().BoolVar(&conf.Config.Elastic.Enable, "elastic-enable", true, "Enable elastic server")
+	configCmd.Flags().StringSliceVar(&conf.Config.Elastic.URLs, "elastic-urls", []string{"http://localhost:9200"}, "elastic cluster server address")
+	configCmd.Flags().BoolVar(&conf.Config.Elastic.Sniff, "elastic-sniff-enable", elastic.DefaultSnifferEnabled, "Enable elastic sniff")
+	configCmd.Flags().DurationVar(&conf.Config.Elastic.Sniffer, "elastic-sniffer", elastic.DefaultSnifferInterval, "sniffer interval")
+	configCmd.Flags().BoolVar(&conf.Config.Elastic.HealthCheck, "elastic-health-check-enable", elastic.DefaultHealthcheckEnabled, "enable or disable healthchecks")
+	configCmd.Flags().DurationVar(&conf.Config.Elastic.HealthChecker, "elastic-health-check-interval", elastic.DefaultHealthcheckInterval, "healthcheck interval")
+
+	configCmd.Flags().StringVar(&conf.Config.Elastic.AuthUserName, "elastic-username", "", "elastic auth username")
+	configCmd.Flags().StringVar(&conf.Config.Elastic.AuthPassword, "elastic-password", "", "elastic auth password")
+	configCmd.Flags().BoolVar(&conf.Config.Elastic.Gzip, "elastic-gzip", elastic.DefaultGzipEnabled, "Enable elastic gzip")
+
+	viper.BindPFlag("Elastic.Enable", configCmd.Flags().Lookup("elastic-enable"))
+	viper.BindPFlag("Elastic.URLs", configCmd.Flags().Lookup("elastic-urls"))
+	viper.BindPFlag("Elastic.Sniff", configCmd.Flags().Lookup("elastic-sniff-enable"))
+	viper.BindPFlag("Elastic.Sniffer", configCmd.Flags().Lookup("elastic-sniffer"))
+	viper.BindPFlag("Elastic.HealthCheck", configCmd.Flags().Lookup("elastic-health-check-enable"))
+	viper.BindPFlag("Elastic.HealthChecker", configCmd.Flags().Lookup("elastic-health-check-interval"))
+
+	viper.BindPFlag("Elastic.AuthUserName", configCmd.Flags().Lookup("elastic-username"))
+	viper.BindPFlag("Elastic.AuthPassword", configCmd.Flags().Lookup("elastic-password"))
+	viper.BindPFlag("Elastic.Gzip", configCmd.Flags().Lookup("elastic-gzip"))
+
 
 }
