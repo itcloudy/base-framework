@@ -1,9 +1,13 @@
-// Copyright 2018 cloudy 272685110@qq.com.  All rights reserved.
+// Copyright 2018 cloudy itcloudy@qq.com.  All rights reserved.
 // Use of this source code is governed by a MIT style
 // license that can be found in the LICENSE file.
 package tools
 
-import "strconv"
+import (
+	"os/exec"
+	"strconv"
+	"strings"
+)
 
 // IntToStr converts integer to string
 func IntToStr(num int) string {
@@ -68,4 +72,62 @@ func StrToBool(s string) bool {
 		return false
 	}
 	return true
+}
+
+// snake string, XxYy to xx_yy
+func SnakeString(s string) string {
+	data := make([]byte, 0, len(s)*2)
+	j := false
+	num := len(s)
+	for i := 0; i < num; i++ {
+		d := s[i]
+		if i > 0 && d >= 'A' && d <= 'Z' && j {
+			data = append(data, '_')
+		}
+		if d != '_' {
+			j = true
+		}
+		data = append(data, d)
+	}
+	return strings.ToLower(string(data[:]))
+}
+
+func CamelString(s string) string {
+	data := make([]byte, 0, len(s))
+	j := false
+	k := false
+	num := len(s) - 1
+	for i := 0; i <= num; i++ {
+		d := s[i]
+		if !k && d >= 'A' && d <= 'Z' {
+			k = true
+		}
+		if d >= 'a' && d <= 'z' && (j || !k) {
+			d = d - 32
+			j = false
+			k = true
+		}
+		if k && d == '_' && num > i && s[i+1] >= 'a' && s[i+1] <= 'z' {
+			j = true
+			continue
+		}
+		data = append(data, d)
+	}
+	return string(data[:])
+}
+
+// camelCase converts a _ delimited string to camel case
+// e.g. very_important_person => VeryImportantPerson
+func CamelCase(in string) string {
+	tokens := strings.Split(in, "_")
+	for i := range tokens {
+		tokens[i] = strings.Title(strings.Trim(tokens[i], " "))
+	}
+	return strings.Join(tokens, "")
+}
+
+// formatSourceCode formats source files
+func FormatSourceCode(filename string) {
+	cmd := exec.Command("gofmt", "-w", filename)
+	 cmd.Run()
 }

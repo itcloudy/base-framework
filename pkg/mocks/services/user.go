@@ -1,4 +1,4 @@
-// Copyright 2018 cloudy 272685110@qq.com.  All rights reserved.
+// Copyright 2018 cloudy itcloudy@qq.com.  All rights reserved.
 // Use of this source code is governed by a MIT style
 // license that can be found in the LICENSE file.
 package services
@@ -18,10 +18,10 @@ func (mo *MockUserService) GetSelf(id int) (user models.UserDetail, err error) {
 	return
 }
 
-//根据用户ID查找用户
+//根据ID查找
 func (mo *MockUserService) GetUserByID(id int) (user models.UserDetail, err error) {
 	ret := mo.Called(id)
-	if rf, ok := ret.Get(0).(func(string) models.UserDetail); ok {
+	if rf, ok := ret.Get(0).(func(int) models.UserDetail); ok {
 		user = rf(id)
 	} else {
 		user = ret.Get(0).(models.UserDetail)
@@ -29,7 +29,7 @@ func (mo *MockUserService) GetUserByID(id int) (user models.UserDetail, err erro
 	return user, err
 }
 
-//根据用户名查找用户
+//根据名查找
 func (mo *MockUserService) FindUserByUserName(DB *gorm.DB, username string) (result models.UserDetail, err error) {
 	ret := mo.Called(username)
 	if rf, ok := ret.Get(0).(func(string) models.UserDetail); ok {
@@ -40,12 +40,12 @@ func (mo *MockUserService) FindUserByUserName(DB *gorm.DB, username string) (res
 	return result, err
 }
 
-// 创建用户
+// 创建
 func (mo *MockUserService) InsertUser(DB *gorm.DB, model models.UserCreate) (result models.UserDetail, err error) {
 	return
 }
 
-// 删除用户
+// 删除
 func (mo *MockUserService) DeleteUser(DB *gorm.DB, ids []int) (err error) {
 	return
 }
@@ -55,12 +55,12 @@ func (mo *MockUserService) UpdateUserAdmin(DB *gorm.DB, id int, isAdmin bool) (e
 	return
 }
 
-// 用户有效更改
+// 有效更改
 func (mo *MockUserService) UpdateUserActive(DB *gorm.DB, id int, isActive bool) (err error) {
 	return
 }
 
-//根据密码和用户名查询用户
+//根据密码和名查询
 func (mo *MockUserService) FindUserByUserNameAndPwd(DB *gorm.DB, username, pwd string) (model models.UserDetail, err error) {
 	return
 }

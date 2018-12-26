@@ -1,4 +1,4 @@
-// Copyright 2018 cloudy 272685110@qq.com.  All rights reserved.
+// Copyright 2018 cloudy itcloudy@qq.com.  All rights reserved.
 // Use of this source code is governed by a MIT style
 // license that can be found in the LICENSE file.
 package mocks
@@ -24,7 +24,7 @@ func (m *MockUserRepository) FindUserByUserName(DB *gorm.DB, username string) (u
 }
 func (m *MockUserRepository) FindUserByID(DB *gorm.DB, id int) (user models.UserDetail, err error) {
 	ret := m.Called(id)
-	if rf, ok := ret.Get(0).(func(string) models.UserDetail); ok {
+	if rf, ok := ret.Get(0).(func(int) models.UserDetail); ok {
 		user = rf(id)
 	} else {
 		user = ret.Get(0).(models.UserDetail)
