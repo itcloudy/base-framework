@@ -6,5 +6,5 @@ package generator
 import "github.com/itcloudy/base-framework/pkg/generator/all_fields"
 
 var AllModels = []interface{}{
-all_fileds.Notice{},
+	all_fileds.Notice{},
 }

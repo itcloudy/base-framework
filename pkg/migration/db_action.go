@@ -24,6 +24,11 @@ var AllInitMigrations = map[string][]models.MigrationHistory{
 	},
 }
 var AllUpdateMigrations = map[string][]models.MigrationHistory{
-	"postgres": {},
-	"mysql":    {},
+	"postgres": {
+		models.MigrationHistory{
+			Version: "0.0.2",
+			Data:    postgres.Update_0_0_2,
+		},
+	},
+	"mysql": {},
 }

@@ -129,5 +129,5 @@ func CamelCase(in string) string {
 // formatSourceCode formats source files
 func FormatSourceCode(filename string) {
 	cmd := exec.Command("gofmt", "-w", filename)
-	 cmd.Run()
+	cmd.Run()
 }

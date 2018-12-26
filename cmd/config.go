@@ -239,5 +239,4 @@ func init() {
 	viper.BindPFlag("Elastic.AuthPassword", configCmd.Flags().Lookup("elastic-password"))
 	viper.BindPFlag("Elastic.Gzip", configCmd.Flags().Lookup("elastic-gzip"))
 
-
 }

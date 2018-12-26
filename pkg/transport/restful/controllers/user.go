@@ -82,7 +82,7 @@ func (ctl UserController) CtlLoginAccount(c *gin.Context) {
 		code = consts.Success
 		response["currentAuthority"] = "admin"
 		response["token"] = middles.GenerateJWT(userDetail.Username,
-			[]string{}, []string{},   userDetail.ID, userDetail.IsAdmin)
+			[]string{}, []string{}, userDetail.ID, userDetail.IsAdmin)
 	}
 	common.GenResponse(c, code, response, "")
 }

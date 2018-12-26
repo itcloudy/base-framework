@@ -92,7 +92,7 @@ func (service *MigrationService) ServiceFirstMigration() (err error) {
 /*
 升级到某个版本，若中间存在多个，则中间版本同样升级
 */
-func (service *MigrationService) ServiceUpdateToOneVersion() (err error) {
+func (service *MigrationService) ServiceUpdateToOneVersion(ver string) (err error) {
 	var (
 		collection version.Collection
 
@@ -101,7 +101,7 @@ func (service *MigrationService) ServiceUpdateToOneVersion() (err error) {
 		lastVersion string
 	)
 	needUpdateMap := make(map[string]string)
-	if needVer, err = version.NewVersion(conf.Config.DBUpdateToVersion); err != nil {
+	if needVer, err = version.NewVersion(ver); err != nil {
 		return
 	}
 

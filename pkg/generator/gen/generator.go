@@ -15,11 +15,11 @@ import (
 	"text/template"
 )
 
-
 var (
 	projectPath string
 	toTar       bool
 )
+
 func init() {
 	flag.StringVar(&projectPath, "p", "", "project path")
 	flag.BoolVar(&toTar, "t", false, "save to project location")
@@ -39,7 +39,7 @@ func main() {
 	generatorServiceInterface()
 
 }
-func generatorServiceInterface()  {
+func generatorServiceInterface() {
 	templateBytes, err := generator.GetTemplate("service_interface")
 	if err != nil {
 		fmt.Println(err.Error())
@@ -87,7 +87,7 @@ func generatorServiceInterface()  {
 
 	}
 }
-func generatorRepositoryInterface()  {
+func generatorRepositoryInterface() {
 	templateBytes, err := generator.GetTemplate("repository_interface")
 	if err != nil {
 		fmt.Println(err.Error())
@@ -135,7 +135,7 @@ func generatorRepositoryInterface()  {
 
 	}
 }
-func generatorMockService()  {
+func generatorMockService() {
 	templateBytes, err := generator.GetTemplate("mock_service")
 	if err != nil {
 		fmt.Println(err.Error())
@@ -183,7 +183,7 @@ func generatorMockService()  {
 
 	}
 }
-func generatorMockRepository()  {
+func generatorMockRepository() {
 	templateBytes, err := generator.GetTemplate("mock_repository")
 	if err != nil {
 		fmt.Println(err.Error())
@@ -278,7 +278,6 @@ func generatorController() {
 	}
 
 }
-
 
 func generatorService() {
 	templateBytes, err := generator.GetTemplate("service_impl")

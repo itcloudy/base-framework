@@ -8,6 +8,9 @@ const (
 	Success = 20000 //正常返回
 	//controller 层的错误代码为4000开始
 	BindingJsonErr = 40000 // 绑定json失败
+	GetFileErr     = 40008 // 获取上传文件失败
+	PathParamErr   = 40008 // url参数错误
+	UpdateIdErr    = 40009 // 更新ID错误
 
 	//service 层的错误代码从50000开始	common.GenResponse(c, consts.Success, response, "")
 	ServerErr             = 50000 //

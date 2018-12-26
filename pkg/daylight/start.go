@@ -65,7 +65,7 @@ func Start() {
 	cfg := conf.Config.DB
 
 	conf.GetDBConnection(cfg.DbType, cfg.Host, cfg.Port, cfg.User, cfg.Password, cfg.Name, cfg.Charset, "")
-	if conf.Config.Elastic.Enable{
+	if conf.Config.Elastic.Enable {
 		conf.GetElasticClient(conf.Config.Elastic)
 	}
 	transport.ServerStart()

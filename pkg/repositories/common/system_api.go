@@ -25,7 +25,7 @@ func (repo *SystemAPIRepository) InsertSystemAPI(DB *gorm.DB, model models.Syste
 	model.ID = 0
 	err = DB.Create(&model).Error
 	if err == nil {
-		return repo.FindSystemAPIByID(DB,  model.ID)
+		return repo.FindSystemAPIByID(DB, model.ID)
 	}
 	return
 }

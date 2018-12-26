@@ -13,7 +13,6 @@ import (
 	"net/http"
 )
 
-
 type SystemAPIController struct {
 	services.SystemAPIService
 }
@@ -45,20 +44,22 @@ func (ctl SystemAPIController) CtlCreateSystemAPI(c *gin.Context) {
 	}
 	common.GenResponse(c, consts.Success, result, "")
 }
+
 type activeBind struct {
-	Ids []int `json:"ids"`
-	Active bool `json:"active"`
+	Ids    []int `json:"ids"`
+	Active bool  `json:"active"`
 }
+
 // 启用禁用接口
 func (ctl SystemAPIController) CtlActiveActionSystemAPI(c *gin.Context) {
-	 var (
-	 	bind activeBind
-	 	err error
-	 )
-	 if err=c.BindJSON(&bind);err!=nil{
-		 common.GenResponse(c, consts.BindingJsonErr, "", err.Error())
-		 return
-	 }
+	var (
+		bind activeBind
+		err  error
+	)
+	if err = c.BindJSON(&bind); err != nil {
+		common.GenResponse(c, consts.BindingJsonErr, "", err.Error())
+		return
+	}
 
 	if err = ctl.ServiceActiveSystemAPI(bind.Ids, bind.Active); err != nil {
 		common.GenResponse(c, consts.DBUpdateErr, "", err.Error())

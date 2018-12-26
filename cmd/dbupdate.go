@@ -33,7 +33,7 @@ var dbupdateCmd = &cobra.Command{
 			panic(errors.New("un support sql type:" + cfg.DbType))
 
 		}
-		if err := migrateService.ServiceUpdateToOneVersion(); err != nil {
+		if err := migrateService.ServiceUpdateToOneVersion(conf.Config.DBUpdateToVersion); err != nil {
 			logs.Logger.Fatal("update database failed", zap.String("db name", conf.Config.DB.Name), zap.Error(err))
 			logs.Logger.Sync()
 

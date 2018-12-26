@@ -8,6 +8,6 @@ import "github.com/itcloudy/base-framework/pkg/models"
 type IMigrationHistory interface {
 	ServiceGetCurrentVersion() (version string, err error)
 	ServiceFirstMigration() (err error)
-	ServiceUpdateToOneVersion() (err error)
+	ServiceUpdateToOneVersion(version string) (err error)
 	ServiceGetAllListMigration() (migrates []models.MigrationHistory, err error)
 }

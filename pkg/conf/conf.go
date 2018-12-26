@@ -109,6 +109,9 @@ type InitConfig struct {
 	Enable bool   // 是否初始化
 	API    string // 接口初始化路径
 }
+type FileUploadConfig struct {
+	Target string // local,qiniu
+}
 type ElasticConfig struct {
 	Enable        bool
 	URLs          []string
@@ -144,8 +147,8 @@ type GlobalConfig struct {
 	Cors              CorsConfig              // 跨域配置
 	Admin             SuperUser               // 超级用户
 	Init              InitConfig              // 初始化数据
+	FileUpload        FileUploadConfig        // 文件上传、
 	Elastic           ElasticConfig           // elastic配置
-
 
 }
 
