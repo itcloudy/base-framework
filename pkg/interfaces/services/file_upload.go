@@ -4,6 +4,7 @@
 package services
 
 import (
+	"github.com/itcloudy/base-framework/pkg/conf"
 	"github.com/itcloudy/base-framework/pkg/models"
 	"mime/multipart"
 )

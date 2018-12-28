@@ -8,6 +8,7 @@ import (
 	"github.com/itcloudy/base-framework/pkg/consts"
 	"github.com/itcloudy/base-framework/pkg/interfaces/services"
 	"github.com/itcloudy/base-framework/pkg/transport/restful/common"
+	"github.com/itcloudy/base-framework/tools"
 )
 
 type FileUploadController struct {

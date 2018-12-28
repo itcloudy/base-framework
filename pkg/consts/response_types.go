@@ -18,6 +18,8 @@ const (
 	UserNameOrPasswordErr = 50006 // 用户名或密码错误
 	PermissionErr         = 50007 // 没有权限
 	TokenValidErr         = 50008 // token无效
+	FilelUploadErr        = 50009 //文件上传失败
+	MigrationErr          = 50010 // 升级失败
 
 	//repository层的错误代码从60000开始
 	DBInSertErr = 60000 // 数据插入失败

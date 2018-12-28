@@ -52,7 +52,6 @@ func dotRender(out *os.File, pkgTypes map[string]map[string]namedType) {
 			buf.Reset()
 
 			switch t := typ.Type.(type) {
-
 			case *ast.Ident:
 				var label = fmt.Sprintf(`%s %s`, typ.Ident.Name, t.Name)
 				fmt.Fprintf(out, " \"node-%s\" [shape=ellipse,label=\"%s\"];\n", typ.Ident.Name, escape(label))
