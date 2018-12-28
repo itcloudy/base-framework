@@ -17,7 +17,32 @@ end
 $$
 language plpgsql;
 
- 
+
+-- ----------------------------
+-- 数据库升级日志表
+-- ----------------------------
+CREATE TABLE migration_history (
+  id integer PRIMARY KEY NOT NULL ,
+  created_at timestamp NOT NULL  default CURRENT_TIMESTAMP,
+  updated_at timestamp NOT NULL  default CURRENT_TIMESTAMP,
+  version VARCHAR(50) NOT NULL ,
+  data text NOT NULL,
+  UNIQUE(version)
+);
+COMMENT ON TABLE migration_history IS '数据库升级';
+comment on column migration_history.id is '主键';
+comment on column migration_history.created_at is '创建时间';
+comment on column migration_history.updated_at is '修改时间';
+comment on column migration_history.version is '升级版本';
+comment on column migration_history.data is '升级内容';
+
+CREATE SEQUENCE migration_history_id_seq START WITH 1 INCREMENT BY 1 NO MINVALUE NO MAXVALUE CACHE 1;
+
+alter table migration_history alter column id set default nextval('migration_history_id_seq');
+
+
+CREATE TRIGGER update_migration_history_updated_at BEFORE UPDATE ON migration_history FOR EACH ROW EXECUTE PROCEDURE upd_timestamp();
+
 -- ----------------------------
 -- 文件上传记录
 --  ----------------------------
@@ -224,4 +249,5 @@ CREATE SEQUENCE user_role_id_seq START WITH 1 INCREMENT BY 1 NO MINVALUE NO MAXV
 alter table user_role alter column id set default nextval('user_role_id_seq');
 
 CREATE TRIGGER user_role_updated_at BEFORE UPDATE ON role_api FOR EACH ROW EXECUTE PROCEDURE upd_timestamp();
+
 `
