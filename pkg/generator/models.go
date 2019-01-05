@@ -1,4 +1,4 @@
-// Copyright 2018 itcloudy@qq.com.  All rights reserved.
+// Copyright 2018  itcloudy@qq.com  All rights reserved.
 // Use of this source code is governed by a MIT style
 // license that can be found in the LICENSE file.
 package generator
@@ -6,5 +6,11 @@ package generator
 import "github.com/itcloudy/base-framework/pkg/generator/all_fields"
 
 var AllModels = []interface{}{
-	all_fileds.Notice{},
+	all_fileds.FileUpload{},
+	all_fileds.Message{},
+	all_fileds.Role{},
+	all_fileds.RoleApi{},
+	all_fileds.SystemApi{},
+	all_fileds.User{},
+	all_fileds.UserRole{},
 }

@@ -1,4 +1,4 @@
-// Copyright 2018 itcloudy@qq.com  All rights reserved.
+// Copyright 2018  itcloudy@qq.com  All rights reserved.
 // Use of this source code is governed by a MIT style
 // license that can be found in the LICENSE file.
 package controllers
@@ -10,7 +10,6 @@ import (
 	"{{.ProjectPath}}/pkg/restful/common"
 	"{{.ProjectPath}}/tools"
 	"github.com/gin-gonic/gin"
-	"net/http"
 )
 
 type {{.ModelName}}Controller struct {
@@ -19,11 +18,11 @@ type {{.ModelName}}Controller struct {
 
 //根据ID获得详情
 func (ctl {{.ModelName}}Controller) CtlGet{{.ModelName}}ByID(c *gin.Context) {
-	api, err := ctl.ServiceGet{{.ModelName}}ByID(tools.StrToInt(c.Param("id")))
+	result, err := ctl.ServiceGet{{.ModelName}}ByID(tools.StrToInt(c.Param("id")))
 	if err != nil {
-
+        common.GenResponse(c, consts.DBSelectErr, "", err.Error())
 	}
-	c.JSON(http.StatusOK, api)
+	common.GenResponse(c, consts.Success, result, "")
 }
 
 //创建
@@ -67,7 +66,8 @@ func (ctl {{.ModelName}}Controller) CtlUpdate{{.ModelName}}ByID(c *gin.Context) 
 		common.GenResponse(c, consts.Success, result, "")
 	}
 }
-func (ctl {{.ModelName}}Controller) CtlDelete{{.ModelName}}(c *gin.Context) {
+//删除
+func (ctl {{.ModelName}}Controller) Ctl{{.ModelName}}Delete(c *gin.Context) {
 	var (
 		bind activeBind
 		err  error
@@ -77,7 +77,7 @@ func (ctl {{.ModelName}}Controller) CtlDelete{{.ModelName}}(c *gin.Context) {
 		return
 	}
 
-	if err = ctl.ServiceDelete{{.ModelName}}(bind.Ids); err != nil {
+	if err = ctl.Service{{.ModelName}}Delete(bind.Ids); err != nil {
 		common.GenResponse(c, consts.DBDeleteErr, "", err.Error())
 
 	} else {
@@ -103,3 +103,4 @@ func (ctl {{.ModelName}}Controller) CtlGetAll{{.ModelName}}(c *gin.Context) {
 	result["list"] = list
 	common.GenResponse(c, consts.Success, result, "")
 }
+

@@ -1,10 +1,11 @@
-// Copyright 2018 cloudy itcloudy@qq.com.  All rights reserved.
+// Copyright 2018  itcloudy@qq.com  All rights reserved.
 // Use of this source code is governed by a MIT style
 // license that can be found in the LICENSE file.
 package all_fileds
 
 import "time"
 
+//角色
 type Role struct {
 	ID             int       `json:"id" gorm:"column:id" comment:"主键ID"`
 	CreatedAt      time.Time `json:"created_at,omitempty" gorm:"column:created_at" comment:"记录创建时间"`
@@ -18,5 +19,5 @@ type Role struct {
 }
 
 func (mh *Role) TableName() string {
-	return "menu"
+	return "role"
 }

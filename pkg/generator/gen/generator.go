@@ -1,4 +1,4 @@
-// Copyright 2018 itcloudy@qq.com.  All rights reserved.
+// Copyright 2018  itcloudy@qq.com  All rights reserved.
 // Use of this source code is governed by a MIT style
 // license that can be found in the LICENSE file.
 package main
@@ -39,6 +39,7 @@ func main() {
 	generatorServiceInterface()
 
 }
+
 func generatorServiceInterface() {
 	templateBytes, err := generator.GetTemplate("service_interface")
 	if err != nil {
@@ -58,11 +59,11 @@ func generatorServiceInterface() {
 	} else {
 		outPut = path.Join(p, "..", "interfaces", "services")
 	}
-
 	for _, model := range generator.AllModels {
 		modelName := reflect.ValueOf(model).Type().String()
 		splitRe := strings.Split(modelName, ".")
 		modelName = splitRe[len(splitRe)-1]
+
 		snakeModelName := tools.SnakeString(modelName)
 		fileName := path.Join(outPut, tools.StringsJoin(snakeModelName, ".go"))
 		tmpl, err := template.New("service_interface").Parse(string(templateBytes))
@@ -86,6 +87,7 @@ func generatorServiceInterface() {
 		tmpl.Execute(f, Params)
 
 	}
+
 }
 func generatorRepositoryInterface() {
 	templateBytes, err := generator.GetTemplate("repository_interface")
@@ -246,13 +248,14 @@ func generatorController() {
 		outPut = path.Join(outPut, "controllers")
 		tools.MakeDirectory(outPut)
 	} else {
-		outPut = path.Join(p, "..", "transport", "restful", "controllers")
+		outPut = path.Join(p, "..", "restful", "controllers")
 	}
-
+	var modelNames []string
 	for _, model := range generator.AllModels {
 		modelName := reflect.ValueOf(model).Type().String()
 		splitRe := strings.Split(modelName, ".")
 		modelName = splitRe[len(splitRe)-1]
+		modelNames = append(modelNames, modelName)
 		snakeModelName := tools.SnakeString(modelName)
 		fileName := path.Join(outPut, tools.StringsJoin(snakeModelName, ".go"))
 		tmpl, err := template.New("controller").Parse(string(templateBytes))
@@ -276,7 +279,79 @@ func generatorController() {
 		tmpl.Execute(f, Params)
 
 	}
+	generatorRestContainer(modelNames)
+	generatorRestContainerInstance(modelNames)
 
+}
+func generatorRestContainer(modelNames []string) {
+	templateBytes, err := generator.GetTemplate("rest_container")
+	if err != nil {
+		fmt.Println(err.Error())
+		os.Exit(-1)
+	}
+	//判断文件存放位置
+	p, _ := os.Getwd()
+	var outPut string
+	if !toTar {
+		outPut = path.Join(p, "out")
+		tools.MakeDirectory(outPut)
+		outPut = path.Join(outPut, "routers")
+		tools.MakeDirectory(outPut)
+	} else {
+		outPut = path.Join(p, "..", "restful", "routers")
+	}
+	var containerListString string
+	for _, modelName := range modelNames {
+		containerListString += fmt.Sprintf("    %sContainer() controllers.%sController\n", modelName, modelName)
+	}
+	fileName := path.Join(outPut, "rest_container.go")
+	f, _ := os.Create(fileName)
+	defer f.Close()
+	defer tools.FormatSourceCode(fileName)
+	Params := make(map[string]interface{})
+	Params["ProjectPath"] = projectPath
+	Params["ContainerListString"] = containerListString
+	tmpl, err := template.New("rest_container").Parse(string(templateBytes))
+	tmpl.Execute(f, Params)
+}
+func generatorRestContainerInstance(modelNames []string) {
+	templateBytes, err := generator.GetTemplate("rest_container_instance")
+	if err != nil {
+		fmt.Println(err.Error())
+		os.Exit(-1)
+	}
+	//判断文件存放位置
+	p, _ := os.Getwd()
+	var outPut string
+	if !toTar {
+		outPut = path.Join(p, "out")
+		tools.MakeDirectory(outPut)
+		outPut = path.Join(outPut, "routers")
+		tools.MakeDirectory(outPut)
+	} else {
+		outPut = path.Join(p, "..", "restful", "routers")
+	}
+	var containerInstance string
+	for _, modelName := range modelNames {
+		containerInstance += fmt.Sprintf(`
+func (k *kernel) %sContainer() controllers.%sController {
+	service := services.%sService{}
+	service.I%sRepository = &common.%sRepository{}
+	service.DB = conf.DBConn
+	controller := controllers.%sController{I%sService: &service}
+	return controller
+}
+`, modelName, modelName, modelName, modelName, modelName, modelName, modelName)
+	}
+	fileName := path.Join(outPut, "rest_container_instance.go")
+	f, _ := os.Create(fileName)
+	defer f.Close()
+	defer tools.FormatSourceCode(fileName)
+	Params := make(map[string]interface{})
+	Params["ProjectPath"] = projectPath
+	Params["ContainerInstance"] = containerInstance
+	tmpl, err := template.New("rest_container_instance").Parse(string(templateBytes))
+	tmpl.Execute(f, Params)
 }
 
 func generatorService() {
@@ -362,7 +437,6 @@ func generatorRepository() {
 			}
 		}
 		fmt.Println("generate file to : ", fileName)
-
 		f, _ := os.Create(fileName)
 		defer f.Close()
 		defer tools.FormatSourceCode(fileName)
@@ -370,7 +444,6 @@ func generatorRepository() {
 		Params["ProjectPath"] = projectPath
 		Params["ModelName"] = modelName
 		tmpl.Execute(f, Params)
-
 	}
 
 }

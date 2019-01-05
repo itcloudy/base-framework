@@ -1,9 +1,10 @@
-// Copyright 2018 itcloudy@qq.com  All rights reserved.
+// Copyright 2018  itcloudy@qq.com  All rights reserved.
 // Use of this source code is governed by a MIT style
 // license that can be found in the LICENSE file.
 package services
 
 import (
+    "errors"
 	"{{.ProjectPath}}/pkg/conf"
 	"{{.ProjectPath}}/pkg/interfaces/repositories"
 	"{{.ProjectPath}}/pkg/models"
@@ -17,13 +18,27 @@ type {{.ModelName}}Service struct {
 }
 
 func (service *{{.ModelName}}Service) ServiceGet{{.ModelName}}ByID(id int) (result models.{{.ModelName}}Detail, err error) {
-	return service.Find{{.ModelName}}ByID(service.DB, id)
+	result, err = service.Find{{.ModelName}}ByID(service.DB, id)
+    	if result.ID == 0 {
+    		err = errors.New("record not found")
+    	}
+    	return
 }
 func (service *{{.ModelName}}Service) Service{{.ModelName}}Delete(ids []int) (err error) {
 	return service.Delete{{.ModelName}}(service.DB, ids)
 }
 func (service *{{.ModelName}}Service) Service{{.ModelName}}Update(model models.{{.ModelName}}Update) (result models.{{.ModelName}}Detail, err error) {
-	return service.Update{{.ModelName}}(service.DB, model)
+	var validate *validator.Validate
+    	validate = validator.New()
+    	if err = validate.Struct(model); err != nil {
+    		return
+    	}
+    	result, err = service.Update{{.ModelName}}(service.DB, model)
+
+    	if result.ID == 0 {
+    		err = errors.New("record not found")
+    	}
+    	return
 }
 func (service *{{.ModelName}}Service) Service{{.ModelName}}Create(model models.{{.ModelName}}Create) (result models.{{.ModelName}}Detail, err error) {
 	var validate *validator.Validate

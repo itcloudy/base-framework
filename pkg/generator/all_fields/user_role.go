@@ -1,10 +1,11 @@
-// Copyright 2018 cloudy itcloudy@qq.com.  All rights reserved.
+// Copyright 2018  itcloudy@qq.com  All rights reserved.
 // Use of this source code is governed by a MIT style
 // license that can be found in the LICENSE file.
 package all_fileds
 
 import "time"
 
+//用户角色
 type UserRole struct {
 	ID        int       `json:"id" gorm:"column:id" comment:"主键ID"`
 	CreatedAt time.Time `json:"created_at,omitempty" gorm:"column:created_at" comment:"记录创建时间"`
@@ -13,7 +14,6 @@ type UserRole struct {
 	RoleID    int       `json:"role_id" gorm:"column:role_id" comment:"角色ID"`
 	User      *User     `json:"user" gorm:"-" comment:"用户"`
 	UserID    int       `json:"user_id" gorm:"column:user_id" comment:"用户ID"`
-	IsActive  bool      `json:"is_active" gorm:"column:is_active" comment:"有效"`
 }
 
 func (mh *UserRole) TableName() string {
